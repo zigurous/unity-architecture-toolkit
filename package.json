@@ -1,0 +1,20 @@
+{
+  "name": "com.zigurous.template",
+  "version": "0.1.0",
+  "displayName": "Zigurous Template",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "unity": "2019.4",
+  "keywords": [],
+  "repository": "https://github.com/zigurous/unity-package-template",
+  "documentationUrl": "https://docs.zigurous.com/com.zigurous.template",
+  "changelogUrl": "https://docs.zigurous.com/com.zigurous.template/changelog",
+  "licensesUrl": "https://docs.zigurous.com/com.zigurous.template/license",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@zigurous"
+  },
+  "author": {
+    "name": "Zigurous",
+    "email": "support@zigurous.com",
+    "url": "https://zigurous.com"
+  }
+}
