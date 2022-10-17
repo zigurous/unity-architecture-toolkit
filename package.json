@@ -1,14 +1,20 @@
 {
-  "name": "com.zigurous.template",
+  "name": "com.zigurous.architecture",
   "version": "0.1.0",
-  "displayName": "Zigurous Template",
-  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "displayName": "Architecture Patterns",
+  "description": "The Architecture Patterns package contains common data structures and design patterns to help create better code structure for Unity projects.",
   "unity": "2019.4",
-  "keywords": [],
-  "repository": "https://github.com/zigurous/unity-package-template",
-  "documentationUrl": "https://docs.zigurous.com/com.zigurous.template",
-  "changelogUrl": "https://docs.zigurous.com/com.zigurous.template/changelog",
-  "licensesUrl": "https://docs.zigurous.com/com.zigurous.template/license",
+  "repository": "https://github.com/zigurous/unity-architecture-patterns",
+  "documentationUrl": "https://docs.zigurous.com/com.zigurous.architecture",
+  "changelogUrl": "https://docs.zigurous.com/com.zigurous.architecture/changelog",
+  "licensesUrl": "https://docs.zigurous.com/com.zigurous.architecture/license",
+  "keywords": [
+    "architecture",
+    "data structures",
+    "design patterns",
+    "extensions",
+    "structs"
+  ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@zigurous"
   },
