@@ -6,6 +6,7 @@ namespace Zigurous.Architecture
     /// A Quaternion variable saved as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Quaternion")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/QuaternionVariable")]
     public class QuaternionVariable : ScriptableVariable<Quaternion>
     {
         /// <summary>

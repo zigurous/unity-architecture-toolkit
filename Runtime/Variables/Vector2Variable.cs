@@ -6,6 +6,7 @@ namespace Zigurous.Architecture
     /// A Vector2 variable saved as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Vector2")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/Vector2Variable")]
     public class Vector2Variable : ScriptableVariable<Vector2>
     {
         /// <summary>

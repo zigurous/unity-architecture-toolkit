@@ -6,6 +6,7 @@ namespace Zigurous.Architecture
     /// Sets the lock state of the cursor.
     /// </summary>
     [AddComponentMenu("Zigurous/Utility/Cursor Lock State")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/CursorLockState")]
     public sealed class CursorLockState : MonoBehaviour
     {
         [SerializeField]

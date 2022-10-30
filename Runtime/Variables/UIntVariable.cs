@@ -6,6 +6,7 @@ namespace Zigurous.Architecture
     /// A uint variable saved as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/UInt")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/UIntVariable")]
     public class UIntVariable : ScriptableVariable<uint>
     {
         /// <summary>

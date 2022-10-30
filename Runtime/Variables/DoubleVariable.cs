@@ -6,6 +6,7 @@ namespace Zigurous.Architecture
     /// A double variable saved as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Double")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/DoubleVariable")]
     public class DoubleVariable : ScriptableVariable<double>
     {
         /// <summary>
