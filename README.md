@@ -2,7 +2,7 @@
 
 [![](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/zigurous/unity-architecture-patterns) [![](https://img.shields.io/github/package-json/v/zigurous/unity-architecture-patterns)](https://github.com/zigurous/unity-architecture-patterns/releases) [![](https://img.shields.io/badge/docs-link-success)](https://docs.zigurous.com/com.zigurous.datastructures) [![](https://img.shields.io/github/license/zigurous/unity-architecture-patterns)](https://github.com/zigurous/unity-architecture-patterns/blob/main/LICENSE.md)
 
-The **Architecture Patterns** package contains common data structures and design patterns to help create better code structure for Unity projects.
+The **Architecture Patterns** package contains data structures, design patterns, and utilities to help create better code structure for Unity projects.
 
 ## Installation
 

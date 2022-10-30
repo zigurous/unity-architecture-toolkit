@@ -1,8 +1,8 @@
 {
   "name": "com.zigurous.architecture",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "displayName": "Architecture Patterns",
-  "description": "The Architecture Patterns package contains common data structures and design patterns to help create better code structure for Unity projects.",
+  "description": "The Architecture Patterns package contains data structures, design patterns, and utilities to help create better code structure for Unity projects.",
   "unity": "2019.4",
   "repository": "https://github.com/zigurous/unity-architecture-patterns",
   "documentationUrl": "https://docs.zigurous.com/com.zigurous.architecture",
@@ -12,8 +12,10 @@
     "architecture",
     "data structures",
     "design patterns",
+    "algorithms",
     "extensions",
-    "structs"
+    "structs",
+    "utilities"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@zigurous"
