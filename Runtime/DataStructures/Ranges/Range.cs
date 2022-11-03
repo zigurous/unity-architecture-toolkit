@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zigurous.Architecture.Structs
+namespace Zigurous.Architecture
 {
     /// <summary>
     /// A range of values of the given type.

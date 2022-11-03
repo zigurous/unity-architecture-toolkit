@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Zigurous.Architecture.Structs
+namespace Zigurous.Architecture
 {
     /// <summary>
     /// Stores the size of an entity as a width and height.

@@ -1,6 +1,5 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using Zigurous.Architecture.Structs;
 
 namespace Zigurous.Architecture.Editor
 {
