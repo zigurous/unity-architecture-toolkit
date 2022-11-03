@@ -3,105 +3,98 @@
 namespace Zigurous.Architecture.Structs
 {
     /// <summary>
-    /// A range of Vector4 values.
+    /// A range of Vector2Int values.
     /// </summary>
     [System.Serializable]
-    public struct Vector4Range : INumberRange<Vector4>
+    public struct Vector2IntRange : INumberRange<Vector2Int>
     {
         [SerializeField]
         [Tooltip("The lower bound of the range.")]
-        private Vector4 m_Min;
+        private Vector2Int m_Min;
 
         [SerializeField]
         [Tooltip("The upper bound of the range.")]
-        private Vector4 m_Max;
+        private Vector2Int m_Max;
 
         /// <inheritdoc/>
-        public Vector4 min
+        public Vector2Int min
         {
             get => m_Min;
             set => m_Min = value;
         }
 
         /// <inheritdoc/>
-        public Vector4 max
+        public Vector2Int max
         {
             get => m_Max;
             set => m_Max = value;
         }
 
         /// <inheritdoc/>
-        public Vector4 delta => max - min;
+        public Vector2Int delta => max - min;
 
         /// <inheritdoc/>
-        public Vector4 median => (min + max) / 2f;
+        public Vector2Int median => (min + max) / 2;
 
         /// <summary>
         /// Creates a new range with the specified values.
         /// </summary>
         /// <param name="min">The lower bound of the range.</param>
         /// <param name="max">The upper bound of the range.</param>
-        public Vector4Range(Vector4 min, Vector4 max)
+        public Vector2IntRange(Vector2Int min, Vector2Int max)
         {
             m_Min = min;
             m_Max = max;
         }
 
         /// <inheritdoc/>
-        public Vector4 Random()
+        public Vector2Int Random()
         {
-            return new Vector4(
-                UnityEngine.Random.Range(min.x, max.x),
-                UnityEngine.Random.Range(min.y, max.y),
-                UnityEngine.Random.Range(min.z, max.z),
-                UnityEngine.Random.Range(min.w, max.w));
+            return new Vector2Int(
+                UnityEngine.Random.Range(min.x, max.x + 1),
+                UnityEngine.Random.Range(min.y, max.y + 1));
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(Vector4 value)
+        public bool Includes(Vector2Int value)
         {
             return value.x >= min.x && value.x <= max.x &&
-                   value.y >= min.y && value.y <= max.y &&
-                   value.z >= min.z && value.z <= max.z &&
-                   value.w >= min.w && value.w <= max.w;
+                   value.y >= min.y && value.y <= max.y;
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(Vector4 value, bool includeMin, bool includeMax)
+        public bool Includes(Vector2Int value, bool includeMin, bool includeMax)
         {
             return value.x.IsBetween(min.x, max.x, includeMin, includeMax) &&
-                   value.y.IsBetween(min.y, max.y, includeMin, includeMax) &&
-                   value.z.IsBetween(min.z, max.z, includeMin, includeMax) &&
-                   value.w.IsBetween(min.w, max.w, includeMin, includeMax);
+                   value.y.IsBetween(min.y, max.y, includeMin, includeMax);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to clamp.</param>
-        public Vector4 Clamp(Vector4 value)
+        public Vector2Int Clamp(Vector2Int value)
         {
             value.x = Mathf.Clamp(value.x, min.x, max.x);
             value.y = Mathf.Clamp(value.y, min.y, max.y);
-            value.z = Mathf.Clamp(value.z, min.z, max.z);
-            value.w = Mathf.Clamp(value.w, min.w, max.w);
             return value;
         }
 
         /// <inheritdoc/>
-        public Vector4 Lerp(float t)
+        public Vector2Int Lerp(float t)
         {
-            return Vector4.Lerp(min, max, t);
+            Vector2 lerp = Vector2.Lerp(min, max, t);
+            return new Vector2Int((int)lerp.x, (int)lerp.y);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value within the range you want to calculate.</param>
-        public float InverseLerp(Vector4 value)
+        public float InverseLerp(Vector2Int value)
         {
-            Vector4 AB = max - min;
-            Vector4 AV = value - min;
+            Vector2 AB = max - min;
+            Vector2 AV = value - min;
 
-            return Vector4.Dot(AV, AB) / Vector4.Dot(AB, AB);
+            return Mathf.Clamp01(Vector2.Dot(AV, AB) / Vector2.Dot(AB, AB));
         }
 
     }

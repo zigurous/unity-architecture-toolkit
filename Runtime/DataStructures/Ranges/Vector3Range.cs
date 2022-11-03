@@ -96,7 +96,8 @@ namespace Zigurous.Architecture.Structs
         {
             Vector3 AB = max - min;
             Vector3 AV = value - min;
-            return Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB);
+
+            return Mathf.Clamp01(Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB));
         }
 
     }
