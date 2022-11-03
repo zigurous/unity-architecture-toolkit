@@ -4,10 +4,9 @@ using UnityEngine;
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A ScriptableObject that stores a list of items of the specified type. A
-    /// project asset can be created for the runtime set so it can be referenced
-    /// throughout the application, but the items are added and removed at
-    /// runtime.
+    /// A ScriptableObject that stores a list of items. A project asset can be
+    /// created for the runtime set so it can be referenced throughout the
+    /// application, but the items are added and removed at runtime.
     /// </summary>
     /// <typeparam name="T">The type of items to store.</typeparam>
     public abstract class RuntimeSet<T> : ScriptableObject
@@ -20,7 +19,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The number of items in the set (Read only).
         /// </summary>
-        public int count => items != null ? items.Count : 0;
+        public int Count => items != null ? items.Count : 0;
 
         /// <summary>
         /// Adds an item to the set if it is not already contained in the set.

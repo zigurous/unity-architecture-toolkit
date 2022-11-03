@@ -3,7 +3,7 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// Sets the visibility of the cursor.
+    /// Sets the visibility of the cursor when the behavior is enabled and disabled.
     /// </summary>
     [AddComponentMenu("Zigurous/Utility/Cursor Visibility")]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/CursorVisibility")]
