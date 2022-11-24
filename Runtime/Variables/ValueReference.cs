@@ -48,12 +48,12 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
-        /// Creates a new double reference.
+        /// Creates a new value reference.
         /// </summary>
         public ValueReference() {}
 
         /// <summary>
-        /// Creates a new double reference with the constant value.
+        /// Creates a new value reference with the constant value.
         /// </summary>
         /// <param name="value">The constant value to set.</param>
         public ValueReference(TValue value)
@@ -63,7 +63,7 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
-        /// Creates a new double reference to the variable value.
+        /// Creates a new value reference to the variable value.
         /// </summary>
         /// <param name="variable">The variable to reference.</param>
         public ValueReference(TVariable variable)
