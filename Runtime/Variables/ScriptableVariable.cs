@@ -14,10 +14,12 @@ namespace Zigurous.Architecture
         public abstract T value { get; set; }
 
         #if UNITY_EDITOR
+        #pragma warning disable 0414
         [Multiline]
         [SerializeField]
         [Tooltip("An optional description for the variable (Dev only).")]
         private string m_DeveloperDescription = "";
+        #pragma warning restore 0414
         #endif
     }
 
