@@ -5,7 +5,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// A behaviour that invokes timed events at a set interval and/or duration.
     /// </summary>
-    [CreateAssetMenu(menuName = "Zigurous/Utility/Timer Behaviour")]
+    [AddComponentMenu("Zigurous/Utility/Timer Behaviour")]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/TimerBehaviour")]
     public sealed class TimerBehaviour : MonoBehaviour
     {
