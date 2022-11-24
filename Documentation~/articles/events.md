@@ -13,3 +13,7 @@ An event can be created through the Asset menu, `Zigurous > Events > Game Event`
 ### Game Event Listener
 
 A [GameEventListener](/api/Zigurous.Architecture/GameEventListener) component can be added to any game object that needs to listen for an event. This is a class that derives from `MonoBehaviour` and will register and unregister itself as a listener for the specified event. The listener also declares a standard `UnityEvent` response property that is invoked when the event is raised.
+
+### Event Reference
+
+The [EventReference](/api/Zigurous.Architecture/EventReference) class allows a `UnityEvent` or `GameEvent` to be referenced. The option to switch between the two choices is available in the editor. Anywhere you might declare a variable as a `UnityEvent` or a `GameEvent` consider declaring it as an `EventReference` for more flexibility.
