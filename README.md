@@ -1,12 +1,22 @@
-# Architecture Patterns
+# Architecture Toolkit
 
-[![](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/zigurous/unity-architecture-patterns) [![](https://img.shields.io/github/package-json/v/zigurous/unity-architecture-patterns)](https://github.com/zigurous/unity-architecture-patterns/releases) [![](https://img.shields.io/badge/docs-link-success)](https://docs.zigurous.com/com.zigurous.datastructures) [![](https://img.shields.io/github/license/zigurous/unity-architecture-patterns)](https://github.com/zigurous/unity-architecture-patterns/blob/main/LICENSE.md)
+[![](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/zigurous/unity-architecture-toolkit) [![](https://img.shields.io/github/package-json/v/zigurous/unity-architecture-toolkit)](https://github.com/zigurous/unity-architecture-toolkit/releases) [![](https://img.shields.io/badge/docs-link-success)](https://docs.zigurous.com/com.zigurous.architecture) [![](https://img.shields.io/github/license/zigurous/unity-architecture-toolkit)](https://github.com/zigurous/unity-architecture-toolkit/blob/main/LICENSE.md)
 
-The **Architecture Patterns** package contains data structures, design patterns, and utilities to help create better code structure for Unity projects.
+The **Architecture Toolkit** contains data structures, design patterns, extensions, and utilities to help solve common architectural problems in Unity projects or simply make common programming tasks easier to manage.
+
+## Reference
+
+- [Attributes](https://docs.zigurous.com/com.zigurous.architecture/manual/attributes)
+- [Behaviours](https://docs.zigurous.com/com.zigurous.architecture/manual/behaviours)
+- [Data Structures](https://docs.zigurous.com/com.zigurous.architecture/manual/data-structures)
+- [Events](https://docs.zigurous.com/com.zigurous.architecture/manual/events)
+- [Extensions](https://docs.zigurous.com/com.zigurous.architecture/manual/extensions)
+- [Scriptable Variables](https://docs.zigurous.com/com.zigurous.architecture/manual/scriptable-variables)
+- [Utilities](https://docs.zigurous.com/com.zigurous.architecture/manual/utilities)
 
 ## Installation
 
-Use the Unity [Package Manager](https://docs.unity3d.com/Manual/upm-ui.html) to install the **Architecture Patterns** package.
+Use the Unity [Package Manager](https://docs.unity3d.com/Manual/upm-ui.html) to install the **Architecture Toolkit** package.
 
 1. Open the Package Manager in `Window > Package Manager`
 2. Click the add (`+`) button in the status bar
@@ -14,7 +24,7 @@ Use the Unity [Package Manager](https://docs.unity3d.com/Manual/upm-ui.html) to 
 4. Enter the following Git URL in the text box and click Add:
 
 ```
-https://github.com/zigurous/unity-architecture-patterns.git
+https://github.com/zigurous/unity-architecture-toolkit.git
 ```
 
 ## Namespace

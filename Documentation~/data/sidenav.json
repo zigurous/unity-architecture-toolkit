@@ -1,0 +1,96 @@
+[
+  {
+    "title": "📌 Overview",
+    "items": [
+      {
+        "name": "Getting Started",
+        "path": "/manual"
+      },
+      {
+        "name": "Installation",
+        "path": "/installation"
+      },
+      {
+        "name": "Changelog",
+        "path": "/changelog"
+      },
+      {
+        "name": "License",
+        "path": "/license"
+      }
+    ]
+  },
+  {
+    "title": "📖 Reference",
+    "items": [
+      {
+        "name": "Attributes",
+        "path": "/manual/attributes"
+      },
+      {
+        "name": "Behaviours",
+        "path": "/manual/behaviours"
+      },
+      {
+        "name": "Data Structures",
+        "path": "/manual/data-structures"
+      },
+      {
+        "name": "Events",
+        "path": "/manual/events"
+      },
+      {
+        "name": "Extensions",
+        "path": "/manual/extensions"
+      },
+      {
+        "name": "Scriptable Variables",
+        "path": "/manual/scriptable-variables"
+      },
+      {
+        "name": "Utilities",
+        "path": "/manual/utilities"
+      }
+    ]
+  },
+  {
+    "title": "💬 Contact",
+    "items": [
+      {
+        "name": "Discord",
+        "href": "https://discord.gg/DdYyWVb",
+        "icon": "launch"
+      },
+      {
+        "name": "Twitter",
+        "href": "https://twitter.com/zigurous",
+        "icon": "launch"
+      }
+    ]
+  },
+  {
+    "title": "🔗 Other Links",
+    "items": [
+      {
+        "name": "GitHub",
+        "href": "https://github.com/zigurous/unity-architecture-toolkit",
+        "icon": "launch"
+      },
+      {
+        "name": "Asset Store",
+        "href": "https://assetstore.unity.com/publishers/51884",
+        "icon": "launch"
+      },
+      {
+        "name": "YouTube",
+        "href": "https://youtube.com/c/zigurous?sub_confirmation=1",
+        "icon": "launch"
+      },
+      {
+        "name": "Patreon",
+        "href": "https://patreon.com/zigurous",
+        "icon": "launch"
+      }
+    ]
+  }
+]
