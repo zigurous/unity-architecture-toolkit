@@ -6,7 +6,7 @@ slug: "/manual/utilities"
 
 The **Architecture Toolkit** includes several utility classes that may be useful under specific situations.
 
-<br/>
+<hr/>
 
 ### [HashCode](/api/Zigurous.Architecture/HashCode)
 

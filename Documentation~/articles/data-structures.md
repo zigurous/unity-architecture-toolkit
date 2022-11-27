@@ -6,7 +6,9 @@ slug: "/manual/data-structures"
 
 The **Architecture Toolkit** contains various data structures that may be useful throughout a project. The following data structures are available in the package:
 
-## Accumulators
+<hr/>
+
+## 🎲 Accumulators
 
 Accumulators work like a reducer function by accumulating a set of values into a single total value except you can store the values using identifiers. This is useful to accumulate values over time while adding and removing values as needed. The total value is updated automatically any time a value is added or removed.
 
@@ -24,7 +26,7 @@ Supported types:
 
 <hr/>
 
-## Ranges
+## 🎚️ Ranges
 
 Ranges allow you to specify a lower and upper bound which can then be used for a multitude of purposes including clamping values, interpolating numbers, generating random values, and more.
 
@@ -47,7 +49,7 @@ Included types:
 
 <hr/>
 
-## Misc
+## 💾 Misc
 
 - [Bitmask](/api/Zigurous.Architecture/Bitmask) - A bitmask representation that can be used for bitwise operations.
 - [Bool3](/api/Zigurous.Architecture/Bool3) - Stores a tuple of 3 booleans
