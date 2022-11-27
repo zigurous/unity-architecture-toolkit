@@ -7,7 +7,7 @@ namespace Zigurous.Architecture
     /// </summary>
     [AddComponentMenu("Zigurous/Utility/Cursor Visibility")]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/CursorVisibility")]
-    public sealed class CursorVisbility : MonoBehaviour
+    public sealed class CursorVisibility : MonoBehaviour
     {
         [SerializeField]
         [Tooltip("The visibility of the cursor when the script is enabled.")]
