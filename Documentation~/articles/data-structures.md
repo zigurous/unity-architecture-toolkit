@@ -6,8 +6,6 @@ slug: "/manual/data-structures"
 
 The **Architecture Toolkit** contains various data structures that may be useful throughout a project. The following data structures are available in the package:
 
-<br/>
-
 ## Accumulators
 
 Accumulators work like a reducer function by accumulating a set of values into a single total value except you can store the values using identifiers. This is useful to accumulate values over time while adding and removing values as needed. The total value is updated automatically any time a value is added or removed.
