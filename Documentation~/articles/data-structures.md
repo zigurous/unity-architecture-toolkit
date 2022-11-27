@@ -4,7 +4,9 @@ slug: "/manual/data-structures"
 
 # Data Structures
 
-The **Architecture Toolkit** contains various data structures that may be useful throughout a project. All of the following data structures are available in the package:
+The **Architecture Toolkit** contains various data structures that may be useful throughout a project. The following data structures are available in the package:
+
+<br/>
 
 ## Accumulators
 
@@ -21,6 +23,8 @@ Supported types:
 - [Vector3](/api/Zigurous.Architecture/Vector3Accumulator)
 - [Vector3Int](/api/Zigurous.Architecture/Vector3IntAccumulator)
 - [Vector4](/api/Zigurous.Architecture/Vector4Accumulator)
+
+<hr/>
 
 ## Ranges
 
@@ -43,12 +47,14 @@ Included types:
 - [Vector3IntRange](/api/Zigurous.Architecture/Vector3IntRange)
 - [Vector4Range](/api/Zigurous.Architecture/Vector4Range)
 
+<hr/>
+
 ## Misc
 
 - [Bitmask](/api/Zigurous.Architecture/Bitmask) - A bitmask representation that can be used for bitwise operations.
 - [Bool3](/api/Zigurous.Architecture/Bool3) - Stores a tuple of 3 booleans
 - [GridSize](/api/Zigurous.Architecture/GridSize) - Stores the size of a grid as rows and columns.
 - [Quantity\<T\>](/api/Zigurous.Architecture/Quantity-1) - Stores a quantity of a given entity type
-- [Registry\<T\>](/api/Zigurous.Architecture/RegisteredList-1) - Manages a list of unique items and invokes callbacks when an item is added or removed from the list.
+- [Registry\<T\>](/api/Zigurous.Architecture/Registry-1) - Manages a list of unique items and invokes callbacks when an item is added or removed from the list.
 - [RuntimeSet\<T\>](/api/Zigurous.Architecture/RuntimeSet-1) - A ScriptableObject that stores a list of items. A project asset can be created for the runtime set so it can be referenced throughout the application, but the items are added and removed at runtime.
 - [Size](/api/Zigurous.Architecture/Size) - Stores the size of an entity as a width and height

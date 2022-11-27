@@ -1,5 +1,5 @@
 ---
-slug: "/manual/variables"
+slug: "/manual/scriptable-variables"
 ---
 
 # Scriptable Variables

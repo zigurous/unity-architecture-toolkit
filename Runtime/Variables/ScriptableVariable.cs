@@ -5,7 +5,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// A variable type that derives from ScriptableObject.
     /// </summary>
-    /// <typeparam name="T">The type of value.<typeparam>
+    /// <typeparam name="T">The type of value.</typeparam>
     public abstract class ScriptableVariable<T> : ScriptableObject
     {
         /// <summary>

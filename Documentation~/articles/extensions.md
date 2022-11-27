@@ -4,7 +4,7 @@ slug: "/manual/extensions"
 
 # Extension Methods
 
-The **Architecture Toolkit** contains hundreds of extension methods that provide enhanced support for common container types and Unity classes. Extension methods are available for the following types:
+The **Architecture Toolkit** contains hundreds of extension methods to provide enhanced support for common container types and Unity classes. See the Scripting API for more information:
 
 #### [Array](/api/Zigurous.Architecture/ArrayExtensions)
 
