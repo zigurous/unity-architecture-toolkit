@@ -24,7 +24,7 @@ The **Architecture Toolkit** contains data structures, design patterns, extensio
 
 #### 🧬 [Attributes](/manual/attributes)
 
-#### 🃏 [Behaviours](/manual/behaviours)
+#### 🃏 [Behaviors](/manual/behaviors)
 
 #### 💾 [Data Structures](/manual/data-structures)
 
