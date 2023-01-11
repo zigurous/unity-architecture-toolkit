@@ -3,7 +3,7 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a value of the specified type, either a constant or a variable.
+    /// A reference to a value of the specified type, either a fixed value or a variable.
     /// </summary>
     /// <typeparam name="TValue">The type of value.</typeparam>
     /// <typeparam name="TVariable">The type of variable reference.</typeparam>
@@ -12,33 +12,33 @@ namespace Zigurous.Architecture
         where TVariable : ScriptableVariable<TValue>
     {
         /// <summary>
-        /// Uses a constant value instead of a variable reference.
+        /// Uses a variable reference instead of a fixed value.
         /// </summary>
-        [Tooltip("Uses a constant value instead of a variable reference.")]
-        public bool useConstant = true;
-
-        /// <summary>
-        /// The constant value to use.
-        /// </summary>
-        [Tooltip("The constant value to use.")]
-        public TValue constantValue;
+        [Tooltip("Uses a variable reference instead of a fixed value.")]
+        public bool useVariable = false;
 
         /// <summary>
         /// The variable to reference.
         /// </summary>
         [Tooltip("The variable to reference.")]
-        public TVariable variable;
+        public TVariable variable = null;
 
         /// <summary>
-        /// The current value, either the constant value if set to use constant
-        /// or the value of the variable reference.
+        /// The fixed value to use.
+        /// </summary>
+        [Tooltip("The fixed value to use.")]
+        public TValue fixedValue = default(TValue);
+
+        /// <summary>
+        /// The current value, either the fixed value or the value of the
+        /// referenced variable.
         /// </summary>
         public TValue value
         {
             get
             {
-                if (useConstant) {
-                    return constantValue;
+                if (!useVariable) {
+                    return fixedValue;
                 } else if (variable != null) {
                     return variable.value;
                 } else {
@@ -53,13 +53,14 @@ namespace Zigurous.Architecture
         public ValueReference() {}
 
         /// <summary>
-        /// Creates a new value reference with the constant value.
+        /// Creates a new value reference with the fixed value.
         /// </summary>
-        /// <param name="value">The constant value to set.</param>
+        /// <param name="value">The fixed value to set.</param>
         public ValueReference(TValue value)
         {
-            this.useConstant = true;
-            this.constantValue = value;
+            useVariable = false;
+            fixedValue = value;
+            variable = null;
         }
 
         /// <summary>
@@ -68,7 +69,8 @@ namespace Zigurous.Architecture
         /// <param name="variable">The variable to reference.</param>
         public ValueReference(TVariable variable)
         {
-            this.useConstant = false;
+            useVariable = true;
+            fixedValue = default(TValue);
             this.variable = variable;
         }
 

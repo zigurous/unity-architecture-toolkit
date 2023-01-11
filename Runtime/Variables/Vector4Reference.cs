@@ -14,9 +14,9 @@ namespace Zigurous.Architecture
         public Vector4Reference() {}
 
         /// <summary>
-        /// Creates a new Vector4 reference with the constant value.
+        /// Creates a new Vector4 reference with the fixed value.
         /// </summary>
-        /// <param name="value">The constant value to set.</param>
+        /// <param name="value">The fixed value to set.</param>
         public Vector4Reference(Vector4 value) : base(value) {}
 
         /// <summary>

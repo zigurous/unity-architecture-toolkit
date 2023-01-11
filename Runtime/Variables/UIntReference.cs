@@ -12,9 +12,9 @@
         public UIntReference() {}
 
         /// <summary>
-        /// Creates a new uint reference with the constant value.
+        /// Creates a new uint reference with the fixed value.
         /// </summary>
-        /// <param name="value">The constant value to set.</param>
+        /// <param name="value">The fixed value to set.</param>
         public UIntReference(uint value) : base(value) {}
 
         /// <summary>

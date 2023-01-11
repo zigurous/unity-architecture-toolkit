@@ -14,9 +14,9 @@ namespace Zigurous.Architecture
         public BoundsReference() {}
 
         /// <summary>
-        /// Creates a new Bounds reference with the constant value.
+        /// Creates a new Bounds reference with the fixed value.
         /// </summary>
-        /// <param name="value">The constant value to set.</param>
+        /// <param name="value">The fixed value to set.</param>
         public BoundsReference(Bounds value) : base(value) {}
 
         /// <summary>
