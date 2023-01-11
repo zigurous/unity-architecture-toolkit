@@ -66,10 +66,10 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        public Color delta => max - min;
+        public Color Delta => max - min;
 
         /// <inheritdoc/>
-        public Color median => (min + max) / 2f;
+        public Color Median => (min + max) / 2f;
 
         /// <summary>
         /// Creates a new range with the specified values.

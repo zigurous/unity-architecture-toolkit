@@ -104,7 +104,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The area of the entity (width * height) (Read only).
         /// </summary>
-        public int area => System.Math.Abs(width * height);
+        public int Area => System.Math.Abs(width * height);
 
         /// <summary>
         /// Creates a new size with the specified width and height.
@@ -140,8 +140,8 @@ namespace Zigurous.Architecture
         /// </returns>
         public int CompareTo(Size other)
         {
-            int a = this.area;
-            int b = other.area;
+            int a = this.Area;
+            int b = other.Area;
 
             if (a == b) return 0;
             else if (a > b) return 1;

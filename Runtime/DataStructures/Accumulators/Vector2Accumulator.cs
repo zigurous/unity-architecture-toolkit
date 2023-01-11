@@ -8,15 +8,15 @@ namespace Zigurous.Architecture
     public sealed class Vector2Accumulator : ValueAccumulator<Vector2>
     {
         /// <inheritdoc/>
-        protected override Vector2 defaultValue => Vector2.zero;
+        protected override Vector2 DefaultValue => Vector2.zero;
 
         /// <inheritdoc/>
         /// <param name="value">The value to add to the total.</param>
-        protected override Vector2 Add(Vector2 value) => total + value;
+        protected override Vector2 Add(Vector2 value) => Total + value;
 
         /// <inheritdoc/>
         /// <param name="value">The value to subtract from the total.</param>
-        protected override Vector2 Subtract(Vector2 value) => total - value;
+        protected override Vector2 Subtract(Vector2 value) => Total - value;
     }
 
 }

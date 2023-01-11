@@ -9,12 +9,12 @@
         /// <summary>
         /// The difference between the maximum and minimum values (Read only).
         /// </summary>
-        T delta { get; }
+        T Delta { get; }
 
         /// <summary>
         /// The median value of the range (Read only).
         /// </summary>
-        T median { get; }
+        T Median { get; }
 
         /// <summary>
         /// Returns a random value in the range.

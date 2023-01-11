@@ -56,10 +56,10 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        public int delta => max - min;
+        public int Delta => max - min;
 
         /// <inheritdoc/>
-        public int median => (min + max) / 2;
+        public int Median => (min + max) / 2;
 
         /// <summary>
         /// Creates a new range with the specified values.
@@ -82,12 +82,32 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
+        /// Returns a random value in the range [inclusive, exclusive) using the
+        /// provided seed.
+        /// </summary>
+        /// <returns>A random value in the range [inclusive, exclusive).</returns>
+        public int Random(System.Random seed)
+        {
+            return seed.Next(min, max);
+        }
+
+        /// <summary>
         /// Returns a random value in the range [inclusive, inclusive].
         /// </summary>
         /// <returns>A random value in the range [inclusive, inclusive].</returns>
         public int RandomInclusive()
         {
             return UnityEngine.Random.Range(min, max + 1);
+        }
+
+        /// <summary>
+        /// Returns a random value in the range [inclusive, inclusive] using the
+        /// provided seed.
+        /// </summary>
+        /// <returns>A random value in the range [inclusive, inclusive].</returns>
+        public int RandomInclusive(System.Random seed)
+        {
+            return seed.Next(min, max + 1);
         }
 
         /// <inheritdoc/>

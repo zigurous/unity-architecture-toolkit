@@ -16,17 +16,17 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The total accumulated value (Read only).
         /// </summary>
-        public T total { get; protected set; }
+        public T Total { get; protected set; }
 
         /// <summary>
         /// The number of unique values being accumulated (Read only).
         /// </summary>
-        public int count => values.Count;
+        public int Count => values.Count;
 
         /// <summary>
         /// The default value of <typeparamref name="T"/>.
         /// </summary>
-        protected virtual T defaultValue => default(T);
+        protected virtual T DefaultValue => default(T);
 
         /// <summary>
         /// Creates a new instance of the value accumulator.
@@ -34,7 +34,7 @@ namespace Zigurous.Architecture
         public ValueAccumulator()
         {
             values = new Dictionary<int, T>();
-            total = defaultValue;
+            Total = DefaultValue;
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Zigurous.Architecture
             if (values.TryGetValue(identifier, out value)) {
                 return value;
             } else {
-                return defaultValue;
+                return DefaultValue;
             }
         }
 
@@ -66,13 +66,13 @@ namespace Zigurous.Architecture
 
             if (values.TryGetValue(identifier, out currentValue))
             {
-                total = Subtract(currentValue);
-                total = Add(value);
+                Total = Subtract(currentValue);
+                Total = Add(value);
                 values[identifier] = value;
             }
             else
             {
-                total = Add(value);
+                Total = Add(value);
                 values.Add(identifier, value);
             }
         }
@@ -88,7 +88,7 @@ namespace Zigurous.Architecture
 
             if (values.TryGetValue(identifier, out value))
             {
-                total = Subtract(value);
+                Total = Subtract(value);
                 values.Remove(identifier);
             }
         }
@@ -99,7 +99,7 @@ namespace Zigurous.Architecture
         public void Clear()
         {
             values.Clear();
-            total = defaultValue;
+            Total = DefaultValue;
         }
 
         /// <summary>

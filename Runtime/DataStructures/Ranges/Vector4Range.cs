@@ -31,10 +31,10 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        public Vector4 delta => max - min;
+        public Vector4 Delta => max - min;
 
         /// <inheritdoc/>
-        public Vector4 median => (min + max) / 2f;
+        public Vector4 Median => (min + max) / 2f;
 
         /// <summary>
         /// Creates a new range with the specified values.
