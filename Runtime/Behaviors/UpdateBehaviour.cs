@@ -4,7 +4,7 @@ namespace Zigurous.Architecture
 {
     /// <summary>
     /// A behavior that can run in any update mode. The update mode can be
-    /// changed as needed without occuring any additional performance cost.
+    /// changed as needed without incurring any additional performance cost.
     /// </summary>
     public abstract class UpdateBehaviour : MonoBehaviour
     {

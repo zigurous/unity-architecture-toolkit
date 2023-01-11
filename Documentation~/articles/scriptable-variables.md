@@ -10,7 +10,7 @@ All of these variables can be created through the Asset menu, `Zigurous > Variab
 
 For example, the player can declare their hitpoints as a `FloatVariable` instead of a `float`. A health bar script would also declare a hitpoints property as a `FloatVariable`. Both behaviors could reference the same variable asset without needing any dependencies between them.
 
-The downside with this is it can be cumbersome to create assets for every variable declared in a behavior. Instead of declaring `FloatVariable` we can declare a `FloatReference` for additional flexibility. This allows the value to either be a constant value or a reference to a variable asset; the choice is customizable in the editor. These reference types derive from [ValueReference\<TValue, TVariable\>](/api/Zigurous.Architecture/ValueReference-2).
+The downside with this is it can be cumbersome to create assets for every variable declared in a behavior. Instead of declaring `FloatVariable` we can declare a `FloatReference` for additional flexibility. This allows the value to be a fixed value or a reference to a variable asset; the choice is customizable in the editor. These reference types derive from [ValueReference\<TValue, TVariable\>](/api/Zigurous.Architecture/ValueReference-2).
 
 <hr/>
 
