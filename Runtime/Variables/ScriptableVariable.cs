@@ -13,6 +13,11 @@ namespace Zigurous.Architecture
         /// </summary>
         public abstract T value { get; set; }
 
+        /// <summary>
+        /// The default value of the variable.
+        /// </summary>
+        public virtual T defaultValue => default(T);
+
         #if UNITY_EDITOR
         #pragma warning disable 0414
         [Multiline]
@@ -21,6 +26,15 @@ namespace Zigurous.Architecture
         private string m_DeveloperDescription = "";
         #pragma warning restore 0414
         #endif
+
+        /// <summary>
+        /// Resets the value to its default value.
+        /// </summary>
+        public void ResetToDefault()
+        {
+            value = defaultValue;
+        }
+
     }
 
 }
