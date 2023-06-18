@@ -3,7 +3,7 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A behaviour that invokes events using a timer.
+    /// A behaviour that invokes timed events at a set interval and/or duration.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Utility/Timer Behaviour")]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/TimerBehaviour")]

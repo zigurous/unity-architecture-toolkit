@@ -8,7 +8,8 @@ namespace Zigurous.Architecture.Structs
     /// </summary>
     /// <typeparam name="T">The type of entity being counted.</typeparam>
     [System.Serializable]
-    public struct Quantity<T> : IEquatable<Quantity<T>> where T : IEquatable<T>
+    public struct Quantity<T> : IEquatable<Quantity<T>>
+        where T : IEquatable<T>
     {
         /// <summary>
         /// The entity being counted.
