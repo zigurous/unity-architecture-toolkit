@@ -8,22 +8,9 @@ namespace Zigurous.Architecture
     /// when changing scenes, thus making it persistent.
     /// </summary>
     /// <typeparam name="T">The type of component to instantiate.</typeparam>
-    public abstract class SingletonPersistent<T> : Singleton<T>
+    public abstract class PersistentSingletonBehaviour<T> : SingletonBehaviour<T>
         where T : Component
     {
-        /// <inheritdoc/>
-        internal override void Awake()
-        {
-            if (instance == null)
-            {
-                if (Application.isPlaying) {
-                    DontDestroyOnLoad(this);
-                }
-            }
-
-            base.Awake();
-        }
-
         /// <inheritdoc/>
         protected override void SetUp()
         {
