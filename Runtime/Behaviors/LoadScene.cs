@@ -4,11 +4,11 @@ using UnityEngine.SceneManagement;
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// Loads a scene after a set delay.
+    /// Loads a scene using a specified set of options.
     /// </summary>
-    [AddComponentMenu("Zigurous/Utility/Load Scene Delayed")]
-    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/LoadSceneDelayed")]
-    public sealed class LoadSceneDelayed : MonoBehaviour
+    [AddComponentMenu("Zigurous/Utility/Load Scene")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/LoadScene")]
+    public sealed class LoadScene : MonoBehaviour
     {
         /// <summary>
         /// The mode to use for loading the scene.
@@ -26,7 +26,7 @@ namespace Zigurous.Architecture
         /// The delay in seconds before loading the scene.
         /// </summary>
         [Tooltip("The delay in seconds before loading the scene.")]
-        public float delay = 3f;
+        public float delay;
 
         /// <summary>
         /// Loads the scene when the script starts.
@@ -56,29 +56,29 @@ namespace Zigurous.Architecture
         public void Load()
         {
             if (async) {
-                Invoke(nameof(LoadSceneAsync), delay);
+                Invoke(nameof(TriggerLoadSceneAsync), delay);
             } else {
-                Invoke(nameof(LoadScene), delay);
+                Invoke(nameof(TriggerLoadScene), delay);
             }
         }
 
         /// <summary>
         /// Loads the scene using the settings provided in the script while
-        /// ignoring the delay.
+        /// ignoring any delay.
         /// </summary>
         public void LoadImmediate()
         {
             if (async) {
-                LoadSceneAsync();
+                TriggerLoadSceneAsync();
             } else {
-                LoadScene();
+                TriggerLoadScene();
             }
         }
 
         /// <summary>
         /// Loads the scene synchronously.
         /// </summary>
-        private void LoadScene()
+        private void TriggerLoadScene()
         {
             SceneManager.LoadScene(scene, mode);
         }
@@ -87,7 +87,7 @@ namespace Zigurous.Architecture
         /// Loads the scene asynchronously.
         /// </summary>
         /// <returns>The async operation.</returns>
-        private AsyncOperation LoadSceneAsync()
+        private AsyncOperation TriggerLoadSceneAsync()
         {
             return SceneManager.LoadSceneAsync(scene, mode);
         }
