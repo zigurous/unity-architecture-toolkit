@@ -69,6 +69,23 @@ namespace Zigurous.Architecture
             }
         }
 
+        /// <summary>
+        /// Formats the string using title case. If the string is null, then the
+        /// default text will be returned instead.
+        /// </summary>
+        /// <param name="str">The string to format.</param>
+        /// <param name="cultureInfo">The localization culture to use when formatting the string.</param>
+        /// <param name="defaultText">An optional string returned if the formatted string is null.</param>
+        /// <returns>The formatted string.</returns>
+        public static string ToTitleCase(this string str, CultureInfo cultureInfo, string defaultText = null)
+        {
+            if (str == null) {
+                return defaultText;
+            } else {
+                return cultureInfo.TextInfo.ToTitleCase(str.ToLower());
+            }
+        }
+
     }
 
 }
