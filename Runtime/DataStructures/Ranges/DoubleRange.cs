@@ -67,12 +67,12 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The difference between the maximum and minimum values (Read only).
         /// </summary>
-        public double delta => max - min;
+        public double Delta => max - min;
 
         /// <summary>
         /// The median value of the range (Read only).
         /// </summary>
-        public double median => (min + max) / 2.0;
+        public double Median => (min + max) / 2.0;
 
         /// <summary>
         /// Creates a new range with the specified values.

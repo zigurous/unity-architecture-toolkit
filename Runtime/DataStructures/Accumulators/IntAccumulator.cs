@@ -7,11 +7,11 @@
     {
         /// <inheritdoc/>
         /// <param name="value">The value to add to the total.</param>
-        protected override int Add(int value) => total + value;
+        protected override int Add(int value) => Total + value;
 
         /// <inheritdoc/>
         /// <param name="value">The value to subtract from the total.</param>
-        protected override int Subtract(int value) => total - value;
+        protected override int Subtract(int value) => Total - value;
     }
 
 }

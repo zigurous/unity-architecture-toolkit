@@ -104,7 +104,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The area of the grid (rows * columns) (Read only).
         /// </summary>
-        public int area => System.Math.Abs(rows * columns);
+        public int Area => System.Math.Abs(rows * columns);
 
         /// <summary>
         /// Creates a new grid size with the specified rows and columns.
@@ -140,8 +140,8 @@ namespace Zigurous.Architecture
         /// </returns>
         public int CompareTo(GridSize other)
         {
-            int a = this.area;
-            int b = other.area;
+            int a = this.Area;
+            int b = other.Area;
 
             if (a == b) return 0;
             else if (a > b) return 1;

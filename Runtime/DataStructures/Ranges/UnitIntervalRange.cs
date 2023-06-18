@@ -48,10 +48,10 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        public float delta => max - min;
+        public float Delta => max - min;
 
         /// <inheritdoc/>
-        public float median => (min + max) / 2f;
+        public float Median => (min + max) / 2f;
 
         /// <summary>
         /// Creates a new range with the specified values.
