@@ -6,6 +6,7 @@ namespace Zigurous.Architecture
     /// A float variable saved as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Float")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/FloatVariable")]
     public class FloatVariable : ScriptableVariable<float>
     {
         /// <summary>

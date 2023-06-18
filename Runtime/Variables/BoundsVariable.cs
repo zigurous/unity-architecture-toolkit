@@ -6,6 +6,7 @@ namespace Zigurous.Architecture
     /// A Bounds variable saved as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Bounds")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/BoundsVariable")]
     public class BoundsVariable : ScriptableVariable<Bounds>
     {
         /// <summary>

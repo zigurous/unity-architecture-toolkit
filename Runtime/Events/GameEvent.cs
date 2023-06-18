@@ -8,6 +8,7 @@ namespace Zigurous.Architecture
     /// throughout the application.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Events/Game Event")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/GameEvent")]
     public class GameEvent : ScriptableObject
     {
         /// <summary>

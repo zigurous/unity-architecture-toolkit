@@ -6,6 +6,7 @@ namespace Zigurous.Architecture
     /// An int variable saved as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Int")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/IntVariable")]
     public class IntVariable : ScriptableVariable<int>
     {
         /// <summary>

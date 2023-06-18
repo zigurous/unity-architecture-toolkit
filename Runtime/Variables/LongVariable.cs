@@ -6,6 +6,7 @@ namespace Zigurous.Architecture
     /// A long variable saved as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Long")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/LongVariable")]
     public class LongVariable : ScriptableVariable<long>
     {
         /// <summary>

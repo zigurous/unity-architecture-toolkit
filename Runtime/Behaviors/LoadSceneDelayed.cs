@@ -7,6 +7,7 @@ namespace Zigurous.Architecture
     /// Loads a scene after a set delay.
     /// </summary>
     [AddComponentMenu("Zigurous/Utility/Load Scene Delayed")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/LoadSceneDelayed")]
     public sealed class LoadSceneDelayed : MonoBehaviour
     {
         /// <summary>

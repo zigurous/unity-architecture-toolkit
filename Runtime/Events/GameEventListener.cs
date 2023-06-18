@@ -8,6 +8,7 @@ namespace Zigurous.Architecture
     /// in response.
     /// </summary>
     [AddComponentMenu("Zigurous/Events/Game Event Listener")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/GameEventListener")]
     public class GameEventListener : MonoBehaviour
     {
         /// <summary>

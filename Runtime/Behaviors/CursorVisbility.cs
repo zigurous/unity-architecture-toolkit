@@ -6,6 +6,7 @@ namespace Zigurous.Architecture
     /// Sets the visibility of the cursor.
     /// </summary>
     [AddComponentMenu("Zigurous/Utility/Cursor Visibility")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/CursorVisibility")]
     public sealed class CursorVisbility : MonoBehaviour
     {
         [SerializeField]
