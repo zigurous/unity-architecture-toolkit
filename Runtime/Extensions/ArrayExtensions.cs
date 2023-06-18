@@ -67,7 +67,8 @@ namespace Zigurous.Architecture
         /// <param name="array">The array to search in.</param>
         /// <param name="element">The element to search for.</param>
         /// <returns>True if the array contains the element, false otherwise.</returns>
-        public static bool Contains<T>(this T[] array, T element) where T : IEquatable<T>
+        public static bool Contains<T>(this T[] array, T element)
+            where T : IEquatable<T>
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -77,6 +78,44 @@ namespace Zigurous.Architecture
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Checks if the array contains an element that satisfies a predicate.
+        /// </summary>
+        /// <typeparam name="T">The type of the array.</typeparam>
+        /// <param name="array">The array to search in.</param>
+        /// <param name="predicate">The predicate to use.</param>
+        /// <returns>True if any element satisfies the predicate.</returns>
+        public static bool Contains<T>(this T[] array, Predicate<T> predicate)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (predicate(array[i]) == true) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if the array contains all elements that satisfy a predicate.
+        /// </summary>
+        /// <typeparam name="T">The type of the array.</typeparam>
+        /// <param name="array">The array to search in.</param>
+        /// <param name="predicate">The predicate to use.</param>
+        /// <returns>True if all elements satisfy the predicate.</returns>
+        public static bool ContainsAll<T>(this T[] array, Predicate<T> predicate)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (predicate(array[i]) == false) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -263,7 +302,8 @@ namespace Zigurous.Architecture
         /// <param name="array">The array to search in.</param>
         /// <param name="element">The element to search for.</param>
         /// <returns>The index of the element in the array.</returns>
-        public static int IndexOf<T>(this T[] array, T element) where T : IEquatable<T>
+        public static int IndexOf<T>(this T[] array, T element)
+            where T : IEquatable<T>
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -276,41 +316,23 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
-        /// Checks if any element in the array satisfies a predicate.
+        /// Returns the index of the first element in the array that satisfies
+        /// the predicate.
         /// </summary>
         /// <typeparam name="T">The type of the array.</typeparam>
         /// <param name="array">The array to search in.</param>
         /// <param name="predicate">The predicate to use.</param>
-        /// <returns>True if any element satisfies the predicate.</returns>
-        public static bool IsAny<T>(this T[] array, Predicate<T> predicate)
+        /// <returns>The index of the element, or -1 if not found.</returns>
+        public static int IndexOf<T>(this T[] array, Predicate<T> predicate)
         {
             for (int i = 0; i < array.Length; i++)
             {
                 if (predicate(array[i]) == true) {
-                    return true;
+                    return i;
                 }
             }
 
-            return false;
-        }
-
-        /// <summary>
-        /// Checks if each element in the array satisfies a predicate.
-        /// </summary>
-        /// <typeparam name="T">The type of the array.</typeparam>
-        /// <param name="array">The array to search in.</param>
-        /// <param name="predicate">The predicate to use.</param>
-        /// <returns>True if all elements satisfy the predicate.</returns>
-        public static bool IsEach<T>(this T[] array, Predicate<T> predicate)
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (predicate(array[i]) == false) {
-                    return false;
-                }
-            }
-
-            return true;
+            return -1;
         }
 
         /// <summary>

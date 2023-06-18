@@ -42,6 +42,45 @@ namespace Zigurous.Architecture
             return combinedList;
         }
 
+
+        /// <summary>
+        /// Checks if the list contains an item that satisfies a predicate.
+        /// </summary>
+        /// <typeparam name="T">The type of the list.</typeparam>
+        /// <param name="list">The list to search in.</param>
+        /// <param name="predicate">The predicate to use.</param>
+        /// <returns>True if any item satisfies the predicate.</returns>
+        public static bool Contains<T>(this List<T> list, Predicate<T> predicate)
+        {
+            foreach (T item in list)
+            {
+                if (predicate(item) == true) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if the list contains all items that satisfy a predicate.
+        /// </summary>
+        /// <typeparam name="T">The type of the list.</typeparam>
+        /// <param name="list">The list to search in.</param>
+        /// <param name="predicate">The predicate to use.</param>
+        /// <returns>True if all items satisfy the predicate.</returns>
+        public static bool ContainsAll<T>(this List<T> list, Predicate<T> predicate)
+        {
+            foreach (T item in list)
+            {
+                if (predicate(item) == false) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Returns the item at the specified index.
         /// </summary>
@@ -137,41 +176,23 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
-        /// Checks if any item in the list satisfies a predicate.
+        /// Returns the index of the first item in the list that satisfies the
+        /// predicate.
         /// </summary>
         /// <typeparam name="T">The type of the list.</typeparam>
         /// <param name="list">The list to search in.</param>
         /// <param name="predicate">The predicate to use.</param>
-        /// <returns>True if any item satisfies the predicate.</returns>
-        public static bool IsAny<T>(this List<T> list, Predicate<T> predicate)
+        /// <returns>The index of the item, or -1 if not found.</returns>
+        public static int IndexOf<T>(this List<T> list, Predicate<T> predicate)
         {
-            foreach (T item in list)
+            for (int i = 0; i < list.Count; i++)
             {
-                if (predicate(item) == true) {
-                    return true;
+                if (predicate(list[i]) == true) {
+                    return i;
                 }
             }
 
-            return false;
-        }
-
-        /// <summary>
-        /// Checks if each item in the list satisfies a predicate.
-        /// </summary>
-        /// <typeparam name="T">The type of the list.</typeparam>
-        /// <param name="list">The list to search in.</param>
-        /// <param name="predicate">The predicate to use.</param>
-        /// <returns>True if all items satisfy the predicate.</returns>
-        public static bool IsEach<T>(this List<T> list, Predicate<T> predicate)
-        {
-            foreach (T item in list)
-            {
-                if (predicate(item) == false) {
-                    return false;
-                }
-            }
-
-            return true;
+            return -1;
         }
 
         /// <summary>
