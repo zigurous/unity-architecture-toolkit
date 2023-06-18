@@ -74,6 +74,26 @@ namespace Zigurous.Architecture
             this.variable = variable;
         }
 
+        /// <summary>
+        /// Switches to use a fixed value and assigns the provided value.
+        /// </summary>
+        /// <param name="value">The fixed value to use.</param>
+        public void SetFixedValue(TValue value)
+        {
+            useVariable = false;
+            fixedValue = value;
+        }
+
+        /// <summary>
+        /// Switches to use a variable reference and assigns the provided variable.
+        /// </summary>
+        /// <param name="variable">The variable reference to use.</param>
+        public void SetVariable(TVariable variable)
+        {
+            useVariable = true;
+            this.variable = variable;
+        }
+
     }
 
 }
