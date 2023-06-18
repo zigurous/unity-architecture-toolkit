@@ -1,7 +1,9 @@
 {
-    "name": "Zigurous.Template.Tests",
+    "name": "Zigurous.Architecture.Editor",
     "references": [],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
