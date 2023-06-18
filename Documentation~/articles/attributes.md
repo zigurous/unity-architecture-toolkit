@@ -6,7 +6,7 @@ slug: "/manual/attributes"
 
 The **Architecture Toolkit** includes a few different C# attributes that are useful to customize the editor interface for custom data structures and behaviours without needing to write custom editor scripts.
 
-<br/>
+<hr/>
 
 ### [[ConditionalShow]](/api/Zigurous.Architecture/ConditionalShowAttribute)
 
@@ -17,7 +17,8 @@ Shows the field in the editor based on the state of another field.
 public bool useCustomValue;
 [ConditionalShow(nameof(useCustomValue))]
 public float customValue;
-
+```
+```csharp
 // enum condition
 public Axis axis;
 [ConditionalShow(nameof(axis), (int)Axis.X)]
@@ -39,7 +40,8 @@ Hides the field in the editor based on the state of another field.
 public bool useDefaultValue;
 [ConditionalHide(nameof(useDefaultValue))]
 public float customValue;
-
+```
+```csharp
 // enum condition
 public Option option;
 [ConditionalHide(nameof(option), (int)Option.B)]

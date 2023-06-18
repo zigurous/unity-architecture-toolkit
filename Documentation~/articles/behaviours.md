@@ -6,7 +6,7 @@ slug: "/manual/behaviours"
 
 The **Architecture Toolkit** includes several behaviours that can be used across an application. All of the behaviours derive from `MonoBehaviour`.
 
-<br/>
+<hr/>
 
 ### [CursorLockState](/api/Zigurous.Architecture/CursorLockState)
 
