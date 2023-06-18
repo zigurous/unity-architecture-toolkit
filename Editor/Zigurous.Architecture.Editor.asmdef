@@ -1,6 +1,8 @@
 {
     "name": "Zigurous.Architecture.Editor",
-    "references": [],
+    "references": [
+        "GUID:4c0ec80807ad29a4fadc3386e4b06833"
+    ],
     "includePlatforms": [
         "Editor"
     ],
