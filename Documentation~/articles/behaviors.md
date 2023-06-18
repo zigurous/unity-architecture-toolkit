@@ -44,7 +44,7 @@ Sets the target frame rate of the application.
 
 <hr/>
 
-### [TimerBehaviour](/api/Zigurous.Architecture/TimerBehaviour)
+### [TimedBehaviour](/api/Zigurous.Architecture/TimedBehaviour)
 
 Invokes timed events at a set interval and/or duration.
 
