@@ -52,4 +52,4 @@ Invokes timed events at a set interval and/or duration.
 
 ### [UpdateBehaviour](/api/Zigurous.Architecture/UpdateBehaviour)
 
-An abstract class to derive from that can run in any update mode. The update mode can be changed as needed without occuring any additional performance cost.
+An abstract class to derive from that can run in any update mode. The update mode can be changed as needed without incurring any additional performance cost.

@@ -4,13 +4,13 @@ slug: "/manual/events"
 
 # Events
 
-Events are powerful tool provided by Unity. The **Architecture Toolkit** extends this system by allowing events to be saved as ScriptableObjects. This means the same event can be referenced and listened to by multiple systems throughout the project.
+Events are a powerful tool provided by Unity. The **Architecture Toolkit** extends this system by allowing events to be saved as ScriptableObjects. This means the same event can be referenced and listened to by multiple systems throughout the project.
 
 <hr/>
 
 ## 📅 Game Event
 
-An event can be created through the Asset menu, `Zigurous > Events > Game Event`. There are no properties on an event, but they can be extended further with subclasses if needed. See the [GameEvent](/api/Zigurous.Architecture/GameEvent) Scripting API.
+An event can be created through the Asset menu, `Zigurous > Events > Game Event`. There are no properties on an event, but they can be extended with subclasses if needed. See the [GameEvent](/api/Zigurous.Architecture/GameEvent) Scripting API.
 
 <hr/>
 
