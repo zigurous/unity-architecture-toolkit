@@ -21,9 +21,9 @@ namespace Zigurous.Architecture
         {
             if (change == PlayModeStateChange.ExitingPlayMode)
             {
-                var assets = FindAssets<ScriptableObject>();
+                ScriptableObject[] assets = FindAssets<ScriptableObject>();
 
-                foreach (var asset in assets)
+                foreach (ScriptableObject asset in assets)
                 {
                     if (asset is IScriptableObjectResettable resettable) {
                         resettable.ResetValues();
@@ -34,12 +34,12 @@ namespace Zigurous.Architecture
 
         private static T[] FindAssets<T>() where T : Object
         {
-            var guids = AssetDatabase.FindAssets($"t:{typeof(T)}");
-            var assets = new T[guids.Length];
+            string[] guids = AssetDatabase.FindAssets($"t:{typeof(T)}");
+            T[] assets = new T[guids.Length];
 
             for (int i = 0; i < guids.Length; i++)
             {
-                var path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                string path = AssetDatabase.GUIDToAssetPath(guids[i]);
                 assets[i] = AssetDatabase.LoadAssetAtPath<T>(path);
             }
 
