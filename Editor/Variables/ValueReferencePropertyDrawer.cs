@@ -32,26 +32,26 @@ namespace Zigurous.Architecture.Editor
                 popupStyle.imagePosition = ImagePosition.ImageOnly;
             }
 
-            label = EditorGUI.BeginProperty(position, label, property);
-            position = EditorGUI.PrefixLabel(position, label);
-
-            EditorGUI.BeginChangeCheck();
-
             SerializedProperty useConstant = property.FindPropertyRelative("useConstant");
             SerializedProperty constantValue = property.FindPropertyRelative("constantValue");
             SerializedProperty variable = property.FindPropertyRelative("variable");
 
-            Rect buttonRect = new Rect(position);
-            buttonRect.width = popupStyle.fixedWidth + popupStyle.margin.right;
-            buttonRect.height = EditorGUIUtility.singleLineHeight;
-            buttonRect.y += (buttonRect.height - popupStyle.fixedHeight) / 2f;
-            position.width -= buttonRect.width;
-            buttonRect.x += position.width;
+            label = EditorGUI.BeginProperty(position, label, property);
+            position = EditorGUI.PrefixLabel(position, label);
+
+            Rect popupRect = new Rect(position);
+            popupRect.width = popupStyle.fixedWidth + popupStyle.margin.right;
+            popupRect.height = EditorGUIUtility.singleLineHeight;
+            popupRect.y += (popupRect.height - popupStyle.fixedHeight) / 2f;
+            position.width -= popupRect.width;
+            popupRect.x += position.width;
+
+            EditorGUI.BeginChangeCheck();
 
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
-            int result = EditorGUI.Popup(buttonRect, useConstant.boolValue ? 0 : 1, popupOptions, popupStyle);
+            int result = EditorGUI.Popup(popupRect, useConstant.boolValue ? 0 : 1, popupOptions, popupStyle);
             useConstant.boolValue = result == 0;
 
             EditorGUI.PropertyField(position, useConstant.boolValue ? constantValue : variable, GUIContent.none, true);
@@ -68,12 +68,9 @@ namespace Zigurous.Architecture.Editor
         {
             SerializedProperty useConstant = property.FindPropertyRelative("useConstant");
             SerializedProperty constantValue = property.FindPropertyRelative("constantValue");
+            SerializedProperty variable = property.FindPropertyRelative("variable");
 
-            if (useConstant.boolValue) {
-                return EditorGUI.GetPropertyHeight(constantValue, true);
-            } else {
-                return base.GetPropertyHeight(property, label);
-            }
+            return EditorGUI.GetPropertyHeight(useConstant.boolValue ? constantValue : variable, true);
         }
 
     }

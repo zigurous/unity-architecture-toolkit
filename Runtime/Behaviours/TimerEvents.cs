@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 namespace Zigurous.Architecture
 {
@@ -13,13 +12,13 @@ namespace Zigurous.Architecture
         /// An event invoked every timer interval.
         /// </summary>
         [Tooltip("An event invoked every timer interval.")]
-        public UnityEvent onTick;
+        public EventReference onTick;
 
         /// <summary>
         /// An event invoked every timer completion.
         /// </summary>
         [Tooltip("An event invoked every timer completion.")]
-        public UnityEvent onComplete;
+        public EventReference onComplete;
     }
 
 }
