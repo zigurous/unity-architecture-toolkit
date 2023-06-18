@@ -3,7 +3,8 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// An attribute that shows a field in the editor based on a condition.
+    /// An attribute that shows a field in the editor based on the state of
+    /// another field.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public sealed class ConditionalShowAttribute : ConditionalAttribute
