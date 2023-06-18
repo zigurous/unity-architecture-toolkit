@@ -17,12 +17,12 @@ namespace Zigurous.Architecture
         /// Waits until the end of the frame, just before displaying the frame
         /// on screen.
         /// </summary>
-        public static readonly WaitForEndOfFrame endOfFrame = new WaitForEndOfFrame();
+        public static readonly WaitForEndOfFrame EndOfFrame = new WaitForEndOfFrame();
 
         /// <summary>
         /// Waits until the next fixed frame rate update function.
         /// </summary>
-        public static readonly WaitForFixedUpdate fixedUpdate = new WaitForFixedUpdate();
+        public static readonly WaitForFixedUpdate FixedUpdate = new WaitForFixedUpdate();
 
         /// <summary>
         /// Stores WaitForSeconds statements.
