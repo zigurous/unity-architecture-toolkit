@@ -7,7 +7,7 @@ The **Architecture Toolkit** contains data structures, design patterns, extensio
 ## Reference
 
 - [Attributes](https://docs.zigurous.com/com.zigurous.architecture/manual/attributes)
-- [Behaviours](https://docs.zigurous.com/com.zigurous.architecture/manual/behaviours)
+- [Behaviors](https://docs.zigurous.com/com.zigurous.architecture/manual/behaviors)
 - [Data Structures](https://docs.zigurous.com/com.zigurous.architecture/manual/data-structures)
 - [Events](https://docs.zigurous.com/com.zigurous.architecture/manual/events)
 - [Extensions](https://docs.zigurous.com/com.zigurous.architecture/manual/extensions)

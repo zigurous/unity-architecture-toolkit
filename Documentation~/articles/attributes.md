@@ -4,7 +4,7 @@ slug: "/manual/attributes"
 
 # Attributes
 
-The **Architecture Toolkit** includes a few different C# attributes that are useful to customize the editor interface for custom data structures and behaviours without needing to write custom editor scripts.
+The **Architecture Toolkit** includes a few different C# attributes that are useful to customize the editor interface for custom data structures and behaviors without needing to write custom editor scripts.
 
 <hr/>
 

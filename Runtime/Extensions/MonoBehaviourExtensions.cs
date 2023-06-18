@@ -96,9 +96,9 @@ namespace Zigurous.Architecture
         /// <param name="action">The action to execute.</param>
         /// <param name="interval">The interval to repeat the action, in seconds.</param>
         /// <returns>The coroutine.</returns>
-        public static Coroutine RepeatWhile(this MonoBehaviour behaviour, Func<bool> condition, Action action, float interval)
+        public static Coroutine RepeatWhile(this MonoBehaviour behavior, Func<bool> condition, Action action, float interval)
         {
-            return behaviour.StartCoroutine(RepeatWhile(condition, action, interval));
+            return behavior.StartCoroutine(RepeatWhile(condition, action, interval));
         }
 
         /// <summary>
@@ -125,9 +125,9 @@ namespace Zigurous.Architecture
         /// <param name="action">The action to execute.</param>
         /// <param name="interval">The interval to repeat the action, in seconds.</param>
         /// <returns>The coroutine.</returns>
-        public static Coroutine RepeatUntil(this MonoBehaviour behaviour, Func<bool> condition, Action action, float interval)
+        public static Coroutine RepeatUntil(this MonoBehaviour behavior, Func<bool> condition, Action action, float interval)
         {
-            return behaviour.StartCoroutine(RepeatUntil(condition, action, interval));
+            return behavior.StartCoroutine(RepeatUntil(condition, action, interval));
         }
 
         /// <summary>

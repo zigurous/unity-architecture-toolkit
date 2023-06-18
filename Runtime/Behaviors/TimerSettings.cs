@@ -26,9 +26,9 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Resets the previous amount of time elapsed when the timer is
         /// re-enabled. Leaving this off allows the timer to be paused and
-        /// resumed by disabling and enabling the timer behaviour.
+        /// resumed by disabling and enabling the timer behavior.
         /// </summary>
-        [Tooltip("Resets the previous amount of time elapsed when the timer is re-enabled. Leaving this off allows the timer to be paused and resumed by disabling and enabling the timer behaviour.")]
+        [Tooltip("Resets the previous amount of time elapsed when the timer is re-enabled. Leaving this off allows the timer to be paused and resumed by disabling and enabling the timer behavior.")]
         public bool resetElapsedOnEnable;
 
         /// <summary>

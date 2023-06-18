@@ -1,22 +1,22 @@
 ---
-slug: "/manual/behaviours"
+slug: "/manual/behaviors"
 ---
 
-# Behaviours
+# Behaviors
 
-The **Architecture Toolkit** includes several behaviours that can be used across an application. All of the behaviours derive from `MonoBehaviour`.
+The **Architecture Toolkit** includes several behaviors that can be used across an application. All of the behaviors derive from `MonoBehaviour`.
 
 <hr/>
 
 ### [CursorLockState](/api/Zigurous.Architecture/CursorLockState)
 
-Sets the lock state of the cursor when the behaviour is enabled and disabled.
+Sets the lock state of the cursor when the behavior is enabled and disabled.
 
 <hr/>
 
 ### [CursorVisibility](/api/Zigurous.Architecture/CursorVisibility)
 
-Sets the visibility of the cursor when the behaviour is enabled and disabled.
+Sets the visibility of the cursor when the behavior is enabled and disabled.
 
 <hr/>
 
