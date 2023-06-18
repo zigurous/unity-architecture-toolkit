@@ -1,4 +1,4 @@
-namespace Zigurous.Architecture.Structs
+namespace Zigurous.Architecture
 {
     /// <summary>
     /// A generic interface for a range of values.

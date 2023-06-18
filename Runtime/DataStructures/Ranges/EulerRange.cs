@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Zigurous.Architecture.Structs
+namespace Zigurous.Architecture
 {
     /// <summary>
     /// A range of euler values wrapped between -360 and +360.

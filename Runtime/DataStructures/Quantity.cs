@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Zigurous.Architecture.Structs
+namespace Zigurous.Architecture
 {
     /// <summary>
     /// Stores a quantity of a given entity type.

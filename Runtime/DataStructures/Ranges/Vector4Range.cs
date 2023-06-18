@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Zigurous.Architecture.Structs
+namespace Zigurous.Architecture
 {
     /// <summary>
     /// A range of Vector4 values.
