@@ -45,6 +45,10 @@ namespace Zigurous.Architecture
                     return default(TValue);
                 }
             }
+            set
+            {
+                SetFixedValue(value);
+            }
         }
 
         /// <summary>
