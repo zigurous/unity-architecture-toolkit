@@ -1,4 +1,4 @@
-﻿namespace Zigurous.Architecture
+namespace Zigurous.Architecture
 {
     /// <summary>
     /// Combines multiple hash codes into a single value.
@@ -16,8 +16,8 @@
             unchecked // Overflow is fine, just wrap
             {
                 int hash = 17;
-                hash = hash * 23 + hash1;
-                hash = hash * 23 + hash2;
+                hash = hash * 31 + hash1;
+                hash = hash * 31 + hash2;
                 return hash;
             }
         }
@@ -34,9 +34,9 @@
             unchecked // Overflow is fine, just wrap
             {
                 int hash = 17;
-                hash = hash * 23 + hash1;
-                hash = hash * 23 + hash2;
-                hash = hash * 23 + hash3;
+                hash = hash * 31 + hash1;
+                hash = hash * 31 + hash2;
+                hash = hash * 31 + hash3;
                 return hash;
             }
         }
@@ -54,10 +54,10 @@
             unchecked // Overflow is fine, just wrap
             {
                 int hash = 17;
-                hash = hash * 23 + hash1;
-                hash = hash * 23 + hash2;
-                hash = hash * 23 + hash3;
-                hash = hash * 23 + hash4;
+                hash = hash * 31 + hash1;
+                hash = hash * 31 + hash2;
+                hash = hash * 31 + hash3;
+                hash = hash * 31 + hash4;
                 return hash;
             }
         }
