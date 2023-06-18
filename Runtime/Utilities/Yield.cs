@@ -27,12 +27,12 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Stores WaitForSeconds statements.
         /// </summary>
-        private static Dictionary<float, WaitForSeconds> waitForSeconds;
+        private static Dictionary<int, WaitForSeconds> waitForSeconds;
 
         /// <summary>
         /// Stores WaitForSecondsRealtime statements.
         /// </summary>
-        private static Dictionary<float, WaitForSecondsRealtime> waitForSecondsRealtime;
+        private static Dictionary<int, WaitForSecondsRealtime> waitForSecondsRealtime;
 
         /// <summary>
         /// Stores WaitUntil statements.
@@ -46,50 +46,54 @@ namespace Zigurous.Architecture
 
         /// <summary>
         /// Suspends the coroutine execution for the given amount of seconds
-        /// using scaled time.
+        /// using scaled time. The amount of seconds is cached as an integer in
+        /// milliseconds to create more cache hits, but this results in a small
+        /// precision loss in certain situations.
         /// </summary>
         /// <param name="seconds">The number of seconds to wait.</param>
         /// <returns>The yield statement.</returns>
         public static WaitForSeconds Wait(float seconds)
         {
-            if (waitForSeconds == null)
-            {
-                waitForSeconds = new Dictionary<float, WaitForSeconds>(
-                    initialCapacity, new FloatEqualityComparer());
+            if (waitForSeconds == null) {
+                waitForSeconds = new Dictionary<int, WaitForSeconds>(initialCapacity);
             }
 
-            if (!waitForSeconds.ContainsKey(seconds))
+            int milliseconds = Mathf.RoundToInt(seconds * 1000f);
+
+            if (!waitForSeconds.ContainsKey(milliseconds))
             {
-                WaitForSeconds yield = new WaitForSeconds(seconds);
-                waitForSeconds.Add(seconds, yield);
+                WaitForSeconds yield = new WaitForSeconds(milliseconds / 1000f);
+                waitForSeconds.Add(milliseconds, yield);
                 return yield;
             }
 
-            return waitForSeconds[seconds];
+            return waitForSeconds[milliseconds];
         }
 
         /// <summary>
         /// Suspends the coroutine execution for the given amount of seconds
-        /// using unscaled time.
+        /// using unscaled time. The amount of seconds is cached as an integer
+        /// in milliseconds to create more cache hits, but this results in a
+        /// small precision loss in certain situations.
         /// </summary>
         /// <param name="seconds">The number of seconds to wait.</param>
         /// <returns>The yield statement.</returns>
         public static WaitForSecondsRealtime WaitRealtime(float seconds)
         {
-            if (waitForSecondsRealtime == null)
-            {
-                waitForSecondsRealtime = new Dictionary<float, WaitForSecondsRealtime>(
-                    initialCapacity, new FloatEqualityComparer());
+            if (waitForSecondsRealtime == null) {
+                waitForSecondsRealtime = new Dictionary<int, WaitForSecondsRealtime>(initialCapacity);
             }
 
-            if (!waitForSecondsRealtime.ContainsKey(seconds))
+            int milliseconds = Mathf.RoundToInt(seconds * 1000f);
+
+            if (!waitForSecondsRealtime.ContainsKey(milliseconds))
             {
-                WaitForSecondsRealtime yield = new WaitForSecondsRealtime(seconds);
-                waitForSecondsRealtime.Add(seconds, yield);
+                WaitForSecondsRealtime yield = new WaitForSecondsRealtime(milliseconds / 1000f);
+                waitForSecondsRealtime.Add(milliseconds, yield);
                 return yield;
             }
 
-            return waitForSecondsRealtime[seconds];
+            return waitForSecondsRealtime[milliseconds];
         }
 
         /// <summary>
