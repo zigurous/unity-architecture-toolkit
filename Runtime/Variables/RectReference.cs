@@ -14,9 +14,9 @@ namespace Zigurous.Architecture
         public RectReference() {}
 
         /// <summary>
-        /// Creates a new Rect reference with the constant value.
+        /// Creates a new Rect reference with the fixed value.
         /// </summary>
-        /// <param name="value">The constant value to set.</param>
+        /// <param name="value">The fixed value to set.</param>
         public RectReference(Rect value) : base(value) {}
 
         /// <summary>

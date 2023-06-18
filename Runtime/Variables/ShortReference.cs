@@ -12,9 +12,9 @@
         public ShortReference() {}
 
         /// <summary>
-        /// Creates a new short reference with the constant value.
+        /// Creates a new short reference with the fixed value.
         /// </summary>
-        /// <param name="value">The constant value to set.</param>
+        /// <param name="value">The fixed value to set.</param>
         public ShortReference(short value) : base(value) {}
 
         /// <summary>

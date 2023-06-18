@@ -14,9 +14,9 @@ namespace Zigurous.Architecture
         public Vector3IntReference() {}
 
         /// <summary>
-        /// Creates a new Vector3Int reference with the constant value.
+        /// Creates a new Vector3Int reference with the fixed value.
         /// </summary>
-        /// <param name="value">The constant value to set.</param>
+        /// <param name="value">The fixed value to set.</param>
         public Vector3IntReference(Vector3Int value) : base(value) {}
 
         /// <summary>

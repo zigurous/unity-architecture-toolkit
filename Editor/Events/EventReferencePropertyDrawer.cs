@@ -27,17 +27,17 @@ namespace Zigurous.Architecture.Editor
                 position = EditorGUI.PrefixLabel(position, label);
             }
 
-            Rect popupRect = new Rect(position);
-            popupRect.width = popupStyle.fixedWidth + popupStyle.margin.right;
-            popupRect.height = EditorGUIUtility.singleLineHeight;
-            popupRect.y += (popupRect.height - popupStyle.fixedHeight) / 2f;
-            position.width -= popupRect.width;
-            popupRect.x += position.width;
-
-            EditorGUI.BeginChangeCheck();
-
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
+
+            Rect popupRect = new Rect(position);
+            popupRect.width = popupStyle.fixedWidth + popupStyle.margin.right;
+            popupRect.height = popupStyle.fixedHeight;
+            popupRect.x += position.width - popupRect.width;
+            popupRect.y += (EditorGUIUtility.singleLineHeight - popupStyle.fixedHeight) / 2f;
+            position.width -= popupRect.width;
+
+            EditorGUI.BeginChangeCheck();
 
             int result = EditorGUI.Popup(popupRect, useUnityEvent.boolValue ? 0 : 1, popupOptions, popupStyle);
             useUnityEvent.boolValue = result == 0;

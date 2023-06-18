@@ -21,7 +21,7 @@ namespace Zigurous.Architecture.Editor
     [CustomPropertyDrawer(typeof(Vector4Reference), true)]
     public class ValueReferencePropertyDrawer : PropertyDrawer
     {
-        private readonly string[] popupOptions = { "Use Constant", "Use Variable" };
+        private readonly string[] popupOptions = { "Fixed Value", "Variable" };
         private static GUIStyle popupStyle;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -32,29 +32,29 @@ namespace Zigurous.Architecture.Editor
                 popupStyle.imagePosition = ImagePosition.ImageOnly;
             }
 
-            SerializedProperty useConstant = property.FindPropertyRelative("useConstant");
-            SerializedProperty constantValue = property.FindPropertyRelative("constantValue");
+            SerializedProperty useVariable = property.FindPropertyRelative("useVariable");
             SerializedProperty variable = property.FindPropertyRelative("variable");
+            SerializedProperty fixedValue = property.FindPropertyRelative("fixedValue");
 
             label = EditorGUI.BeginProperty(position, label, property);
             position = EditorGUI.PrefixLabel(position, label);
 
-            Rect popupRect = new Rect(position);
-            popupRect.width = popupStyle.fixedWidth + popupStyle.margin.right;
-            popupRect.height = EditorGUIUtility.singleLineHeight;
-            popupRect.y += (popupRect.height - popupStyle.fixedHeight) / 2f;
-            position.width -= popupRect.width;
-            popupRect.x += position.width;
-
-            EditorGUI.BeginChangeCheck();
-
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
-            int result = EditorGUI.Popup(popupRect, useConstant.boolValue ? 0 : 1, popupOptions, popupStyle);
-            useConstant.boolValue = result == 0;
+            Rect popupRect = new Rect(position);
+            popupRect.width = popupStyle.fixedWidth + popupStyle.margin.right;
+            popupRect.height = popupStyle.fixedHeight;
+            popupRect.x += position.width - popupRect.width;
+            popupRect.y += (EditorGUIUtility.singleLineHeight - popupStyle.fixedHeight) / 2f;
+            position.width -= popupRect.width;
 
-            EditorGUI.PropertyField(position, useConstant.boolValue ? constantValue : variable, GUIContent.none, true);
+            EditorGUI.BeginChangeCheck();
+
+            int result = EditorGUI.Popup(popupRect, useVariable.boolValue ? 1 : 0, popupOptions, popupStyle);
+            useVariable.boolValue = result == 1;
+
+            EditorGUI.PropertyField(position, useVariable.boolValue ? variable : fixedValue, GUIContent.none, true);
 
             if (EditorGUI.EndChangeCheck()) {
                 property.serializedObject.ApplyModifiedProperties();
@@ -66,11 +66,11 @@ namespace Zigurous.Architecture.Editor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            SerializedProperty useConstant = property.FindPropertyRelative("useConstant");
-            SerializedProperty constantValue = property.FindPropertyRelative("constantValue");
+            SerializedProperty useVariable = property.FindPropertyRelative("useVariable");
             SerializedProperty variable = property.FindPropertyRelative("variable");
+            SerializedProperty fixedValue = property.FindPropertyRelative("fixedValue");
 
-            return EditorGUI.GetPropertyHeight(useConstant.boolValue ? constantValue : variable, true);
+            return EditorGUI.GetPropertyHeight(useVariable.boolValue ? variable : fixedValue, true);
         }
 
     }
