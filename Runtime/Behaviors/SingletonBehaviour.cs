@@ -85,8 +85,6 @@ namespace Zigurous.Architecture
         {
             isUnloading = true;
             instance = null;
-
-            Destroy(gameObject);
         }
 
         /// <summary>
