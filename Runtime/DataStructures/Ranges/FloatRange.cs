@@ -11,32 +11,32 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Shorthand for writing <c>FloatRange(0f, 0f)</c>.
         /// </summary>
-        public static FloatRange zero => new FloatRange(0f, 0f);
+        public static FloatRange zero => new(0f, 0f);
 
         /// <summary>
         /// Shorthand for writing <c>FloatRange(1f, 1f)</c>.
         /// </summary>
-        public static FloatRange one => new FloatRange(1f, 1f);
+        public static FloatRange one => new(1f, 1f);
 
         /// <summary>
         /// Shorthand for writing <c>FloatRange(0f, 1f)</c>.
         /// </summary>
-        public static FloatRange percent => new FloatRange(0f, 1f);
+        public static FloatRange percent => new(0f, 1f);
 
         /// <summary>
         /// Shorthand for writing <c>FloatRange(0f, float.MaxValue)</c>.
         /// </summary>
-        public static FloatRange positive => new FloatRange(0f, float.MaxValue);
+        public static FloatRange positive => new(0f, float.MaxValue);
 
         /// <summary>
         /// Shorthand for writing <c>FloatRange(float.MinValue, 0f)</c>.
         /// </summary>
-        public static FloatRange negative => new FloatRange(float.MinValue, 0f);
+        public static FloatRange negative => new(float.MinValue, 0f);
 
         /// <summary>
         /// Shorthand for writing <c>FloatRange(float.MinValue, float.MaxValue)</c>.
         /// </summary>
-        public static FloatRange minMax => new FloatRange(float.MinValue, float.MaxValue);
+        public static FloatRange minMax => new(float.MinValue, float.MaxValue);
 
         [SerializeField]
         [Tooltip("The lower bound of the range.")]
@@ -49,22 +49,22 @@ namespace Zigurous.Architecture
         /// <inheritdoc/>
         public float min
         {
-            get => m_Min;
+            readonly get => m_Min;
             set => m_Min = value;
         }
 
         /// <inheritdoc/>
         public float max
         {
-            get => m_Max;
+            readonly get => m_Max;
             set => m_Max = value;
         }
 
         /// <inheritdoc/>
-        public float Delta => max - min;
+        public readonly float Delta => max - min;
 
         /// <inheritdoc/>
-        public float Median => (min + max) / 2f;
+        public readonly float Median => (min + max) / 2f;
 
         /// <summary>
         /// Creates a new range with the specified values.
@@ -78,41 +78,41 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        public float Random()
+        public readonly float Random()
         {
             return UnityEngine.Random.Range(min, max);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(float value)
+        public readonly bool Includes(float value)
         {
             return value >= min && value <= max;
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(float value, bool includeMin, bool includeMax)
+        public readonly bool Includes(float value, bool includeMin, bool includeMax)
         {
             return value.IsBetween(min, max, includeMin, includeMax);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to clamp.</param>
-        public float Clamp(float value)
+        public readonly float Clamp(float value)
         {
             return Mathf.Clamp(value, min, max);
         }
 
         /// <inheritdoc/>
-        public float Lerp(float t)
+        public readonly float Lerp(float t)
         {
             return Mathf.Lerp(min, max, t);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value within the range you want to calculate.</param>
-        public float InverseLerp(float value)
+        public readonly float InverseLerp(float value)
         {
             return Mathf.InverseLerp(min, max, value);
         }

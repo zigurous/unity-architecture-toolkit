@@ -78,9 +78,11 @@ namespace Zigurous.Architecture
         public static T GetRequiredComponent<T>(this GameObject gameObject)
             where T : Component
         {
-            T component = gameObject.GetComponent<T>();
-            if (component == null) component = gameObject.AddComponent<T>();
-            return component;
+            if (gameObject.TryGetComponent(out T component)) {
+                return component;
+            } else {
+                return gameObject.AddComponent<T>();
+            }
         }
 
         /// <summary>
@@ -90,6 +92,7 @@ namespace Zigurous.Architecture
         /// <param name="gameObject">The game object to check for the component.</param>
         /// <returns>True if the component exists, false otherwise.</returns>
         public static bool HasComponent<T>(this GameObject gameObject)
+            where T : Component
         {
             return gameObject.GetComponent<T>() != null;
         }
@@ -114,6 +117,7 @@ namespace Zigurous.Architecture
         /// <param name="includeInactive">Includes inactive game objects.</param>
         /// <returns>True if the component exists, false otherwise.</returns>
         public static bool HasComponentInChildren<T>(this GameObject gameObject, bool includeInactive = false)
+            where T : Component
         {
             return gameObject.GetComponentInChildren<T>(includeInactive) != null;
         }
@@ -139,6 +143,7 @@ namespace Zigurous.Architecture
         /// <param name="gameObject">The game object to check for the component.</param>
         /// <returns>True if the component exists, false otherwise.</returns>
         public static bool HasComponentInParent<T>(this GameObject gameObject)
+            where T : Component
         {
             return gameObject.GetComponentInParent<T>() != null;
         }

@@ -13,7 +13,7 @@ namespace Zigurous.Architecture.Editor
         [MenuItem("Edit/Rename Selected Assets...")]
         public static void ShowWindow()
         {
-            EditorWindow window = EditorWindow.GetWindow(typeof(RenameSelectedAssets), false, "Rename Selected Assets");
+            EditorWindow window = GetWindow(typeof(RenameSelectedAssets), false, "Rename Selected Assets");
             window.minSize = new Vector2(300f, 150f);
         }
 

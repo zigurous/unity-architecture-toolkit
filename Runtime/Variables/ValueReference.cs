@@ -27,7 +27,7 @@ namespace Zigurous.Architecture
         /// The fixed value to use.
         /// </summary>
         [Tooltip("The fixed value to use.")]
-        public TValue fixedValue = default(TValue);
+        public TValue fixedValue = default;
 
         /// <summary>
         /// The current value, either the fixed value or the value of the
@@ -42,7 +42,7 @@ namespace Zigurous.Architecture
                 } else if (variable != null) {
                     return variable.value;
                 } else {
-                    return default(TValue);
+                    return default;
                 }
             }
             set
@@ -74,7 +74,7 @@ namespace Zigurous.Architecture
         public ValueReference(TVariable variable)
         {
             useVariable = true;
-            fixedValue = default(TValue);
+            fixedValue = default;
             this.variable = variable;
         }
 

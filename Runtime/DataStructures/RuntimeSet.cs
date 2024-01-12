@@ -14,7 +14,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The list of stored items in the set (Read only).
         /// </summary>
-        public readonly List<T> items = new List<T>();
+        public readonly List<T> items = new();
 
         /// <summary>
         /// The number of items in the set (Read only).

@@ -39,10 +39,10 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="other">The quantity to compare to.</param>
         /// <returns>True if the quantities are equal, false otherwise.</returns>
-        public bool Equals(Quantity<T> other)
+        public readonly bool Equals(Quantity<T> other)
         {
-            return this.entity.Equals(other.entity) &&
-                   this.amount == other.amount;
+            return entity.Equals(other.entity) &&
+                   amount == other.amount;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="other">The object to compare to.</param>
         /// <returns>True if the quantities are equal, false otherwise.</returns>
-        public override bool Equals(object other)
+        public override readonly bool Equals(object other)
         {
             if (other is Quantity<T> quantity) {
                 return Equals(quantity);
@@ -63,18 +63,18 @@ namespace Zigurous.Architecture
         /// Returns the hash code of the quantity.
         /// </summary>
         /// <returns>The hash code of the quantity.</returns>
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
-            return (entity, amount).GetHashCode();
+            return System.HashCode.Combine(entity, amount);
         }
 
         /// <summary>
         /// Converts the quantity to a string.
         /// </summary>
         /// <returns>The quantity as a string.</returns>
-        public override string ToString()
+        public override readonly string ToString()
         {
-            return $"{amount.ToString()} {entity.ToString()}";
+            return $"{amount} {entity}";
         }
 
         /// <summary>

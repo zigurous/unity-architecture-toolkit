@@ -11,32 +11,32 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Shorthand for writing <c>DoubleRange(0.0, 0.0)</c>.
         /// </summary>
-        public static DoubleRange zero => new DoubleRange(0.0, 0.0);
+        public static DoubleRange zero => new(0.0, 0.0);
 
         /// <summary>
         /// Shorthand for writing <c>DoubleRange(1.0, 1.0)</c>.
         /// </summary>
-        public static DoubleRange one => new DoubleRange(1.0, 1.0);
+        public static DoubleRange one => new(1.0, 1.0);
 
         /// <summary>
         /// Shorthand for writing <c>DoubleRange(0.0, 1.0)</c>.
         /// </summary>
-        public static DoubleRange percent => new DoubleRange(0.0, 1.0);
+        public static DoubleRange percent => new(0.0, 1.0);
 
         /// <summary>
         /// Shorthand for writing <c>DoubleRange(0.0, double.MaxValue)</c>.
         /// </summary>
-        public static DoubleRange positive => new DoubleRange(0.0, double.MaxValue);
+        public static DoubleRange positive => new(0.0, double.MaxValue);
 
         /// <summary>
         /// Shorthand for writing <c>DoubleRange(double.MinValue, 0.0)</c>.
         /// </summary>
-        public static DoubleRange negative => new DoubleRange(double.MinValue, 0.0);
+        public static DoubleRange negative => new(double.MinValue, 0.0);
 
         /// <summary>
         /// Shorthand for writing <c>DoubleRange(double.MinValue, double.MaxValue)</c>.
         /// </summary>
-        public static DoubleRange minMax => new DoubleRange(double.MinValue, double.MaxValue);
+        public static DoubleRange minMax => new(double.MinValue, double.MaxValue);
 
         [SerializeField]
         [Tooltip("The lower bound of the range.")]
@@ -51,7 +51,7 @@ namespace Zigurous.Architecture
         /// </summary>
         public double min
         {
-            get => m_Min;
+            readonly get => m_Min;
             set => m_Min = value;
         }
 
@@ -60,19 +60,19 @@ namespace Zigurous.Architecture
         /// </summary>
         public double max
         {
-            get => m_Max;
+            readonly get => m_Max;
             set => m_Max = value;
         }
 
         /// <summary>
         /// The difference between the maximum and minimum values (Read only).
         /// </summary>
-        public double Delta => max - min;
+        public readonly double Delta => max - min;
 
         /// <summary>
         /// The median value of the range (Read only).
         /// </summary>
-        public double Median => (min + max) / 2.0;
+        public readonly double Median => (min + max) / 2.0;
 
         /// <summary>
         /// Creates a new range with the specified values.
@@ -90,7 +90,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="value">The value to check.</param>
         /// <returns>True if the value is in the range, false otherwise.</returns>
-        public bool Includes(double value)
+        public readonly bool Includes(double value)
         {
             return value >= min && value <= max;
         }
@@ -102,7 +102,7 @@ namespace Zigurous.Architecture
         /// <param name="includeMin">The minimum value is inclusive if true, exclusive if false.</param>
         /// <param name="includeMax">The maximum value is inclusive if true, exclusive if false.</param>
         /// <returns>True if the value is in the range, false otherwise.</returns>
-        public bool Includes(double value, bool includeMin, bool includeMax)
+        public readonly bool Includes(double value, bool includeMin, bool includeMax)
         {
             return value.IsBetween(min, max, includeMin, includeMax);
         }
@@ -112,7 +112,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="value">The value to clamp.</param>
         /// <returns>The clamped value.</returns>
-        public double Clamp(double value)
+        public readonly double Clamp(double value)
         {
             return value < min ? min : (value > max ? max : value);
         }
@@ -122,7 +122,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="t">The interpolant value between [0..1].</param>
         /// <returns>The interpolated value.</returns>
-        public double Lerp(double t)
+        public readonly double Lerp(double t)
         {
             t = t < 0.0 ? 0.0 : (t > 1.0 ? 1.0 : t);
             return min + (max - min) * t;
@@ -134,7 +134,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="value">The value within the range you want to calculate.</param>
         /// <returns>The interpolant value between [0..1].</returns>
-        public double InverseLerp(double value)
+        public readonly double InverseLerp(double value)
         {
             double t = (value - min) / (max - min);
             return t < 0.0 ? 0.0 : (t > 1.0 ? 1.0 : t);

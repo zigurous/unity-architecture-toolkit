@@ -124,13 +124,13 @@ namespace Zigurous.Architecture
         /// <typeparam name="T">The type of the array.</typeparam>
         /// <param name="array">The array to search in.</param>
         /// <param name="index">The index of the element to return.</param>
-        /// <returns>The element at the specified index, or <c>default(T)</c> if the array is empty.</returns>
+        /// <returns>The element at the specified index, or <c>default</c> if the array is empty.</returns>
         public static T ElementAt<T>(this T[] array, int index)
         {
             if (index >= 0 && index < array.Length) {
                 return array[index];
             } else {
-                return default(T);
+                return default;
             }
         }
 
@@ -143,7 +143,7 @@ namespace Zigurous.Architecture
         /// <returns>A new array with the filtered elements removed.</returns>
         public static T[] Filter<T>(this T[] array, Predicate<T> predicate)
         {
-            List<T> list = new List<T>(array.Length);
+            List<T> list = new(array.Length);
 
             for (int i = 0; i < array.Length; i++)
             {
@@ -162,13 +162,13 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="T">The type of the array.</typeparam>
         /// <param name="array">The array to get the element from.</param>
-        /// <returns>The first element in the array, or <c>default(T)</c> if the array is empty.</returns>
+        /// <returns>The first element in the array, or <c>default</c> if the array is empty.</returns>
         public static T First<T>(this T[] array)
         {
             if (array.Length > 0) {
                 return array[0];
             } else {
-                return default(T);
+                return default;
             }
         }
 
@@ -178,7 +178,7 @@ namespace Zigurous.Architecture
         /// <typeparam name="T">The type of the array.</typeparam>
         /// <param name="array">The array to get the element from.</param>
         /// <param name="predicate">The predicate to use.</param>
-        /// <returns>The first element in the array that satisfies the predicate, or <c>default(T)</c> if no element satisfies the predicate.</returns>
+        /// <returns>The first element in the array that satisfies the predicate, or <c>default</c> if no element satisfies the predicate.</returns>
         public static T First<T>(this T[] array, Predicate<T> predicate)
         {
             for (int i = 0; i < array.Length; i++)
@@ -190,7 +190,7 @@ namespace Zigurous.Architecture
                 }
             }
 
-            return default(T);
+            return default;
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="T">The type of the array.</typeparam>
         /// <param name="array">The array to get the element from.</param>
-        /// <returns>The first non-null element in the array, or <c>default(T)</c> if all elements are null.</returns>
+        /// <returns>The first non-null element in the array, or <c>default</c> if all elements are null.</returns>
         public static T FirstNonNull<T>(this T[] array) where T : class
         {
             for (int i = 0; i < array.Length; i++)
@@ -210,7 +210,7 @@ namespace Zigurous.Architecture
                 }
             }
 
-            return default(T);
+            return default;
         }
 
         /// <summary>
@@ -398,8 +398,8 @@ namespace Zigurous.Architecture
                 stringBuilder.Clear();
             }
 
-            int start = System.Math.Max(0, startIndex);
-            int end = System.Math.Min(array.Length - 1, endIndex - 1);
+            int start = Math.Max(0, startIndex);
+            int end = Math.Min(array.Length - 1, endIndex - 1);
 
             for (int i = start; i < end; i++) {
                 stringBuilder.Append(array[i]).Append(delimiter);
@@ -414,13 +414,13 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="T">The type of the array.</typeparam>
         /// <param name="array">The array to get the element from.</param>
-        /// <returns>The last element in the array, or <c>default(T)</c> if the array is empty.</returns>
+        /// <returns>The last element in the array, or <c>default</c> if the array is empty.</returns>
         public static T Last<T>(this T[] array)
         {
             if (array.Length > 0) {
-                return array[array.Length - 1];
+                return array[^1];
             } else {
-                return default(T);
+                return default;
             }
         }
 
@@ -430,7 +430,7 @@ namespace Zigurous.Architecture
         /// <typeparam name="T">The type of the array.</typeparam>
         /// <param name="array">The array to get the element from.</param>
         /// <param name="predicate">The predicate to use.</param>
-        /// <returns>The last element in the array that satisfies the predicate, or <c>default(T)</c> if no element satisfies the predicate.</returns>
+        /// <returns>The last element in the array that satisfies the predicate, or <c>default</c> if no element satisfies the predicate.</returns>
         public static T Last<T>(this T[] array, Predicate<T> predicate)
         {
             for (int i = array.Length - 1; i >= 0; i--)
@@ -442,7 +442,7 @@ namespace Zigurous.Architecture
                 }
             }
 
-            return default(T);
+            return default;
         }
 
         /// <summary>
@@ -450,7 +450,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="T">The type of the array.</typeparam>
         /// <param name="array">The array to get the element from.</param>
-        /// <returns>The last non-null element in the array, or <c>default(T)</c> if all elements are null.</returns>
+        /// <returns>The last non-null element in the array, or <c>default</c> if all elements are null.</returns>
         public static T LastNonNull<T>(this T[] array) where T : class
         {
             for (int i = array.Length - 1; i >= 0; i--)
@@ -462,7 +462,7 @@ namespace Zigurous.Architecture
                 }
             }
 
-            return default(T);
+            return default;
         }
 
         /// <summary>
@@ -505,13 +505,13 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="T">The type of the array.</typeparam>
         /// <param name="array">The array to get the random element from.</param>
-        /// <returns>A random element from the array, or <c>default(T)</c> if the array is empty.</returns>
+        /// <returns>A random element from the array, or <c>default</c> if the array is empty.</returns>
         public static T Random<T>(this T[] array)
         {
             if (array.Length > 0) {
                 return array[UnityEngine.Random.Range(0, array.Length)];
             } else {
-                return default(T);
+                return default;
             }
         }
 

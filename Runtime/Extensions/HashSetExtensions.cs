@@ -24,7 +24,7 @@ namespace Zigurous.Architecture
                 }
             }
 
-            return default(T);
+            return default;
         }
 
         /// <summary>

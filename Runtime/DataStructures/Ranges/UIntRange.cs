@@ -11,17 +11,17 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Shorthand for writing <c>UIntRange(0, 0)</c>.
         /// </summary>
-        public static UIntRange zero => new UIntRange(0, 0);
+        public static UIntRange zero => new(0, 0);
 
         /// <summary>
         /// Shorthand for writing <c>UIntRange(1, 1)</c>.
         /// </summary>
-        public static UIntRange one => new UIntRange(1, 1);
+        public static UIntRange one => new(1, 1);
 
         /// <summary>
         /// Shorthand for writing <c>UIntRange(uint.MinValue, uint.MaxValue)</c>.
         /// </summary>
-        public static UIntRange minMax => new UIntRange(uint.MinValue, uint.MaxValue);
+        public static UIntRange minMax => new(uint.MinValue, uint.MaxValue);
 
         [SerializeField]
         [Tooltip("The lower bound of the range.")]
@@ -34,22 +34,22 @@ namespace Zigurous.Architecture
         /// <inheritdoc/>
         public uint min
         {
-            get => m_Min;
+            readonly get => m_Min;
             set => m_Min = value;
         }
 
         /// <inheritdoc/>
         public uint max
         {
-            get => m_Max;
+            readonly get => m_Max;
             set => m_Max = value;
         }
 
         /// <inheritdoc/>
-        public uint Delta => max - min;
+        public readonly uint Delta => max - min;
 
         /// <inheritdoc/>
-        public uint Median => (min + max) / 2;
+        public readonly uint Median => (min + max) / 2;
 
         /// <summary>
         /// Creates a new range with the specified values.
@@ -66,7 +66,7 @@ namespace Zigurous.Architecture
         /// Returns a random value in the range [inclusive, exclusive).
         /// </summary>
         /// <returns>A random value in the range [inclusive, exclusive).</returns>
-        public uint Random()
+        public readonly uint Random()
         {
             return (uint)UnityEngine.Random.Range((int)min, (int)max);
         }
@@ -75,41 +75,41 @@ namespace Zigurous.Architecture
         /// Returns a random value in the range [inclusive, inclusive].
         /// </summary>
         /// <returns>A random value in the range [inclusive, inclusive].</returns>
-        public uint RandomInclusive()
+        public readonly uint RandomInclusive()
         {
             return (uint)UnityEngine.Random.Range((int)min, (int)max + 1);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(uint value)
+        public readonly bool Includes(uint value)
         {
             return value >= min && value < max;
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(uint value, bool includeMin, bool includeMax)
+        public readonly bool Includes(uint value, bool includeMin, bool includeMax)
         {
             return value.IsBetween(min, max, includeMin, includeMax);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to clamp.</param>
-        public uint Clamp(uint value)
+        public readonly uint Clamp(uint value)
         {
             return value < min ? min : (value > max ? max : value);
         }
 
         /// <inheritdoc/>
-        public uint Lerp(float t)
+        public readonly uint Lerp(float t)
         {
             return (uint)Mathf.Lerp(min, max, t);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value within the range you want to calculate.</param>
-        public float InverseLerp(uint value)
+        public readonly float InverseLerp(uint value)
         {
             return Mathf.InverseLerp(min, max, value);
         }

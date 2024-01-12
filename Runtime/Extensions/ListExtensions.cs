@@ -87,13 +87,13 @@ namespace Zigurous.Architecture
         /// <typeparam name="T">The type of the list.</typeparam>
         /// <param name="list">The list to get the item from.</param>
         /// <param name="index">The index of the item to get.</param>
-        /// <returns>The item at the index, or <c>default(T)</c> if the list is empty.</returns>
+        /// <returns>The item at the index, or <c>default</c> if the list is empty.</returns>
         public static T ItemAt<T>(this List<T> list, int index)
         {
             if (index >= 0 && index < list.Count) {
                 return list[index];
             } else {
-                return default(T);
+                return default;
             }
         }
 
@@ -114,13 +114,13 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="T">The type of the list.</typeparam>
         /// <param name="list">The list to get the item from.</param>
-        /// <returns>The first item in the list, or <c>default(T)</c> if the list is empty.</returns>
+        /// <returns>The first item in the list, or <c>default</c> if the list is empty.</returns>
         public static T First<T>(this List<T> list)
         {
             if (list.Count > 0) {
                 return list[0];
             } else {
-                return default(T);
+                return default;
             }
         }
 
@@ -130,7 +130,7 @@ namespace Zigurous.Architecture
         /// <typeparam name="T">The type of the list.</typeparam>
         /// <param name="list">The list to get the item from.</param>
         /// <param name="predicate">The predicate to use.</param>
-        /// <returns>The first item in the list that satisfies the predicate, or <c>default(T)</c> if no item satisfies the predicate.</returns>
+        /// <returns>The first item in the list that satisfies the predicate, or <c>default</c> if no item satisfies the predicate.</returns>
         public static T First<T>(this List<T> list, Predicate<T> predicate)
         {
             foreach (T item in list)
@@ -140,7 +140,7 @@ namespace Zigurous.Architecture
                 }
             }
 
-            return default(T);
+            return default;
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="T">The type of the list.</typeparam>
         /// <param name="list">The list to get the item from.</param>
-        /// <returns>The first non-null item in the list, or <c>default(T)</c> if all items are null.</returns>
+        /// <returns>The first non-null item in the list, or <c>default</c> if all items are null.</returns>
         public static T FirstNonNull<T>(this List<T> list) where T : class
         {
             foreach (T item in list)
@@ -158,7 +158,7 @@ namespace Zigurous.Architecture
                 }
             }
 
-            return default(T);
+            return default;
         }
 
         /// <summary>
@@ -262,8 +262,8 @@ namespace Zigurous.Architecture
                 stringBuilder.Clear();
             }
 
-            int start = System.Math.Max(0, startIndex);
-            int end = System.Math.Min(list.Count - 1, endIndex - 1);
+            int start = Math.Max(0, startIndex);
+            int end = Math.Min(list.Count - 1, endIndex - 1);
 
             for (int i = start; i < end; i++) {
                 stringBuilder.Append(list[i]).Append(delimiter);
@@ -278,13 +278,13 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="T">The type of the list.</typeparam>
         /// <param name="list">The list to get the item from.</param>
-        /// <returns>The last item in the list, or <c>default(T)</c> if the list is empty.</returns>
+        /// <returns>The last item in the list, or <c>default</c> if the list is empty.</returns>
         public static T Last<T>(this List<T> list)
         {
             if (list.Count > 0) {
-                return list[list.Count - 1];
+                return list[^1];
             } else {
-                return default(T);
+                return default;
             }
         }
 
@@ -294,7 +294,7 @@ namespace Zigurous.Architecture
         /// <typeparam name="T">The type of the list.</typeparam>
         /// <param name="list">The list to get the item from.</param>
         /// <param name="predicate">The predicate to use.</param>
-        /// <returns>The last item in the list that satisfies the predicate, or <c>default(T)</c> if no item satisfies the predicate.</returns>
+        /// <returns>The last item in the list that satisfies the predicate, or <c>default</c> if no item satisfies the predicate.</returns>
         public static T Last<T>(this List<T> list, Predicate<T> predicate)
         {
             for (int i = list.Count - 1; i >= 0; i--)
@@ -306,7 +306,7 @@ namespace Zigurous.Architecture
                 }
             }
 
-            return default(T);
+            return default;
         }
 
         /// <summary>
@@ -314,7 +314,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="T">The type of the list.</typeparam>
         /// <param name="list">The list to get the item from.</param>
-        /// <returns>The last non-null item in the list, or <c>default(T)</c> if all items are null.</returns>
+        /// <returns>The last non-null item in the list, or <c>default</c> if all items are null.</returns>
         public static T LastNonNull<T>(this List<T> list) where T : class
         {
             for (int i = list.Count - 1; i >= 0; i--)
@@ -326,7 +326,7 @@ namespace Zigurous.Architecture
                 }
             }
 
-            return default(T);
+            return default;
         }
 
         /// <summary>
@@ -362,13 +362,13 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="T">The type of the list.</typeparam>
         /// <param name="list">The list to get the random item from.</param>
-        /// <returns>A random item from the list, or <c>default(T)</c> if the list is empty.</returns>
+        /// <returns>A random item from the list, or <c>default</c> if the list is empty.</returns>
         public static T Random<T>(this List<T> list)
         {
             if (list.Count > 0) {
                 return list[UnityEngine.Random.Range(0, list.Count)];
             } else {
-                return default(T);
+                return default;
             }
         }
 
@@ -434,7 +434,7 @@ namespace Zigurous.Architecture
         /// <returns>A new list with the order of the items reversed.</returns>
         public static List<T> Reversed<T>(this List<T> list)
         {
-            List<T> reversed = new List<T>(list.Count);
+            List<T> reversed = new(list.Count);
 
             for (int i = 0, j = list.Count - 1; i < list.Count; i++, j--) {
                 reversed[i] = list[j];

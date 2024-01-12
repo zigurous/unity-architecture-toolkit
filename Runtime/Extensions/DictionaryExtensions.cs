@@ -18,7 +18,7 @@ namespace Zigurous.Architecture
         /// <returns>A new dictionary with the filtered key-value pairs removed.</returns>
         public static Dictionary<TKey, TValue> Where<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, Predicate<KeyValuePair<TKey, TValue>> predicate)
         {
-            Dictionary<TKey, TValue> matches = new Dictionary<TKey, TValue>(dictionary.Count);
+            Dictionary<TKey, TValue> matches = new(dictionary.Count);
 
             foreach (KeyValuePair<TKey, TValue> pair in dictionary)
             {
@@ -40,7 +40,7 @@ namespace Zigurous.Architecture
         /// <returns>A new list with the filtered keys removed.</returns>
         public static List<TKey> Where<TKey, TValue>(this Dictionary<TKey, TValue>.KeyCollection keys, Predicate<TKey> predicate)
         {
-            List<TKey> matches = new List<TKey>(keys.Count);
+            List<TKey> matches = new(keys.Count);
 
             foreach (TKey key in keys)
             {
@@ -62,7 +62,7 @@ namespace Zigurous.Architecture
         /// <returns>A new list with the filtered values removed.</returns>
         public static List<TValue> Where<TKey, TValue>(this Dictionary<TKey, TValue>.ValueCollection values, Predicate<TValue> predicate)
         {
-            List<TValue> matches = new List<TValue>(values.Count);
+            List<TValue> matches = new(values.Count);
 
             foreach (TValue value in values)
             {

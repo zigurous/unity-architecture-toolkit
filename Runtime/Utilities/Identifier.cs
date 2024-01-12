@@ -25,7 +25,7 @@ namespace Zigurous.Architecture
         /// <returns>The generated serial number.</returns>
         public static string SerialNumber(int length)
         {
-            return System.Guid.NewGuid().ToString("N").Substring(0, length).ToUpper();
+            return System.Guid.NewGuid().ToString("N")[..length].ToUpper();
         }
 
         /// <summary>

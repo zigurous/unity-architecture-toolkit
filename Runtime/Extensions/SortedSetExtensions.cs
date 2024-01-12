@@ -14,7 +14,7 @@ namespace Zigurous.Architecture
         /// <typeparam name="T">The type of the elements in the set.</typeparam>
         /// <param name="set">The set to get the element from.</param>
         /// <param name="predicate">The predicate to use.</param>
-        /// <returns>The first element in the set that satisfies the predicate, or <c>default(T)</c> if no item satisfies the predicate.</returns>
+        /// <returns>The first element in the set that satisfies the predicate, or <c>default</c> if no item satisfies the predicate.</returns>
         public static T First<T>(this SortedSet<T> set, Predicate<T> predicate)
         {
             foreach (T element in set)
@@ -24,7 +24,7 @@ namespace Zigurous.Architecture
                 }
             }
 
-            return default(T);
+            return default;
         }
 
         /// <summary>

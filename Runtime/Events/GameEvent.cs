@@ -14,7 +14,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The list of event listeners to invoke when the event is raised.
         /// </summary>
-        private readonly List<GameEventListener> listeners = new List<GameEventListener>();
+        private readonly List<GameEventListener> listeners = new();
 
         /// <summary>
         /// Raises the game event and invokes all of the registered listeners.

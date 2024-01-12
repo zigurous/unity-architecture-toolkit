@@ -84,10 +84,7 @@ namespace Zigurous.Architecture
             }
 
             items.Add(item);
-
-            if (registered != null) {
-                registered.Invoke(item);
-            }
+            registered?.Invoke(item);
 
             return true;
         }
@@ -104,10 +101,7 @@ namespace Zigurous.Architecture
             }
 
             items.Remove(item);
-
-            if (unregistered != null) {
-                unregistered.Invoke(item);
-            }
+            unregistered?.Invoke(item);
 
             return true;
         }

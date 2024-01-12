@@ -12,7 +12,7 @@ namespace Zigurous.Architecture
         where T : Component
     {
         internal static volatile T instance;
-        private static object threadLock = new object();
+        private static readonly object threadLock = new();
         private static bool isUnloading = false;
 
         private static T GetInstance()
@@ -25,9 +25,12 @@ namespace Zigurous.Architecture
 
                     if (instance == null && !isUnloading)
                     {
-                        GameObject singleton = new GameObject();
-                        singleton.name = typeof(T).Name;
-                        singleton.hideFlags = HideFlags.HideInHierarchy | HideFlags.HideInInspector;
+                        GameObject singleton = new()
+                        {
+                            name = typeof(T).Name,
+                            hideFlags = HideFlags.HideInHierarchy | HideFlags.HideInInspector
+                        };
+
                         return singleton.AddComponent<T>();
                     }
                 }
@@ -84,7 +87,6 @@ namespace Zigurous.Architecture
         private void OnApplicationQuit()
         {
             isUnloading = true;
-            instance = null;
         }
 
         /// <summary>

@@ -11,27 +11,27 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Shorthand for writing <c>EulerRange(0f, 0f)</c>.
         /// </summary>
-        public static EulerRange zero => new EulerRange(0f, 0f);
+        public static EulerRange zero => new(0f, 0f);
 
         /// <summary>
         /// Shorthand for writing <c>EulerRange(0f, 180f)</c>.
         /// </summary>
-        public static EulerRange pi => new EulerRange(0f, 180f);
+        public static EulerRange pi => new(0f, 180f);
 
         /// <summary>
         /// Shorthand for writing <c>EulerRange(0f, 360f)</c>.
         /// </summary>
-        public static EulerRange pi2 => new EulerRange(0f, 360f);
+        public static EulerRange pi2 => new(0f, 360f);
 
         /// <summary>
         /// Shorthand for writing <c>EulerRange(-180f, 180f)</c>.
         /// </summary>
-        public static EulerRange halfRange => new EulerRange(-180f, 180f);
+        public static EulerRange halfRange => new(-180f, 180f);
 
         /// <summary>
         /// Shorthand for writing <c>EulerRange(-360f, 360f)</c>.
         /// </summary>
-        public static EulerRange fullRange => new EulerRange(-360f, 360f);
+        public static EulerRange fullRange => new(-360f, 360f);
 
         [SerializeField]
         [Range(-360f, 360f)]
@@ -46,22 +46,22 @@ namespace Zigurous.Architecture
         /// <inheritdoc/>
         public float min
         {
-            get => m_Min;
-            set => m_Min = EulerRange.Wrap(value, -360f, 360f);
+            readonly get => m_Min;
+            set => m_Min = Wrap(value, -360f, 360f);
         }
 
         /// <inheritdoc/>
         public float max
         {
-            get => m_Max;
-            set => m_Max = EulerRange.Wrap(value, -360f, 360f);
+            readonly get => m_Max;
+            set => m_Max = Wrap(value, -360f, 360f);
         }
 
         /// <inheritdoc/>
-        public float Delta => max - min;
+        public readonly float Delta => max - min;
 
         /// <inheritdoc/>
-        public float Median => (min + max) / 2f;
+        public readonly float Median => (min + max) / 2f;
 
         /// <summary>
         /// Creates a new range with the specified values.
@@ -70,33 +70,33 @@ namespace Zigurous.Architecture
         /// <param name="max">The upper bound of the range.</param>
         public EulerRange(float min = -360f, float max = 360f)
         {
-            m_Min = EulerRange.Wrap(min, -360f, 360f);
-            m_Max = EulerRange.Wrap(max, -360f, 360f);
+            m_Min = Wrap(min, -360f, 360f);
+            m_Max = Wrap(max, -360f, 360f);
         }
 
         /// <inheritdoc/>
-        public float Random()
+        public readonly float Random()
         {
             return UnityEngine.Random.Range(min, max);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(float value)
+        public readonly bool Includes(float value)
         {
             return value >= min && value <= max;
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(float value, bool includeMin, bool includeMax)
+        public readonly bool Includes(float value, bool includeMin, bool includeMax)
         {
             return value.IsBetween(min, max, includeMin, includeMax);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to clamp.</param>
-        public float Clamp(float value)
+        public readonly float Clamp(float value)
         {
             return Mathf.Clamp(value, min, max);
         }
@@ -106,9 +106,9 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="value">The value to wrap.</param>
         /// <returns>The wrapped value.</returns>
-        public float Wrap(float value)
+        public readonly float Wrap(float value)
         {
-            return EulerRange.Wrap(value, min, max);
+            return Wrap(value, min, max);
         }
 
         private static float Wrap(float value, float min, float max)
@@ -123,14 +123,14 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        public float Lerp(float t)
+        public readonly float Lerp(float t)
         {
             return Mathf.Lerp(min, max, t);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value within the range you want to calculate.</param>
-        public float InverseLerp(float value)
+        public readonly float InverseLerp(float value)
         {
             return Mathf.InverseLerp(min, max, value);
         }

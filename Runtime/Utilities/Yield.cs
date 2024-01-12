@@ -17,12 +17,12 @@ namespace Zigurous.Architecture
         /// Waits until the end of the frame, just before displaying the frame
         /// on screen.
         /// </summary>
-        public static readonly WaitForEndOfFrame EndOfFrame = new WaitForEndOfFrame();
+        public static readonly WaitForEndOfFrame EndOfFrame = new();
 
         /// <summary>
         /// Waits until the next fixed frame rate update function.
         /// </summary>
-        public static readonly WaitForFixedUpdate FixedUpdate = new WaitForFixedUpdate();
+        public static readonly WaitForFixedUpdate FixedUpdate = new();
 
         /// <summary>
         /// Stores WaitForSeconds statements.
@@ -54,15 +54,13 @@ namespace Zigurous.Architecture
         /// <returns>The yield statement.</returns>
         public static WaitForSeconds Wait(float seconds)
         {
-            if (waitForSeconds == null) {
-                waitForSeconds = new Dictionary<int, WaitForSeconds>(initialCapacity);
-            }
+            waitForSeconds ??= new Dictionary<int, WaitForSeconds>(initialCapacity);
 
             int milliseconds = Mathf.RoundToInt(seconds * 1000f);
 
             if (!waitForSeconds.ContainsKey(milliseconds))
             {
-                WaitForSeconds yield = new WaitForSeconds(milliseconds / 1000f);
+                WaitForSeconds yield = new(milliseconds / 1000f);
                 waitForSeconds.Add(milliseconds, yield);
                 return yield;
             }
@@ -80,15 +78,13 @@ namespace Zigurous.Architecture
         /// <returns>The yield statement.</returns>
         public static WaitForSecondsRealtime WaitRealtime(float seconds)
         {
-            if (waitForSecondsRealtime == null) {
-                waitForSecondsRealtime = new Dictionary<int, WaitForSecondsRealtime>(initialCapacity);
-            }
+            waitForSecondsRealtime ??= new Dictionary<int, WaitForSecondsRealtime>(initialCapacity);
 
             int milliseconds = Mathf.RoundToInt(seconds * 1000f);
 
             if (!waitForSecondsRealtime.ContainsKey(milliseconds))
             {
-                WaitForSecondsRealtime yield = new WaitForSecondsRealtime(milliseconds / 1000f);
+                WaitForSecondsRealtime yield = new(milliseconds / 1000f);
                 waitForSecondsRealtime.Add(milliseconds, yield);
                 return yield;
             }
@@ -105,13 +101,11 @@ namespace Zigurous.Architecture
         /// <returns>The yield statement.</returns>
         public static WaitUntil WaitUntil(System.Func<bool> predicate, int id)
         {
-            if (waitUntil == null) {
-                waitUntil = new Dictionary<int, WaitUntil>(initialCapacity);
-            }
+            waitUntil ??= new Dictionary<int, WaitUntil>(initialCapacity);
 
             if (!waitUntil.ContainsKey(id))
             {
-                WaitUntil yield = new WaitUntil(predicate);
+                WaitUntil yield = new(predicate);
                 waitUntil.Add(id, yield);
                 return yield;
             }
@@ -128,13 +122,11 @@ namespace Zigurous.Architecture
         /// <returns>The yield statement.</returns>
         public static WaitWhile WaitWhile(System.Func<bool> predicate, int id)
         {
-            if (waitWhile == null) {
-                waitWhile = new Dictionary<int, WaitWhile>(initialCapacity);
-            }
+            waitWhile ??= new Dictionary<int, WaitWhile>(initialCapacity);
 
             if (!waitWhile.ContainsKey(id))
             {
-                WaitWhile yield = new WaitWhile(predicate);
+                WaitWhile yield = new(predicate);
                 waitWhile.Add(id, yield);
                 return yield;
             }

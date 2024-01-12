@@ -740,7 +740,7 @@ namespace Zigurous.Architecture
         public static void Reset<T>(T[] array, int n)
         {
             for (int i = 0; i < n; i++) {
-                array[i] = default(T);
+                array[i] = default;
             }
         }
 

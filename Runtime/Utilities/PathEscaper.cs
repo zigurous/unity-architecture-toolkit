@@ -54,12 +54,8 @@ namespace Zigurous.Architecture
         /// <returns>The escaped path.</returns>
         public static string Escape(string path)
         {
-            if (m_EscapeRegex == null) {
-                m_EscapeRegex = EscapeRegex(m_EscapeCharacter, m_InvalidCharacters);
-            }
-
-            return m_EscapeRegex.Replace(path,
-                m => m_EscapeCharacter + ((short)(m.Value[0])).ToString("X4"));
+            m_EscapeRegex ??= EscapeRegex(m_EscapeCharacter, m_InvalidCharacters);
+            return m_EscapeRegex.Replace(path, m => m_EscapeCharacter + ((short)m.Value[0]).ToString("X4"));
         }
 
         /// <summary>
@@ -71,8 +67,7 @@ namespace Zigurous.Architecture
         /// <returns>The escaped path.</returns>
         public static string Escape(string path, Regex regex, string escapeCharacter)
         {
-            return regex.Replace(path,
-                m => escapeCharacter + ((short)(m.Value[0])).ToString("X4"));
+            return regex.Replace(path, m => escapeCharacter + ((short)m.Value[0]).ToString("X4"));
         }
 
         /// <summary>
@@ -95,12 +90,8 @@ namespace Zigurous.Architecture
         /// <returns>The unescaped path.</returns>
         public static string Unescape(string path)
         {
-            if (m_UnescapeRegex == null) {
-                m_UnescapeRegex = UnescapeRegex(m_EscapeCharacter);
-            }
-
-            return m_UnescapeRegex.Replace(path,
-                m => ((char)Convert.ToInt16(m.Groups[1].Value, 16)).ToString());
+            m_UnescapeRegex ??= UnescapeRegex(m_EscapeCharacter);
+            return m_UnescapeRegex.Replace(path, m => ((char)Convert.ToInt16(m.Groups[1].Value, 16)).ToString());
         }
 
         /// <summary>
@@ -111,8 +102,7 @@ namespace Zigurous.Architecture
         /// <returns>The unescaped path.</returns>
         public static string Unescape(string path, Regex regex)
         {
-            return regex.Replace(path,
-                m => ((char)Convert.ToInt16(m.Groups[1].Value, 16)).ToString());
+            return regex.Replace(path, m => ((char)Convert.ToInt16(m.Groups[1].Value, 16)).ToString());
         }
 
         /// <summary>

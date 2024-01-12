@@ -19,22 +19,22 @@ namespace Zigurous.Architecture
         /// <inheritdoc/>
         public Vector4 min
         {
-            get => m_Min;
+            readonly get => m_Min;
             set => m_Min = value;
         }
 
         /// <inheritdoc/>
         public Vector4 max
         {
-            get => m_Max;
+            readonly get => m_Max;
             set => m_Max = value;
         }
 
         /// <inheritdoc/>
-        public Vector4 Delta => max - min;
+        public readonly Vector4 Delta => max - min;
 
         /// <inheritdoc/>
-        public Vector4 Median => (min + max) / 2f;
+        public readonly Vector4 Median => (min + max) / 2f;
 
         /// <summary>
         /// Creates a new range with the specified values.
@@ -48,7 +48,7 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        public Vector4 Random()
+        public readonly Vector4 Random()
         {
             return new Vector4(
                 UnityEngine.Random.Range(min.x, max.x),
@@ -59,7 +59,7 @@ namespace Zigurous.Architecture
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(Vector4 value)
+        public readonly bool Includes(Vector4 value)
         {
             return value.x >= min.x && value.x <= max.x &&
                    value.y >= min.y && value.y <= max.y &&
@@ -69,7 +69,7 @@ namespace Zigurous.Architecture
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(Vector4 value, bool includeMin, bool includeMax)
+        public readonly bool Includes(Vector4 value, bool includeMin, bool includeMax)
         {
             return value.x.IsBetween(min.x, max.x, includeMin, includeMax) &&
                    value.y.IsBetween(min.y, max.y, includeMin, includeMax) &&
@@ -79,7 +79,7 @@ namespace Zigurous.Architecture
 
         /// <inheritdoc/>
         /// <param name="value">The value to clamp.</param>
-        public Vector4 Clamp(Vector4 value)
+        public readonly Vector4 Clamp(Vector4 value)
         {
             value.x = Mathf.Clamp(value.x, min.x, max.x);
             value.y = Mathf.Clamp(value.y, min.y, max.y);
@@ -89,14 +89,14 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        public Vector4 Lerp(float t)
+        public readonly Vector4 Lerp(float t)
         {
             return Vector4.Lerp(min, max, t);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value within the range you want to calculate.</param>
-        public float InverseLerp(Vector4 value)
+        public readonly float InverseLerp(Vector4 value)
         {
             Vector4 AB = max - min;
             Vector4 AV = value - min;

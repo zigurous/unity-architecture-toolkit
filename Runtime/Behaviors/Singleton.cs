@@ -8,7 +8,7 @@
     public abstract class Singleton<T> where T : class, new()
     {
         internal static volatile T instance;
-        private static object threadLock = new object();
+        private static readonly object threadLock = new();
 
         private static T GetInstance()
         {
@@ -16,10 +16,7 @@
             {
                 lock (threadLock)
                 {
-                    if (instance == null) {
-                        instance = new T();
-                    }
-
+                    instance ??= new T();
                     return instance;
                 }
             }

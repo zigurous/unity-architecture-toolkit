@@ -11,7 +11,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The stored values with their given identifiers (Read only).
         /// </summary>
-        public readonly Dictionary<int, T> values = new Dictionary<int, T>();
+        public readonly Dictionary<int, T> values = new();
 
         /// <summary>
         /// The total accumulated value (Read only).
@@ -26,7 +26,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The default value of <typeparamref name="T"/>.
         /// </summary>
-        protected virtual T DefaultValue => default(T);
+        protected virtual T DefaultValue => default;
 
         /// <summary>
         /// Creates a new instance of the value accumulator.
@@ -41,12 +41,10 @@ namespace Zigurous.Architecture
         /// Returns the value stored with the specified identifier.
         /// </summary>
         /// <param name="identifier">The identifier of the stored value.</param>
-        /// <returns>The value stored with the identifier, or <c>default(T)</c> if the value does not exist.</returns>
+        /// <returns>The value stored with the identifier, or <c>default</c> if the value does not exist.</returns>
         public T GetValue(int identifier)
         {
-            T value;
-
-            if (values.TryGetValue(identifier, out value)) {
+            if (values.TryGetValue(identifier, out T value)) {
                 return value;
             } else {
                 return DefaultValue;
@@ -62,9 +60,7 @@ namespace Zigurous.Architecture
         /// <param name="value">The value to set.</param>
         public void SetValue(int identifier, T value)
         {
-            T currentValue;
-
-            if (values.TryGetValue(identifier, out currentValue))
+            if (values.TryGetValue(identifier, out T currentValue))
             {
                 Total = Subtract(currentValue);
                 Total = Add(value);
@@ -84,9 +80,7 @@ namespace Zigurous.Architecture
         /// <param name="identifier">The identifier of the stored value to remove.</param>
         public void RemoveValue(int identifier)
         {
-            T value;
-
-            if (values.TryGetValue(identifier, out value))
+            if (values.TryGetValue(identifier, out T value))
             {
                 Total = Subtract(value);
                 values.Remove(identifier);

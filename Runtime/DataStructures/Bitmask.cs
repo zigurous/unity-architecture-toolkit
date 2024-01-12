@@ -31,7 +31,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="flag">The flag to check for.</param>
         /// <returns>True if the bitmask contains the flag, false otherwise.</returns>
-        public bool HasFlag(int flag)
+        public readonly bool HasFlag(int flag)
         {
             return (mask & flag) == flag;
         }
@@ -42,7 +42,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="flags">The flags to check for.</param>
         /// <returns>True if the bitmask contains any of the flags, false otherwise.</returns>
-        public bool HasAnyFlag(int flags)
+        public readonly bool HasAnyFlag(int flags)
         {
             return (mask & flags) != 0;
         }
@@ -54,7 +54,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="flags">The flags to check for.</param>
         /// <returns>True if the bitmask contains only the given flags, false otherwise.</returns>
-        public bool HasOnlyFlags(int flags)
+        public readonly bool HasOnlyFlags(int flags)
         {
             return ((mask ^ flags) & flags) == 0;
         }
@@ -64,7 +64,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="n">The nth bit to check for.</param>
         /// <returns>True if the nth bit is set, false otherwise.</returns>
-        public bool Has(int n)
+        public readonly bool Has(int n)
         {
             return Get(n) != 0;
         }
@@ -74,7 +74,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="n">The nth bit to get.</param>
         /// <returns>The nth bit of the bitmask.</returns>
-        public int Get(int n)
+        public readonly int Get(int n)
         {
             return (mask >> n) & 1;
         }
@@ -121,9 +121,9 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="other">The bitmask to compare to.</param>
         /// <returns>True if the bitmasks are equal, false otherwise.</returns>
-        public bool Equals(Bitmask other)
+        public readonly bool Equals(Bitmask other)
         {
-            return this.mask == other.mask;
+            return mask == other.mask;
         }
 
         /// <summary>
@@ -131,9 +131,9 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="other">The bitmask to compare to.</param>
         /// <returns>True if the bitmasks are equal, false otherwise.</returns>
-        public bool Equals(int other)
+        public readonly bool Equals(int other)
         {
-            return this.mask == other;
+            return mask == other;
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="other">The object to compare to.</param>
         /// <returns>True if the bitmasks are equal, false otherwise.</returns>
-        public override bool Equals(object other)
+        public override readonly bool Equals(object other)
         {
             if (other is Bitmask bitmask) {
                 return Equals(bitmask);
@@ -156,7 +156,7 @@ namespace Zigurous.Architecture
         /// Returns the hash code of the bitmask.
         /// </summary>
         /// <returns>The hash code of the bitmask.</returns>
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return mask.GetHashCode();
         }
@@ -165,9 +165,9 @@ namespace Zigurous.Architecture
         /// Converts the bitmask to a string.
         /// </summary>
         /// <returns>The bitmask as a string.</returns>
-        public override string ToString()
+        public override readonly string ToString()
         {
-            string binary = System.Convert.ToString(mask, 2);
+            string binary = Convert.ToString(mask, 2);
             return binary.PadLeft(32, '0');
         }
 
@@ -225,7 +225,7 @@ namespace Zigurous.Architecture
         /// <param name="lhs">The first bitmask.</param>
         /// <param name="rhs">The second bitmask.</param>
         /// <returns>The result of the operation.</returns>
-        public static Bitmask operator &(Bitmask lhs, Bitmask rhs) => new Bitmask(lhs.mask & rhs.mask);
+        public static Bitmask operator &(Bitmask lhs, Bitmask rhs) => new(lhs.mask & rhs.mask);
 
         /// <summary>
         /// Performs a bitwise OR operation on two bitmasks.
@@ -233,7 +233,7 @@ namespace Zigurous.Architecture
         /// <param name="lhs">The first bitmask.</param>
         /// <param name="rhs">The second bitmask.</param>
         /// <returns>The result of the operation.</returns>
-        public static Bitmask operator |(Bitmask lhs, Bitmask rhs) => new Bitmask(lhs.mask | rhs.mask);
+        public static Bitmask operator |(Bitmask lhs, Bitmask rhs) => new(lhs.mask | rhs.mask);
 
         /// <summary>
         /// Performs a bitwise XOR operation on two bitmasks.
@@ -241,7 +241,7 @@ namespace Zigurous.Architecture
         /// <param name="lhs">The first bitmask.</param>
         /// <param name="rhs">The second bitmask.</param>
         /// <returns>The result of the operation.</returns>
-        public static Bitmask operator ^(Bitmask lhs, Bitmask rhs) => new Bitmask(lhs.mask ^ rhs.mask);
+        public static Bitmask operator ^(Bitmask lhs, Bitmask rhs) => new(lhs.mask ^ rhs.mask);
 
         /// <summary>
         /// Performs a bitwise ones' complement operation on a bitmask.
@@ -249,7 +249,7 @@ namespace Zigurous.Architecture
         /// <param name="lhs">The first bitmask.</param>
         /// <param name="rhs">The second bitmask.</param>
         /// <returns>The result of the operation.</returns>
-        public static Bitmask operator ~(Bitmask operand) => new Bitmask(~operand.mask);
+        public static Bitmask operator ~(Bitmask operand) => new(~operand.mask);
 
         /// <summary>
         /// Performs a binary left shift operation on two bitmasks.
@@ -257,7 +257,7 @@ namespace Zigurous.Architecture
         /// <param name="lhs">The first bitmask.</param>
         /// <param name="rhs">The second bitmask.</param>
         /// <returns>The result of the operation.</returns>
-        public static Bitmask operator <<(Bitmask lhs, int rhs) => new Bitmask(lhs.mask << rhs);
+        public static Bitmask operator <<(Bitmask lhs, int rhs) => new(lhs.mask << rhs);
 
         /// <summary>
         /// Performs a binary right shift operation on two bitmasks.
@@ -265,7 +265,7 @@ namespace Zigurous.Architecture
         /// <param name="lhs">The first bitmask.</param>
         /// <param name="rhs">The second bitmask.</param>
         /// <returns>The result of the operation.</returns>
-        public static Bitmask operator >>(Bitmask lhs, int rhs) => new Bitmask(lhs.mask >> rhs);
+        public static Bitmask operator >>(Bitmask lhs, int rhs) => new(lhs.mask >> rhs);
 
         /// <summary>
         /// Implicitly converts a bitmask to an integer.
@@ -279,7 +279,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="mask">The integer to convert.</param>
         /// <returns>The integer as a bitmask.</returns>
-        public static implicit operator Bitmask(int mask) => new Bitmask(mask);
+        public static implicit operator Bitmask(int mask) => new(mask);
 
     }
 

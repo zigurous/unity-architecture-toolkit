@@ -28,8 +28,7 @@ namespace Zigurous.Architecture
         /// <param name="transform">The transform to reset.</param>
         public static void Reset(this Transform transform)
         {
-            transform.position = Vector3.zero;
-            transform.rotation = Quaternion.identity;
+            transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
             transform.localScale = Vector3.one;
         }
 
@@ -39,8 +38,7 @@ namespace Zigurous.Architecture
         /// <param name="transform">The transform to reset.</param>
         public static void ResetLocal(this Transform transform)
         {
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.identity;
+            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
             transform.localScale = Vector3.one;
         }
 

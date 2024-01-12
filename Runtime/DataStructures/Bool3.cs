@@ -12,27 +12,27 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Shorthand for writing <c>Bool3(false, false, false)</c>.
         /// </summary>
-        public static Bool3 False => new Bool3(false, false, false);
+        public static Bool3 False => new(false, false, false);
 
         /// <summary>
         /// Shorthand for writing <c>Bool3(true, true, true)</c>.
         /// </summary>
-        public static Bool3 True => new Bool3(true, true, true);
+        public static Bool3 True => new(true, true, true);
 
         /// <summary>
         /// Shorthand for writing <c>Bool3(true, false, false)</c>.
         /// </summary>
-        public static Bool3 X => new Bool3(true, false, false);
+        public static Bool3 X => new(true, false, false);
 
         /// <summary>
         /// Shorthand for writing <c>Bool3(false, true, false)</c>.
         /// </summary>
-        public static Bool3 Y => new Bool3(false, true, false);
+        public static Bool3 Y => new(false, true, false);
 
         /// <summary>
         /// Shorthand for writing <c>Bool3(false, false, true)</c>.
         /// </summary>
-        public static Bool3 Z => new Bool3(false, false, true);
+        public static Bool3 Z => new(false, false, true);
 
         /// <summary>
         /// The X component.
@@ -58,15 +58,15 @@ namespace Zigurous.Architecture
         /// <param name="index">The index of the component to get or set.</param>
         public bool this[int index]
         {
-            get
+            readonly get
             {
-                switch (index)
+                return index switch
                 {
-                    case 0: return x;
-                    case 1: return y;
-                    case 2: return z;
-                    default: throw new IndexOutOfRangeException();
-                }
+                    0 => x,
+                    1 => y,
+                    2 => z,
+                    _ => throw new IndexOutOfRangeException(),
+                };
             }
             set
             {
@@ -98,11 +98,11 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="other">The tuple to compare to.</param>
         /// <returns>True if the tuples are equal, false otherwise.</returns>
-        public bool Equals(Bool3 other)
+        public readonly bool Equals(Bool3 other)
         {
-            return this.x == other.x &&
-                   this.y == other.y &&
-                   this.z == other.z;
+            return x == other.x &&
+                   y == other.y &&
+                   z == other.z;
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="other">The object to compare to.</param>
         /// <returns>True if the tuples are equal, false otherwise.</returns>
-        public override bool Equals(object other)
+        public override readonly bool Equals(object other)
         {
             if (other is Bool3 bool3) {
                 return Equals(bool3);
@@ -123,18 +123,18 @@ namespace Zigurous.Architecture
         /// Returns the hash code of the tuple.
         /// </summary>
         /// <returns>The hash code of the tuple.</returns>
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
-            return (x, y, z).GetHashCode();
+            return System.HashCode.Combine(x, y, z);
         }
 
         /// <summary>
         /// Converts the tuple to a string.
         /// </summary>
         /// <returns>The tuple as a string.</returns>
-        public override string ToString()
+        public override readonly string ToString()
         {
-            return $"{x.ToString()}, {y.ToString()}, {z.ToString()}";
+            return $"{x}, {y}, {z}";
         }
 
         /// <summary>
@@ -159,8 +159,7 @@ namespace Zigurous.Architecture
         /// <param name="lhs">The first tuple.</param>
         /// <param name="rhs">The second tuple.</param>
         /// <returns>The result of the operation.</returns>
-        public static Bool3 operator &(Bool3 lhs, Bool3 rhs) =>
-            new Bool3(lhs.x & rhs.x, lhs.y & rhs.y, lhs.z & rhs.z);
+        public static Bool3 operator &(Bool3 lhs, Bool3 rhs) => new(lhs.x & rhs.x, lhs.y & rhs.y, lhs.z & rhs.z);
 
         /// <summary>
         /// Performs a bitwise OR operation on two tuples.
@@ -168,8 +167,7 @@ namespace Zigurous.Architecture
         /// <param name="lhs">The first tuple.</param>
         /// <param name="rhs">The second tuple.</param>
         /// <returns>The result of the operation.</returns>
-        public static Bool3 operator |(Bool3 lhs, Bool3 rhs) =>
-            new Bool3(lhs.x | rhs.x, lhs.y | rhs.y, lhs.z | rhs.z);
+        public static Bool3 operator |(Bool3 lhs, Bool3 rhs) => new(lhs.x | rhs.x, lhs.y | rhs.y, lhs.z | rhs.z);
 
         /// <summary>
         /// Performs a bitwise XOR operation on two tuples.
@@ -177,16 +175,14 @@ namespace Zigurous.Architecture
         /// <param name="lhs">The first tuple.</param>
         /// <param name="rhs">The second tuple.</param>
         /// <returns>The result of the operation.</returns>
-        public static Bool3 operator ^(Bool3 lhs, Bool3 rhs) =>
-            new Bool3(lhs.x ^ rhs.x, lhs.y ^ rhs.y, lhs.z ^ rhs.z);
+        public static Bool3 operator ^(Bool3 lhs, Bool3 rhs) => new(lhs.x ^ rhs.x, lhs.y ^ rhs.y, lhs.z ^ rhs.z);
 
         /// <summary>
         /// Performs a logical negation operation on a tuple.
         /// </summary>
         /// <param name="operand">The tuple to negate.</param>
         /// <returns>The result of the operation.</returns>
-        public static Bool3 operator !(Bool3 operand) =>
-            new Bool3(!operand.x, !operand.y, !operand.z);
+        public static Bool3 operator !(Bool3 operand) => new(!operand.x, !operand.y, !operand.z);
 
     }
 

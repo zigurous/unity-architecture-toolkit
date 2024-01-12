@@ -12,82 +12,82 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Shorthand for writing <c>GridSize(0, 0)</c>.
         /// </summary>
-        public static GridSize zero => new GridSize(0, 0);
+        public static GridSize zero => new(0, 0);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(1, 1)</c>.
         /// </summary>
-        public static GridSize one => new GridSize(1, 1);
+        public static GridSize one => new(1, 1);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(int.MaxValue, int.MaxValue)</c>.
         /// </summary>
-        public static GridSize max => new GridSize(int.MaxValue, int.MaxValue);
+        public static GridSize max => new(int.MaxValue, int.MaxValue);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(2)</c>.
         /// </summary>
-        public static GridSize sq2 => new GridSize(2);
+        public static GridSize sq2 => new(2);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(4)</c>.
         /// </summary>
-        public static GridSize sq4 => new GridSize(4);
+        public static GridSize sq4 => new(4);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(8)</c>.
         /// </summary>
-        public static GridSize sq8 => new GridSize(8);
+        public static GridSize sq8 => new(8);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(16)</c>.
         /// </summary>
-        public static GridSize sq16 => new GridSize(16);
+        public static GridSize sq16 => new(16);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(32)</c>.
         /// </summary>
-        public static GridSize sq32 => new GridSize(32);
+        public static GridSize sq32 => new(32);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(64)</c>.
         /// </summary>
-        public static GridSize sq64 => new GridSize(64);
+        public static GridSize sq64 => new(64);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(128)</c>.
         /// </summary>
-        public static GridSize sq128 => new GridSize(128);
+        public static GridSize sq128 => new(128);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(256)</c>.
         /// </summary>
-        public static GridSize sq256 => new GridSize(256);
+        public static GridSize sq256 => new(256);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(512)</c>.
         /// </summary>
-        public static GridSize sq512 => new GridSize(512);
+        public static GridSize sq512 => new(512);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(1024)</c>.
         /// </summary>
-        public static GridSize sq1024 => new GridSize(1024);
+        public static GridSize sq1024 => new(1024);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(2048)</c>.
         /// </summary>
-        public static GridSize sq2048 => new GridSize(2048);
+        public static GridSize sq2048 => new(2048);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(4096)</c>.
         /// </summary>
-        public static GridSize sq4096 => new GridSize(4096);
+        public static GridSize sq4096 => new(4096);
 
         /// <summary>
         /// Shorthand for writing <c>GridSize(8192)</c>.
         /// </summary>
-        public static GridSize sq8192 => new GridSize(8192);
+        public static GridSize sq8192 => new(8192);
 
         /// <summary>
         /// The number of rows in the grid.
@@ -104,7 +104,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The area of the grid (rows * columns) (Read only).
         /// </summary>
-        public int Area => System.Math.Abs(rows * columns);
+        public readonly int Area => Math.Abs(rows * columns);
 
         /// <summary>
         /// Creates a new grid size with the specified rows and columns.
@@ -123,8 +123,8 @@ namespace Zigurous.Architecture
         /// <param name="size">The uniform size of the grid.</param>
         public GridSize(int size)
         {
-            this.rows = size;
-            this.columns = size;
+            rows = size;
+            columns = size;
         }
 
         /// <summary>
@@ -138,9 +138,9 @@ namespace Zigurous.Architecture
         /// if this instance precedes the other, and zero if this instance has
         /// the same position as the other.
         /// </returns>
-        public int CompareTo(GridSize other)
+        public readonly int CompareTo(GridSize other)
         {
-            int a = this.Area;
+            int a = Area;
             int b = other.Area;
 
             if (a == b) return 0;
@@ -153,10 +153,10 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="other">The grid size to compare to.</param>
         /// <returns>True if the grid sizes are equal, false otherwise.</returns>
-        public bool Equals(GridSize other)
+        public readonly bool Equals(GridSize other)
         {
-            return this.rows == other.rows &&
-                   this.columns == other.columns;
+            return rows == other.rows &&
+                   columns == other.columns;
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="other">The object to compare to.</param>
         /// <returns>True if the grid sizes are equal, false otherwise.</returns>
-        public override bool Equals(object other)
+        public override readonly bool Equals(object other)
         {
             if (other is GridSize size) {
                 return Equals(size);
@@ -177,18 +177,18 @@ namespace Zigurous.Architecture
         /// Returns the hash code of the grid size.
         /// </summary>
         /// <returns>The hash code of the grid size.</returns>
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
-            return (rows, columns).GetHashCode();
+            return System.HashCode.Combine(rows, columns);
         }
 
         /// <summary>
         /// Converts the grid size to a string.
         /// </summary>
         /// <returns>The grid size as a string.</returns>
-        public override string ToString()
+        public override readonly string ToString()
         {
-            return $"{rows.ToString()}x{columns.ToString()}";
+            return $"{rows}x{columns}";
         }
 
         /// <summary>

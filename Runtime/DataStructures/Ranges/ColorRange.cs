@@ -11,37 +11,37 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Shorthand for writing <c>ColorRange(Color.black, Color.black)</c>.
         /// </summary>
-        public static ColorRange black => new ColorRange(Color.black, Color.black);
+        public static ColorRange black => new(Color.black, Color.black);
 
         /// <summary>
         /// Shorthand for writing <c>ColorRange(Color.white, Color.white)</c>.
         /// </summary>
-        public static ColorRange white => new ColorRange(Color.white, Color.white);
+        public static ColorRange white => new(Color.white, Color.white);
 
         /// <summary>
         /// Shorthand for writing <c>ColorRange(Color.black, Color.white)</c>.
         /// </summary>
-        public static ColorRange blackToWhite => new ColorRange(Color.black, Color.white);
+        public static ColorRange blackToWhite => new(Color.black, Color.white);
 
         /// <summary>
         /// Shorthand for writing <c>ColorRange(Color.white, Color.black)</c>.
         /// </summary>
-        public static ColorRange whiteToBlack => new ColorRange(Color.white, Color.black);
+        public static ColorRange whiteToBlack => new(Color.white, Color.black);
 
         /// <summary>
         /// Shorthand for writing <c>ColorRange(Color(0,0,0,0), Color(0,0,0,1))</c>.
         /// </summary>
-        public static ColorRange fadeIn => new ColorRange(new Color(0f, 0f, 0f, 0f), new Color(0f, 0f, 0f, 1f));
+        public static ColorRange fadeIn => new(new Color(0f, 0f, 0f, 0f), new Color(0f, 0f, 0f, 1f));
 
         /// <summary>
         /// Shorthand for writing <c>ColorRange(Color(0,0,0,1), Color(0,0,0,0))</c>.
         /// </summary>
-        public static ColorRange fadeOut => new ColorRange(new Color(0f, 0f, 0f, 1f), new Color(0f, 0f, 0f, 0f));
+        public static ColorRange fadeOut => new(new Color(0f, 0f, 0f, 1f), new Color(0f, 0f, 0f, 0f));
 
         /// <summary>
         /// Shorthand for writing <c>ColorRange(Color(0,0,0,0), Color(0,0,0,0))</c>.
         /// </summary>
-        public static ColorRange transparent => new ColorRange(new Color(0f, 0f, 0f, 0f), new Color(0f, 0f, 0f, 0f));
+        public static ColorRange transparent => new(new Color(0f, 0f, 0f, 0f), new Color(0f, 0f, 0f, 0f));
 
         [SerializeField]
         [Tooltip("The lower bound of the range.")]
@@ -54,22 +54,22 @@ namespace Zigurous.Architecture
         /// <inheritdoc/>
         public Color min
         {
-            get => m_Min;
+            readonly get => m_Min;
             set => m_Min = value;
         }
 
         /// <inheritdoc/>
         public Color max
         {
-            get => m_Max;
+            readonly get => m_Max;
             set => m_Max = value;
         }
 
         /// <inheritdoc/>
-        public Color Delta => max - min;
+        public readonly Color Delta => max - min;
 
         /// <inheritdoc/>
-        public Color Median => (min + max) / 2f;
+        public readonly Color Median => (min + max) / 2f;
 
         /// <summary>
         /// Creates a new range with the specified values.
@@ -83,14 +83,14 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        public Color Random()
+        public readonly Color Random()
         {
             return Color.Lerp(min, max, UnityEngine.Random.value);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(Color value)
+        public readonly bool Includes(Color value)
         {
             return value.r >= min.r && value.r <= max.r &&
                    value.g >= min.g && value.g <= max.g &&
@@ -100,7 +100,7 @@ namespace Zigurous.Architecture
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(Color value, bool includeMin, bool includeMax)
+        public readonly bool Includes(Color value, bool includeMin, bool includeMax)
         {
             return value.r.IsBetween(min.r, max.r, includeMin, includeMax) &&
                    value.g.IsBetween(min.g, max.g, includeMin, includeMax) &&
@@ -110,7 +110,7 @@ namespace Zigurous.Architecture
 
         /// <inheritdoc/>
         /// <param name="value">The value to clamp.</param>
-        public Color Clamp(Color value)
+        public readonly Color Clamp(Color value)
         {
             value.r = Mathf.Clamp(value.r, min.r, max.r);
             value.g = Mathf.Clamp(value.g, min.g, max.g);
@@ -120,14 +120,14 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        public Color Lerp(float t)
+        public readonly Color Lerp(float t)
         {
             return Color.Lerp(min, max, t);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value within the range you want to calculate.</param>
-        public float InverseLerp(Color value)
+        public readonly float InverseLerp(Color value)
         {
             Vector4 AB = max - min;
             Vector4 AV = value - min;

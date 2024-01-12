@@ -18,7 +18,7 @@ namespace Zigurous.Architecture.Editor
 
         public static T FieldWrapper<T>(string label, System.Func<GUIContent, T> draw)
         {
-            GUIContent content = new GUIContent(label);
+            GUIContent content = new(label);
 
             float labelWidth = EditorStyles.label.CalcSize(content).x;
             float originalWidth = UnityEditor.EditorGUIUtility.labelWidth;

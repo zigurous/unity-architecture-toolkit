@@ -13,18 +13,18 @@ namespace Zigurous.Architecture
         /// The settings of the timer.
         /// </summary>
         [Tooltip("The settings of the timer.")]
-        public TimerSettings settings = new TimerSettings();
+        public TimerSettings settings = new();
 
         /// <summary>
         /// The events invoked by the timer.
         /// </summary>
         [Tooltip("The events invoked by the timer.")]
-        public TimerEvents events = new TimerEvents();
+        public TimerEvents events = new();
 
         /// <summary>
         /// The current stats of the timer (Read only).
         /// </summary>
-        public TimerStats stats { get; private set; } = new TimerStats();
+        public readonly TimerStats stats = new();
 
         /// <summary>
         /// Resets the elapsed time and re-enables the timer. This does not

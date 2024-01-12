@@ -11,27 +11,27 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Shorthand for writing <c>IntRange(0, 0)</c>.
         /// </summary>
-        public static IntRange zero => new IntRange(0, 0);
+        public static IntRange zero => new(0, 0);
 
         /// <summary>
         /// Shorthand for writing <c>IntRange(1, 1)</c>.
         /// </summary>
-        public static IntRange one => new IntRange(1, 1);
+        public static IntRange one => new(1, 1);
 
         /// <summary>
         /// Shorthand for writing <c>IntRange(0, int.MaxValue)</c>.
         /// </summary>
-        public static IntRange positive => new IntRange(0, int.MaxValue);
+        public static IntRange positive => new(0, int.MaxValue);
 
         /// <summary>
         /// Shorthand for writing <c>IntRange(int.MinValue, 0)</c>.
         /// </summary>
-        public static IntRange negative => new IntRange(int.MinValue, 0);
+        public static IntRange negative => new(int.MinValue, 0);
 
         /// <summary>
         /// Shorthand for writing <c>IntRange(int.MinValue, int.MaxValue)</c>.
         /// </summary>
-        public static IntRange minMax => new IntRange(int.MinValue, int.MaxValue);
+        public static IntRange minMax => new(int.MinValue, int.MaxValue);
 
         [SerializeField]
         [Tooltip("The lower bound of the range.")]
@@ -44,22 +44,22 @@ namespace Zigurous.Architecture
         /// <inheritdoc/>
         public int min
         {
-            get => m_Min;
+            readonly get => m_Min;
             set => m_Min = value;
         }
 
         /// <inheritdoc/>
         public int max
         {
-            get => m_Max;
+            readonly get => m_Max;
             set => m_Max = value;
         }
 
         /// <inheritdoc/>
-        public int Delta => max - min;
+        public readonly int Delta => max - min;
 
         /// <inheritdoc/>
-        public int Median => (min + max) / 2;
+        public readonly int Median => (min + max) / 2;
 
         /// <summary>
         /// Creates a new range with the specified values.
@@ -76,7 +76,7 @@ namespace Zigurous.Architecture
         /// Returns a random value in the range [inclusive, exclusive).
         /// </summary>
         /// <returns>A random value in the range [inclusive, exclusive).</returns>
-        public int Random()
+        public readonly int Random()
         {
             return UnityEngine.Random.Range(min, max);
         }
@@ -86,7 +86,7 @@ namespace Zigurous.Architecture
         /// provided seed.
         /// </summary>
         /// <returns>A random value in the range [inclusive, exclusive).</returns>
-        public int Random(System.Random seed)
+        public readonly int Random(System.Random seed)
         {
             return seed.Next(min, max);
         }
@@ -95,7 +95,7 @@ namespace Zigurous.Architecture
         /// Returns a random value in the range [inclusive, inclusive].
         /// </summary>
         /// <returns>A random value in the range [inclusive, inclusive].</returns>
-        public int RandomInclusive()
+        public readonly int RandomInclusive()
         {
             return UnityEngine.Random.Range(min, max + 1);
         }
@@ -105,41 +105,41 @@ namespace Zigurous.Architecture
         /// provided seed.
         /// </summary>
         /// <returns>A random value in the range [inclusive, inclusive].</returns>
-        public int RandomInclusive(System.Random seed)
+        public readonly int RandomInclusive(System.Random seed)
         {
             return seed.Next(min, max + 1);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(int value)
+        public readonly bool Includes(int value)
         {
             return value >= min && value < max;
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to check.</param>
-        public bool Includes(int value, bool includeMin, bool includeMax)
+        public readonly bool Includes(int value, bool includeMin, bool includeMax)
         {
             return value.IsBetween(min, max, includeMin, includeMax);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value to clamp.</param>
-        public int Clamp(int value)
+        public readonly int Clamp(int value)
         {
             return Mathf.Clamp(value, min, max);
         }
 
         /// <inheritdoc/>
-        public int Lerp(float t)
+        public readonly int Lerp(float t)
         {
             return (int)Mathf.Lerp(min, max, t);
         }
 
         /// <inheritdoc/>
         /// <param name="value">The value within the range you want to calculate.</param>
-        public float InverseLerp(int value)
+        public readonly float InverseLerp(int value)
         {
             return Mathf.InverseLerp(min, max, value);
         }

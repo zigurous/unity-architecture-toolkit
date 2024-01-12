@@ -16,7 +16,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The default value of the variable.
         /// </summary>
-        public virtual T defaultValue => default(T);
+        public virtual T defaultValue => default;
 
         #if UNITY_EDITOR
         #pragma warning disable 0414

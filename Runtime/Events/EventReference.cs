@@ -59,8 +59,8 @@ namespace Zigurous.Architecture
         {
             if (useUnityEvent) {
                 unityEvent?.Invoke();
-            } else {
-                gameEvent?.Raise();
+            } else if (gameEvent != null) {
+                gameEvent.Raise();
             }
         }
 

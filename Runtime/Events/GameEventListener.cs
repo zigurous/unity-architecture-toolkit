@@ -48,9 +48,7 @@ namespace Zigurous.Architecture
         /// </summary>
         public virtual void OnEventRaised()
         {
-            if (Response != null) {
-                Response.Invoke();
-            }
+            Response?.Invoke();
         }
 
     }
