@@ -62,9 +62,6 @@ namespace Zigurous.Architecture
         }
 
         #if UNITY_EDITOR
-        /// <summary>
-        /// A Unity lifecycle method called during editor validation.
-        /// </summary>
         private void OnValidate()
         {
             if (Application.isPlaying) {

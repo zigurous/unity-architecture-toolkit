@@ -11,11 +11,9 @@ namespace Zigurous.Architecture.Editor
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (popupStyle == null)
-            {
-                popupStyle = new GUIStyle(GUI.skin.GetStyle("PaneOptions"));
-                popupStyle.imagePosition = ImagePosition.ImageOnly;
-            }
+            popupStyle ??= new GUIStyle(GUI.skin.GetStyle("PaneOptions")) {
+                imagePosition = ImagePosition.ImageOnly
+            };
 
             SerializedProperty useVariable = property.FindPropertyRelative("useVariable");
             SerializedProperty variable = property.FindPropertyRelative("variable");
@@ -27,9 +25,11 @@ namespace Zigurous.Architecture.Editor
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
-            Rect popupRect = new Rect(position);
-            popupRect.width = popupStyle.fixedWidth + popupStyle.margin.right;
-            popupRect.height = popupStyle.fixedHeight;
+            Rect popupRect = new(position)
+            {
+                width = popupStyle.fixedWidth + popupStyle.margin.right,
+                height = popupStyle.fixedHeight
+            };
             popupRect.x += position.width - popupRect.width;
             popupRect.y += (EditorGUIUtility.singleLineHeight - popupStyle.fixedHeight) / 2f;
             position.width -= popupRect.width;
