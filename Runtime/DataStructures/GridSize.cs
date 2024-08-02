@@ -6,7 +6,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// Stores the size of a grid as rows and columns.
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public struct GridSize : IEquatable<GridSize>, IComparable<GridSize>
     {
         /// <summary>

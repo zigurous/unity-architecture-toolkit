@@ -6,7 +6,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// Stores the size of an entity as a width and height.
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public struct Size : IEquatable<Size>, IComparable<Size>
     {
         /// <summary>

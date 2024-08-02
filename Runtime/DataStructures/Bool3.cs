@@ -6,7 +6,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// Stores a tuple of 3 booleans.
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public struct Bool3 : IEquatable<Bool3>
     {
         /// <summary>

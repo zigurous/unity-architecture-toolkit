@@ -6,7 +6,7 @@ namespace Zigurous.Architecture
     /// A range of values of the given type.
     /// </summary>
     /// <typeparam name="T">The type of values in the range.</typeparam>
-    [System.Serializable]
+    [Serializable]
     public struct Range<T> : IRange<T> where T : IComparable<T>
     {
         private T m_Min;

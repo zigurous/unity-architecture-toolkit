@@ -7,7 +7,7 @@ namespace Zigurous.Architecture
     /// Stores a quantity of a given entity type.
     /// </summary>
     /// <typeparam name="T">The type of entity being counted.</typeparam>
-    [System.Serializable]
+    [Serializable]
     public struct Quantity<T> : IEquatable<Quantity<T>>
         where T : IEquatable<T>
     {
