@@ -29,7 +29,7 @@ namespace Zigurous.Architecture
         /// <returns>The coroutine enumerator.</returns>
         private static IEnumerator Wait(float delay, Action action)
         {
-            yield return Yield.Wait(delay);
+            yield return YieldCache.Wait(delay);
             action();
         }
 
@@ -57,7 +57,7 @@ namespace Zigurous.Architecture
         /// <returns>The coroutine enumerator.</returns>
         private static IEnumerator Wait<T>(float delay, Action<T> action, T obj)
         {
-            yield return Yield.Wait(delay);
+            yield return YieldCache.Wait(delay);
             action(obj);
         }
 
@@ -83,7 +83,7 @@ namespace Zigurous.Architecture
         {
             while (true)
             {
-                yield return Yield.Wait(interval);
+                yield return YieldCache.Wait(interval);
                 action();
             }
         }
@@ -112,7 +112,7 @@ namespace Zigurous.Architecture
         {
             while (condition())
             {
-                yield return Yield.Wait(interval);
+                yield return YieldCache.Wait(interval);
                 action();
             }
         }
@@ -141,7 +141,7 @@ namespace Zigurous.Architecture
         {
             while (!condition())
             {
-                yield return Yield.Wait(interval);
+                yield return YieldCache.Wait(interval);
                 action();
             }
         }

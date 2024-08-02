@@ -6,7 +6,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// Caches yield statements to minimize garbage collection.
     /// </summary>
-    public static class Yield
+    public static class YieldCache
     {
         /// <summary>
         /// The initial capacity of the yield cache.
