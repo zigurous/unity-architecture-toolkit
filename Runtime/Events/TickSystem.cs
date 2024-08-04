@@ -6,7 +6,7 @@ namespace Zigurous.Architecture
     /// Invokes a tick event at a fixed interval.
     /// </summary>
     [AddComponentMenu("Zigurous/Events/Tick System")]
-    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/FixedUpdateManager")]
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/TickSystem")]
     public sealed class TickSystem : MonoBehaviour
     {
         internal static volatile TickSystem globalInstance;
