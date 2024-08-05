@@ -82,6 +82,9 @@ namespace Zigurous.Architecture.Editor
                         return property.enumValueIndex == attribute.enumValue;
                     }
 
+                case SerializedPropertyType.ObjectReference:
+                    return property.objectReferenceValue != null;
+
                 default:
                     Debug.LogError("The data type of the property used for conditional hiding [" + property.propertyType + "] is not currently supported.");
                     return attribute.show;
