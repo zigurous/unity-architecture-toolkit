@@ -52,7 +52,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="seconds">The number of seconds to wait.</param>
         /// <returns>The yield statement.</returns>
-        public static WaitForSeconds Wait(float seconds)
+        public static WaitForSeconds WaitForSeconds(float seconds)
         {
             waitForSeconds ??= new Dictionary<int, WaitForSeconds>(initialCapacity);
 
@@ -76,7 +76,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="seconds">The number of seconds to wait.</param>
         /// <returns>The yield statement.</returns>
-        public static WaitForSecondsRealtime WaitRealtime(float seconds)
+        public static WaitForSecondsRealtime WaitForSecondsRealtime(float seconds)
         {
             waitForSecondsRealtime ??= new Dictionary<int, WaitForSecondsRealtime>(initialCapacity);
 
