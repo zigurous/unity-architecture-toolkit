@@ -5,7 +5,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// A Vector2Int variable saved as a ScriptableObject.
     /// </summary>
-    [CreateAssetMenu(menuName = "Zigurous/Variables/Vector2Int")]
+    [CreateAssetMenu(menuName = "Zigurous/Variables/Vector2Int", order = 13)]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/Vector2IntVariable")]
     public class Vector2IntVariable : ScriptableVariable<Vector2Int>
     {

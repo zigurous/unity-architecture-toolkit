@@ -5,7 +5,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// A Rect variable saved as a ScriptableObject.
     /// </summary>
-    [CreateAssetMenu(menuName = "Zigurous/Variables/Rect")]
+    [CreateAssetMenu(menuName = "Zigurous/Variables/Rect", order = 8)]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/RectVariable")]
     public class RectVariable : ScriptableVariable<Rect>
     {

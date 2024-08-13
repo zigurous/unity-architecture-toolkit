@@ -5,7 +5,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// A short variable saved as a ScriptableObject.
     /// </summary>
-    [CreateAssetMenu(menuName = "Zigurous/Variables/Short")]
+    [CreateAssetMenu(menuName = "Zigurous/Variables/Short", order = 9)]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/ShortVariable")]
     public class ShortVariable : ScriptableVariable<short>
     {

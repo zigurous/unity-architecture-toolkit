@@ -5,7 +5,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// A Vector3Int variable saved as a ScriptableObject.
     /// </summary>
-    [CreateAssetMenu(menuName = "Zigurous/Variables/Vector3Int")]
+    [CreateAssetMenu(menuName = "Zigurous/Variables/Vector3Int", order = 15)]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/Vector3IntVariable")]
     public class Vector3IntVariable : ScriptableVariable<Vector3Int>
     {

@@ -5,7 +5,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// A Vector4 variable saved as a ScriptableObject.
     /// </summary>
-    [CreateAssetMenu(menuName = "Zigurous/Variables/Vector4")]
+    [CreateAssetMenu(menuName = "Zigurous/Variables/Vector4", order = 16)]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/Vector4Variable")]
     public class Vector4Variable : ScriptableVariable<Vector4>
     {

@@ -5,7 +5,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// A string variable saved as a ScriptableObject.
     /// </summary>
-    [CreateAssetMenu(menuName = "Zigurous/Variables/String")]
+    [CreateAssetMenu(menuName = "Zigurous/Variables/String", order = 10)]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/StringVariable")]
     public class StringVariable : ScriptableVariable<string>
     {
