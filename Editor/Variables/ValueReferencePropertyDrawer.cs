@@ -3,22 +3,7 @@ using UnityEngine;
 
 namespace Zigurous.Architecture.Editor
 {
-    [CustomPropertyDrawer(typeof(BoolReference), true)]
-    [CustomPropertyDrawer(typeof(BoundsReference), true)]
-    [CustomPropertyDrawer(typeof(DoubleReference), true)]
-    [CustomPropertyDrawer(typeof(FloatReference), true)]
-    [CustomPropertyDrawer(typeof(IntReference), true)]
-    [CustomPropertyDrawer(typeof(LongReference), true)]
-    [CustomPropertyDrawer(typeof(QuaternionReference), true)]
-    [CustomPropertyDrawer(typeof(RectReference), true)]
-    [CustomPropertyDrawer(typeof(ShortReference), true)]
-    [CustomPropertyDrawer(typeof(StringReference), true)]
-    [CustomPropertyDrawer(typeof(UIntReference), true)]
-    [CustomPropertyDrawer(typeof(Vector2Reference), true)]
-    [CustomPropertyDrawer(typeof(Vector2IntReference), true)]
-    [CustomPropertyDrawer(typeof(Vector3Reference), true)]
-    [CustomPropertyDrawer(typeof(Vector3IntReference), true)]
-    [CustomPropertyDrawer(typeof(Vector4Reference), true)]
+    [CustomPropertyDrawer(typeof(ValueReference<,>), true)]
     public class ValueReferencePropertyDrawer : PropertyDrawer
     {
         private readonly string[] popupOptions = { "Fixed Value", "Variable" };
