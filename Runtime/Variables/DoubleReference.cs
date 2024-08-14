@@ -1,7 +1,7 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a double value, either a constant or <see cref="DoubleVariable"/>.
+    /// A reference to a double value, either a fixed value or <see cref="DoubleVariable"/>.
     /// </summary>
     [System.Serializable]
     public class DoubleReference : ValueReference<double, DoubleVariable>

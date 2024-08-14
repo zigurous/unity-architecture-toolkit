@@ -3,7 +3,7 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a Rect value, either a constant or <see cref="RectVariable"/>.
+    /// A reference to a Rect value, either a fixed value or <see cref="RectVariable"/>.
     /// </summary>
     [System.Serializable]
     public class RectReference : ValueReference<Rect, RectVariable>

@@ -3,7 +3,7 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a Vector3 value, either a constant or <see cref="Vector3Variable"/>.
+    /// A reference to a Vector3 value, either a fixed value or <see cref="Vector3Variable"/>.
     /// </summary>
     [System.Serializable]
     public class Vector3Reference : ValueReference<Vector3, Vector3Variable>

@@ -1,7 +1,7 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a boolean value, either a constant or <see cref="BoolVariable"/>.
+    /// A reference to a boolean value, either a fixed value or <see cref="BoolVariable"/>.
     /// </summary>
     [System.Serializable]
     public class BoolReference : ValueReference<bool, BoolVariable>

@@ -1,7 +1,7 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a uint value, either a constant or <see cref="UIntVariable"/>.
+    /// A reference to a uint value, either a fixed value or <see cref="UIntVariable"/>.
     /// </summary>
     [System.Serializable]
     public class UIntReference : ValueReference<uint, UIntVariable>

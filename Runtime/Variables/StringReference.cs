@@ -1,7 +1,7 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a string value, either a constant or <see cref="StringVariable"/>.
+    /// A reference to a string value, either a fixed value or <see cref="StringVariable"/>.
     /// </summary>
     [System.Serializable]
     public class StringReference : ValueReference<string, StringVariable>

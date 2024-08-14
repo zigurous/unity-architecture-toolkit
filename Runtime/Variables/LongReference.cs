@@ -1,7 +1,7 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a long value, either a constant or <see cref="LongVariable"/>.
+    /// A reference to a long value, either a fixed value or <see cref="LongVariable"/>.
     /// </summary>
     [System.Serializable]
     public class LongReference : ValueReference<long, LongVariable>

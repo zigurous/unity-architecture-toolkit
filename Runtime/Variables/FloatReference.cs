@@ -1,7 +1,7 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a float value, either a constant or <see cref="FloatVariable"/>.
+    /// A reference to a float value, either a fixed value or <see cref="FloatVariable"/>.
     /// </summary>
     [System.Serializable]
     public class FloatReference : ValueReference<float, FloatVariable>

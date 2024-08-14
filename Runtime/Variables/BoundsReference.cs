@@ -3,7 +3,7 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a Bounds value, either a constant or <see cref="BoundsVariable"/>.
+    /// A reference to a Bounds value, either a fixed value or <see cref="BoundsVariable"/>.
     /// </summary>
     [System.Serializable]
     public class BoundsReference : ValueReference<Bounds, BoundsVariable>

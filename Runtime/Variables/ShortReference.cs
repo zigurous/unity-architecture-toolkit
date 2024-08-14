@@ -1,7 +1,7 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a short value, either a constant or <see cref="ShortVariable"/>.
+    /// A reference to a short value, either a fixed value or <see cref="ShortVariable"/>.
     /// </summary>
     [System.Serializable]
     public class ShortReference : ValueReference<short, ShortVariable>

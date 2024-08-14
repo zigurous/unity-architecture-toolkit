@@ -1,7 +1,7 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a percentage value, either a constant or <see cref="PercentageVariable"/>.
+    /// A reference to a percentage value, either a fixed value or <see cref="PercentageVariable"/>.
     /// </summary>
     [System.Serializable]
     public class PercentageReference : ValueReference<float, PercentageVariable>

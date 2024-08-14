@@ -3,7 +3,7 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a Quaternion value, either a constant or <see cref="QuaternionVariable"/>.
+    /// A reference to a Quaternion value, either a fixed value or <see cref="QuaternionVariable"/>.
     /// </summary>
     [System.Serializable]
     public class QuaternionReference : ValueReference<Quaternion, QuaternionVariable>

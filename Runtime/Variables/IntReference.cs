@@ -1,7 +1,7 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to an int value, either a constant or <see cref="IntVariable"/>.
+    /// A reference to an int value, either a fixed value or <see cref="IntVariable"/>.
     /// </summary>
     [System.Serializable]
     public class IntReference : ValueReference<int, IntVariable>

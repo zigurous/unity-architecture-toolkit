@@ -3,7 +3,7 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a Vector2Int value, either a constant or <see cref="Vector2IntVariable"/>.
+    /// A reference to a Vector2Int value, either a fixed value or <see cref="Vector2IntVariable"/>.
     /// </summary>
     [System.Serializable]
     public class Vector2IntReference : ValueReference<Vector2Int, Vector2IntVariable>
