@@ -9,9 +9,6 @@ namespace Zigurous.Architecture
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/BoolVariable")]
     public class BoolVariable : ScriptableVariable<bool>
     {
-        /// <summary>
-        /// The value of the variable.
-        /// </summary>
         [SerializeField]
         [Tooltip("The value of the variable.")]
         private bool m_Value;

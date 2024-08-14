@@ -9,9 +9,6 @@ namespace Zigurous.Architecture
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/BoundsVariable")]
     public class BoundsVariable : ScriptableVariable<Bounds>
     {
-        /// <summary>
-        /// The value of the variable.
-        /// </summary>
         [SerializeField]
         [Tooltip("The value of the variable.")]
         private Bounds m_Value;
