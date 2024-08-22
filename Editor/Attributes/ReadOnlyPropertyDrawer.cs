@@ -8,12 +8,10 @@ namespace Zigurous.Architecture.Editor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            bool enabled = GUI.enabled;
-            GUI.enabled = false;
-
-            EditorGUI.PropertyField(position, property, label, true);
-
-            GUI.enabled = enabled;
+            using (new EditorGUI.DisabledGroupScope(true))
+            {
+                EditorGUI.PropertyField(position, property, label, true);
+            }
         }
 
     }

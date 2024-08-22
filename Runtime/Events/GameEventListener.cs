@@ -11,25 +11,39 @@ namespace Zigurous.Architecture
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/GameEventListener")]
     public class GameEventListener : MonoBehaviour
     {
+        [SerializeField]
+        [Tooltip("The game event to listen to.")]
+        private GameEvent m_Event;
+
+        [SerializeField]
+        [Tooltip("The unity event invoked in response to the event being raised.")]
+        private UnityEvent m_Response;
+
         /// <summary>
         /// The game event to listen to.
         /// </summary>
-        [Tooltip("The game event to listen to.")]
-        public GameEvent Event;
+        public GameEvent Event
+        {
+            get => m_Event;
+            set => m_Event = value;
+        }
 
         /// <summary>
         /// The Unity event invoked in response to the event being raised.
         /// </summary>
-        [Tooltip("The unity event invoked in response to the event being raised.")]
-        public UnityEvent Response;
+        public UnityEvent Response
+        {
+            get => m_Response;
+            set => m_Response = value;
+        }
 
         /// <summary>
         /// A Unity lifecycle method called when the behavior is enabled.
         /// </summary>
         protected virtual void OnEnable()
         {
-            if (Event != null) {
-                Event.RegisterListener(this);
+            if (m_Event != null) {
+                m_Event.RegisterListener(this);
             }
         }
 
@@ -38,8 +52,8 @@ namespace Zigurous.Architecture
         /// </summary>
         protected virtual void OnDisable()
         {
-            if (Event != null) {
-                Event.UnregisterListener(this);
+            if (m_Event != null) {
+                m_Event.UnregisterListener(this);
             }
         }
 
@@ -48,7 +62,7 @@ namespace Zigurous.Architecture
         /// </summary>
         public virtual void OnEventRaised()
         {
-            Response?.Invoke();
+            m_Response?.Invoke();
         }
 
     }
