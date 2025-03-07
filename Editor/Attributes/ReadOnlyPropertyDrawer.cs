@@ -14,6 +14,11 @@ namespace Zigurous.Architecture.Editor
             }
         }
 
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property, label, true);
+        }
+
     }
 
 }
