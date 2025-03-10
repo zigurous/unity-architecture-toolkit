@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Zigurous.Architecture
@@ -7,7 +8,7 @@ namespace Zigurous.Architecture
     /// </summary>
     [AddComponentMenu("Zigurous/Events/Tick System")]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/TickSystem")]
-    public sealed class TickSystem : PersistentSingletonBehaviour<TickSystem>
+    public class TickSystem : MonoBehaviour
     {
         /// <summary>
         /// The default rate in seconds at which the tick system updates.
