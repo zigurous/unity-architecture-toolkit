@@ -41,6 +41,8 @@ namespace Zigurous.Architecture
         /// </summary>
         public event System.Action tick;
 
+        private WaitForGameTick yield;
+
         private void OnEnable()
         {
             timeSinceLastTick = Time.time;
@@ -59,6 +61,31 @@ namespace Zigurous.Architecture
         public void ResetCount()
         {
             ticks = 0;
+        }
+
+        /// <summary>
+        /// Delays an action for a specified amount of game ticks.
+        /// </summary>
+        /// <param name="ticks">The amount of game ticks to wait.</param>
+        /// <param name="onComplete">The action to invoke after the delay.</param>
+        /// <returns>The coroutine for the delayed action.</returns>
+        public Coroutine DelayAction(int ticks, System.Action onComplete)
+        {
+            return StartCoroutine(Delay(ticks, onComplete));
+        }
+
+        private IEnumerator Delay(int ticks, System.Action onComplete)
+        {
+            yield ??= new WaitForGameTick(this);
+
+            while (ticks > 0)
+            {
+                yield.Reset();
+                yield return yield;
+                ticks--;
+            }
+
+            onComplete.Invoke();
         }
 
     }
