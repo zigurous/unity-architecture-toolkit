@@ -23,7 +23,7 @@ namespace Zigurous.Architecture
                 {
                     instance = FindObjectOfType<T>();
 
-                    if (instance == null && !isUnloading)
+                    if (instance == null && Application.isPlaying && !isUnloading)
                     {
                         GameObject singleton = new()
                         {
@@ -58,7 +58,7 @@ namespace Zigurous.Architecture
         /// </summary>
         private void Awake()
         {
-            if (instance == null)
+            if (instance == null || instance == this)
             {
                 instance = this as T;
                 SetUp();
