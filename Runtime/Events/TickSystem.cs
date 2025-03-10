@@ -7,78 +7,57 @@ namespace Zigurous.Architecture
     /// </summary>
     [AddComponentMenu("Zigurous/Events/Tick System")]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/TickSystem")]
-    public sealed class TickSystem : MonoBehaviour
+    public sealed class TickSystem : PersistentSingletonBehaviour<TickSystem>
     {
-        internal static volatile TickSystem globalInstance;
-        private static readonly object threadLock = new();
-        private static bool isUnloading = false;
-
-        private static TickSystem GetGlobalInstance()
-        {
-            if (globalInstance == null && !isUnloading)
-            {
-                lock (threadLock)
-                {
-                    GameObject go = new()
-                    {
-                        name = "GlobalTickSystem",
-                        hideFlags = HideFlags.HideInHierarchy | HideFlags.HideInInspector,
-                    };
-
-                    if (Application.isPlaying) {
-                        DontDestroyOnLoad(go);
-                    }
-
-                    globalInstance = go.AddComponent<TickSystem>();
-                }
-            }
-
-            return globalInstance;
-        }
+        /// <summary>
+        /// The default rate in seconds at which the tick system updates.
+        /// </summary>
+        public static readonly float DefaultTickRate = 0.6f; // seconds
 
         /// <summary>
-        /// The global instance of the TickSystem.
+        /// The rate in seconds at which the tick system updates.
         /// </summary>
-        public static TickSystem Global => GetGlobalInstance();
+        [Tooltip("The rate in seconds at which the tick system updates.")]
+        public float tickRate = DefaultTickRate;
+        private float timeSinceLastTick;
+
+        [ReadOnly]
+        [SerializeField]
+        private int ticks;
 
         /// <summary>
-        /// The rate at which the tick event is invoked.
+        /// The current tick number.
         /// </summary>
-        [Tooltip("The rate at which the tick event is invoked.")]
-        public float tickRate = 0.6f;
+        public int currentTick => ticks;
+
+        /// <summary>
+        /// The amount of seconds since the last tick.
+        /// </summary>
+        public float deltaTime => Time.time - timeSinceLastTick;
 
         /// <summary>
         /// The event invoked at the tick rate.
         /// </summary>
-        public event System.Action ticked;
-
-        private void OnDestroy()
-        {
-            if (this == globalInstance) {
-                globalInstance = null;
-            }
-        }
-
-        private void OnApplicationQuit()
-        {
-            if (this == globalInstance) {
-                isUnloading = true;
-            }
-        }
+        public event System.Action tick;
 
         private void OnEnable()
         {
-            InvokeRepeating(nameof(Tick), tickRate, tickRate);
+            timeSinceLastTick = Time.time;
         }
 
-        private void OnDisable()
+        private void Update()
         {
-            CancelInvoke(nameof(Tick));
+            if (deltaTime >= tickRate)
+            {
+                ticks++;
+                tick?.Invoke();
+                timeSinceLastTick = Time.time;
+            }
         }
 
-        private void Tick()
+        public void ResetCount()
         {
-            ticked?.Invoke();
+            ticks = 0;
         }
 
     }
