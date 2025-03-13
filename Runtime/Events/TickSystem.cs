@@ -41,8 +41,6 @@ namespace Zigurous.Architecture
         /// </summary>
         public event System.Action tick;
 
-        private WaitForGameTick yield;
-
         private void OnEnable()
         {
             timeSinceLastTick = Time.time;
@@ -76,13 +74,16 @@ namespace Zigurous.Architecture
 
         private IEnumerator Delay(int ticks, System.Action onComplete)
         {
-            yield ??= new WaitForGameTick(this);
+            int startTick = currentTick;
 
             while (ticks > 0)
             {
-                yield.Reset();
-                yield return yield;
+                while (currentTick - startTick <= 0) {
+                    yield return null;
+                }
+
                 ticks--;
+                startTick = currentTick;
             }
 
             onComplete.Invoke();
