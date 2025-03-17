@@ -20,7 +20,9 @@ namespace Zigurous.Architecture
         /// </summary>
         [Tooltip("The rate in seconds at which the tick system updates.")]
         public float tickRate = DefaultTickRate;
-        private float timeSinceLastTick;
+
+        [HideInInspector]
+        private float timeOfLastTick;
 
         [ReadOnly]
         [SerializeField]
@@ -34,7 +36,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The amount of seconds since the last tick.
         /// </summary>
-        public float deltaTime => Time.time - timeSinceLastTick;
+        public float deltaTime => Time.time - timeOfLastTick;
 
         /// <summary>
         /// The event invoked at the tick rate.
@@ -43,7 +45,7 @@ namespace Zigurous.Architecture
 
         private void OnEnable()
         {
-            timeSinceLastTick = Time.time;
+            timeOfLastTick = Time.time;
         }
 
         private void Update()
@@ -52,7 +54,7 @@ namespace Zigurous.Architecture
             {
                 ticks++;
                 tick?.Invoke();
-                timeSinceLastTick = Time.time;
+                timeOfLastTick = Time.time;
             }
         }
 
