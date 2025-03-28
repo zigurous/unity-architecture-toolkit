@@ -58,6 +58,9 @@ namespace Zigurous.Architecture
             }
         }
 
+        /// <summary>
+        /// Resets the tick count to zero.
+        /// </summary>
         public void ResetCount()
         {
             ticks = 0;
@@ -76,19 +79,38 @@ namespace Zigurous.Architecture
 
         private IEnumerator Delay(int ticks, System.Action onComplete)
         {
-            int startTick = currentTick;
-
-            while (ticks > 0)
-            {
-                while (currentTick - startTick <= 0) {
-                    yield return null;
-                }
-
-                ticks--;
-                startTick = currentTick;
+            if (ticks > 0) {
+                yield return WaitForGameTicks(ticks);
             }
 
             onComplete.Invoke();
+        }
+
+        /// <summary>
+        /// An enumerator to yield for the specified amount of game ticks.
+        /// </summary>
+        /// <param name="ticks">The amount of game ticks to yield.</param>
+        /// <returns>The current enumerator.</returns>
+        public IEnumerator WaitForGameTicks(int ticks)
+        {
+            while (ticks > 0)
+            {
+                yield return WaitForGameTick();
+                ticks--;
+            }
+        }
+
+        /// <summary>
+        /// An enumerator to yield for a single game tick.
+        /// </summary>
+        /// <returns>The current enumerator.</returns>
+        public IEnumerator WaitForGameTick()
+        {
+            int startTick = currentTick;
+
+            while (currentTick - startTick <= 0) {
+                yield return null;
+            }
         }
 
     }
