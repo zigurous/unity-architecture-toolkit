@@ -64,14 +64,6 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        /// <param name="value">The value to check.</param>
-        public readonly bool Includes(Vector2 value, bool includeMin, bool includeMax)
-        {
-            return value.x.IsBetween(min.x, max.x, includeMin, includeMax) &&
-                   value.y.IsBetween(min.y, max.y, includeMin, includeMax);
-        }
-
-        /// <inheritdoc/>
         /// <param name="value">The value to clamp.</param>
         public readonly Vector2 Clamp(Vector2 value)
         {

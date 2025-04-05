@@ -17,7 +17,7 @@
         T Median { get; }
 
         /// <summary>
-        /// Returns a random value in the range.
+        /// Returns a random value in the range (inclusive).
         /// </summary>
         /// <returns>A random value in the range.</returns>
         T Random();

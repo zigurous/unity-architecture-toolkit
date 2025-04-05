@@ -48,13 +48,6 @@ namespace Zigurous.Architecture
             return value.IsBetween(min, max, true, true);
         }
 
-        /// <inheritdoc/>
-        /// <param name="value">The value to check.</param>
-        public readonly bool Includes(T value, bool includeMin, bool includeMax)
-        {
-            return value.IsBetween(min, max, includeMin, includeMax);
-        }
-
     }
 
 }

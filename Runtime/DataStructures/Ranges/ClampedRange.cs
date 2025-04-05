@@ -65,13 +65,6 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        /// <param name="value">The value to check.</param>
-        public readonly bool Includes(float value, bool includeMin, bool includeMax)
-        {
-            return value.IsBetween(min, max, includeMin, includeMax);
-        }
-
-        /// <inheritdoc/>
         /// <param name="value">The value to clamp.</param>
         public readonly float Clamp(float value)
         {

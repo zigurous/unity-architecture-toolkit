@@ -17,20 +17,11 @@ namespace Zigurous.Architecture
         T max { get; set; }
 
         /// <summary>
-        /// Checks if a value is in the range.
+        /// Checks if a value is in the range (inclusive).
         /// </summary>
         /// <param name="value">The value to check.</param>
         /// <returns>True if the value is in the range, false otherwise.</returns>
         bool Includes(T value);
-
-        /// <summary>
-        /// Checks if a value is in the range.
-        /// </summary>
-        /// <param name="value">The value to check.</param>
-        /// <param name="includeMin">The minimum value is inclusive if true, exclusive if false.</param>
-        /// <param name="includeMax">The maximum value is inclusive if true, exclusive if false.</param>
-        /// <returns>True if the value is in the range, false otherwise.</returns>
-        bool Includes(T value, bool includeMin, bool includeMax);
     }
 
 }

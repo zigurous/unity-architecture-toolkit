@@ -96,18 +96,6 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
-        /// Checks if a value is in the range.
-        /// </summary>
-        /// <param name="value">The value to check.</param>
-        /// <param name="includeMin">The minimum value is inclusive if true, exclusive if false.</param>
-        /// <param name="includeMax">The maximum value is inclusive if true, exclusive if false.</param>
-        /// <returns>True if the value is in the range, false otherwise.</returns>
-        public readonly bool Includes(double value, bool includeMin, bool includeMax)
-        {
-            return value.IsBetween(min, max, includeMin, includeMax);
-        }
-
-        /// <summary>
         /// Clamps a value to the range.
         /// </summary>
         /// <param name="value">The value to clamp.</param>

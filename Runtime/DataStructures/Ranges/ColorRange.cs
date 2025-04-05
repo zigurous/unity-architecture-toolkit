@@ -99,16 +99,6 @@ namespace Zigurous.Architecture
         }
 
         /// <inheritdoc/>
-        /// <param name="value">The value to check.</param>
-        public readonly bool Includes(Color value, bool includeMin, bool includeMax)
-        {
-            return value.r.IsBetween(min.r, max.r, includeMin, includeMax) &&
-                   value.g.IsBetween(min.g, max.g, includeMin, includeMax) &&
-                   value.b.IsBetween(min.b, max.b, includeMin, includeMax) &&
-                   value.a.IsBetween(min.a, max.a, includeMin, includeMax);
-        }
-
-        /// <inheritdoc/>
         /// <param name="value">The value to clamp.</param>
         public readonly Color Clamp(Color value)
         {

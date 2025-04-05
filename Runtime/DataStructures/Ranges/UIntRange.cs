@@ -62,20 +62,8 @@ namespace Zigurous.Architecture
             m_Max = max;
         }
 
-        /// <summary>
-        /// Returns a random value in the range [inclusive, exclusive).
-        /// </summary>
-        /// <returns>A random value in the range [inclusive, exclusive).</returns>
+        /// <inheritdoc/>
         public readonly uint Random()
-        {
-            return (uint)UnityEngine.Random.Range((int)min, (int)max);
-        }
-
-        /// <summary>
-        /// Returns a random value in the range [inclusive, inclusive].
-        /// </summary>
-        /// <returns>A random value in the range [inclusive, inclusive].</returns>
-        public readonly uint RandomInclusive()
         {
             return (uint)UnityEngine.Random.Range((int)min, (int)max + 1);
         }
@@ -84,14 +72,7 @@ namespace Zigurous.Architecture
         /// <param name="value">The value to check.</param>
         public readonly bool Includes(uint value)
         {
-            return value >= min && value < max;
-        }
-
-        /// <inheritdoc/>
-        /// <param name="value">The value to check.</param>
-        public readonly bool Includes(uint value, bool includeMin, bool includeMax)
-        {
-            return value.IsBetween(min, max, includeMin, includeMax);
+            return value >= min && value <= max;
         }
 
         /// <inheritdoc/>

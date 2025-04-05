@@ -72,40 +72,17 @@ namespace Zigurous.Architecture
             m_Max = max;
         }
 
-        /// <summary>
-        /// Returns a random value in the range [inclusive, exclusive).
-        /// </summary>
-        /// <returns>A random value in the range [inclusive, exclusive).</returns>
+        /// <inheritdoc/>
         public readonly int Random()
-        {
-            return UnityEngine.Random.Range(min, max);
-        }
-
-        /// <summary>
-        /// Returns a random value in the range [inclusive, exclusive) using the
-        /// provided seed.
-        /// </summary>
-        /// <returns>A random value in the range [inclusive, exclusive).</returns>
-        public readonly int Random(System.Random seed)
-        {
-            return seed.Next(min, max);
-        }
-
-        /// <summary>
-        /// Returns a random value in the range [inclusive, inclusive].
-        /// </summary>
-        /// <returns>A random value in the range [inclusive, inclusive].</returns>
-        public readonly int RandomInclusive()
         {
             return UnityEngine.Random.Range(min, max + 1);
         }
 
         /// <summary>
-        /// Returns a random value in the range [inclusive, inclusive] using the
-        /// provided seed.
+        /// Returns a random value in the range (inclusive) using the provided seed.
         /// </summary>
-        /// <returns>A random value in the range [inclusive, inclusive].</returns>
-        public readonly int RandomInclusive(System.Random seed)
+        /// <returns>A random seeded value in the range.</returns>
+        public readonly int Random(System.Random seed)
         {
             return seed.Next(min, max + 1);
         }
@@ -114,14 +91,7 @@ namespace Zigurous.Architecture
         /// <param name="value">The value to check.</param>
         public readonly bool Includes(int value)
         {
-            return value >= min && value < max;
-        }
-
-        /// <inheritdoc/>
-        /// <param name="value">The value to check.</param>
-        public readonly bool Includes(int value, bool includeMin, bool includeMax)
-        {
-            return value.IsBetween(min, max, includeMin, includeMax);
+            return value >= min && value <= max;
         }
 
         /// <inheritdoc/>
