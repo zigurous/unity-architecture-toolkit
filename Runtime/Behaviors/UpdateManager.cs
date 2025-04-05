@@ -19,8 +19,11 @@ namespace Zigurous.Architecture
         /// <param name="target">The target object to register.</param>
         public void Register<T>(T target) where T : class, IUpdateable
         {
-            targets.Add(target);
-            targets.Sort(Compare);
+            if (!IsRegistered(target))
+            {
+                targets.Add(target);
+                targets.Sort(Compare);
+            }
         }
 
         /// <summary>
@@ -33,20 +36,36 @@ namespace Zigurous.Architecture
             targets.Remove(target);
         }
 
-        private int Compare<T>(T a, T b) where T : class, IUpdateable
+        /// <summary>
+        /// Checks if the target is registered to be updated.
+        /// </summary>
+        /// <typeparam name="T">The type of target object.</typeparam>
+        /// <param name="target">The target object to check.</param>
+        /// <returns>True if the target is registered, false otherwise.</returns>
+        public bool IsRegistered<T>(T target) where T : class, IUpdateable
         {
-            int orderA = (a as IUpdateableExecutionOrder)?.executionOrder ?? 0;
-            int orderB = (b as IUpdateableExecutionOrder)?.executionOrder ?? 0;
-            return orderA.CompareTo(orderB);
+            return targets.Contains(target);
         }
 
         private void Update()
         {
             float deltaTime = Time.deltaTime;
 
-            foreach (IUpdateable target in targets) {
-                target.Update(deltaTime);
+            for (int i = 0; i < targets.Count; i++) {
+                targets[i].Update(deltaTime);
             }
+        }
+
+        private void OnDestroy()
+        {
+            targets.Clear();
+        }
+
+        private static int Compare<T>(T a, T b) where T : class, IUpdateable
+        {
+            int orderA = (a as IUpdateableExecutionOrder)?.executionOrder ?? 0;
+            int orderB = (b as IUpdateableExecutionOrder)?.executionOrder ?? 0;
+            return orderA.CompareTo(orderB);
         }
 
     }
