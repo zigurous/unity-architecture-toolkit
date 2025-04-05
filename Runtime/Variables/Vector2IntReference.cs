@@ -3,27 +3,22 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a Vector2Int value, either a fixed value or <see cref="Vector2IntVariable"/>.
+    /// A reference to a Vector2Int value, either a fixed value or <see cref="ScriptableVector2Int"/>.
     /// </summary>
     [System.Serializable]
-    public class Vector2IntReference : ValueReference<Vector2Int, Vector2IntVariable>
+    public class Vector2IntReference : ValueReference<Vector2Int, ScriptableVector2Int>
     {
         /// <summary>
-        /// Creates a new Vector2Int reference.
+        /// Creates a new reference to a Vector2Int with a fixed value.
         /// </summary>
-        public Vector2IntReference() {}
-
-        /// <summary>
-        /// Creates a new Vector2Int reference with the fixed value.
-        /// </summary>
-        /// <param name="value">The fixed value to set.</param>
+        /// <param name="value">The fixed value to use.</param>
         public Vector2IntReference(Vector2Int value) : base(value) {}
 
         /// <summary>
-        /// Creates a new Vector2Int reference to the variable value.
+        /// Creates a new reference to the Vector2Int stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public Vector2IntReference(Vector2IntVariable variable) : base(variable) {}
+        /// <param name="value">The ScriptableObject that stores the value.</param>
+        public Vector2IntReference(ScriptableVector2Int value) : base(value) {}
 
         /// <summary>
         /// Implicitly converts the reference to a Vector2Int.

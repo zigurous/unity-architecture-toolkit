@@ -3,14 +3,14 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A Vector2Int variable saved as a ScriptableObject.
+    /// A Vector2Int value stored as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Vector2Int", order = 14)]
-    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/Vector2IntVariable")]
-    public class Vector2IntVariable : ScriptableVariable<Vector2Int>
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/ScriptableVector2Int")]
+    public class ScriptableVector2Int : ScriptableValue<Vector2Int>
     {
         [SerializeField]
-        [Tooltip("The value of the variable.")]
+        [Delayed]
         private Vector2Int m_Value;
 
         /// <inheritdoc/>

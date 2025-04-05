@@ -3,14 +3,15 @@ using UnityEngine;
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A variable saved as a ScriptableObject to represent a duration.
+    /// A duration value stored as a ScriptableObject. Durations are represented
+    /// as floating-point values.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Duration", order = 3)]
-    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/DurationVariable")]
-    public class DurationVariable : ScriptableVariable<float>
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/ScriptableDuration")]
+    public class ScriptableDuration : ScriptableValue<float>
     {
         [SerializeField]
-        [Tooltip("The duration of the cooldown.")]
+        [Delayed]
         private float m_Duration;
 
         /// <inheritdoc/>

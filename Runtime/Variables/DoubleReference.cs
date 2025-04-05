@@ -1,27 +1,22 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a double value, either a fixed value or <see cref="DoubleVariable"/>.
+    /// A reference to a double value, either a fixed value or <see cref="ScriptableDouble"/>.
     /// </summary>
     [System.Serializable]
-    public class DoubleReference : ValueReference<double, DoubleVariable>
+    public class DoubleReference : ValueReference<double, ScriptableDouble>
     {
         /// <summary>
-        /// Creates a new double reference.
+        /// Creates a new reference to a double with a fixed value.
         /// </summary>
-        public DoubleReference() {}
-
-        /// <summary>
-        /// Creates a new double reference with the fixed value.
-        /// </summary>
-        /// <param name="value">The fixed value to set.</param>
+        /// <param name="value">The fixed value to use.</param>
         public DoubleReference(double value) : base(value) {}
 
         /// <summary>
-        /// Creates a new double reference to the variable value.
+        /// Creates a new reference to the double stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public DoubleReference(DoubleVariable variable) : base(variable) {}
+        /// <param name="value">The ScriptableObject that stores the value.</param>
+        public DoubleReference(ScriptableDouble value) : base(value) {}
 
         /// <summary>
         /// Implicitly converts the reference to a double.

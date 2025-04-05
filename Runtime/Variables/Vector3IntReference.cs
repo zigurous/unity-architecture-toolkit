@@ -3,27 +3,22 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a Vector3Int value, either a fixed value or <see cref="Vector3IntVariable"/>.
+    /// A reference to a Vector3Int value, either a fixed value or <see cref="ScriptableVector3Int"/>.
     /// </summary>
     [System.Serializable]
-    public class Vector3IntReference : ValueReference<Vector3Int, Vector3IntVariable>
+    public class Vector3IntReference : ValueReference<Vector3Int, ScriptableVector3Int>
     {
         /// <summary>
-        /// Creates a new Vector3Int reference.
+        /// Creates a new reference to a Vector3Int with a fixed value.
         /// </summary>
-        public Vector3IntReference() {}
-
-        /// <summary>
-        /// Creates a new Vector3Int reference with the fixed value.
-        /// </summary>
-        /// <param name="value">The fixed value to set.</param>
+        /// <param name="value">The fixed value to use.</param>
         public Vector3IntReference(Vector3Int value) : base(value) {}
 
         /// <summary>
-        /// Creates a new Vector3Int reference to the variable value.
+        /// Creates a new reference to the Vector3Int stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public Vector3IntReference(Vector3IntVariable variable) : base(variable) {}
+        /// <param name="value">The ScriptableObject that stores the value.</param>
+        public Vector3IntReference(ScriptableVector3Int value) : base(value) {}
 
         /// <summary>
         /// Implicitly converts the reference to a Vector3Int.

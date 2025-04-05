@@ -3,14 +3,14 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A uint variable saved as a ScriptableObject.
+    /// A uint value stored as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/UInt", order = 12)]
-    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/UIntVariable")]
-    public class UIntVariable : ScriptableVariable<uint>
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/ScriptableUInt")]
+    public class ScriptableUInt : ScriptableValue<uint>
     {
         [SerializeField]
-        [Tooltip("The value of the variable.")]
+        [Delayed]
         private uint m_Value;
 
         /// <inheritdoc/>

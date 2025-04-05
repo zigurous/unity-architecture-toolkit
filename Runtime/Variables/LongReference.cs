@@ -1,27 +1,22 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a long value, either a fixed value or <see cref="LongVariable"/>.
+    /// A reference to a long value, either a fixed value or <see cref="ScriptableLong"/>.
     /// </summary>
     [System.Serializable]
-    public class LongReference : ValueReference<long, LongVariable>
+    public class LongReference : ValueReference<long, ScriptableLong>
     {
         /// <summary>
-        /// Creates a new long reference.
+        /// Creates a new reference to a long with a fixed value.
         /// </summary>
-        public LongReference() {}
-
-        /// <summary>
-        /// Creates a new long reference with the fixed value.
-        /// </summary>
-        /// <param name="value">The fixed value to set.</param>
+        /// <param name="value">The fixed value to use.</param>
         public LongReference(long value) : base(value) {}
 
         /// <summary>
-        /// Creates a new long reference to the variable value.
+        /// Creates a new reference to the long stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public LongReference(LongVariable variable) : base(variable) {}
+        /// <param name="value">The ScriptableObject that stores the value.</param>
+        public LongReference(ScriptableLong value) : base(value) {}
 
         /// <summary>
         /// Implicitly converts the reference to a long.

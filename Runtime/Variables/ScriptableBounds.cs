@@ -3,14 +3,14 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A Bounds variable saved as a ScriptableObject.
+    /// A Bounds value stored as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Bounds", order = 1)]
-    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/BoundsVariable")]
-    public class BoundsVariable : ScriptableVariable<Bounds>
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/ScriptableBounds")]
+    public class ScriptableBounds : ScriptableValue<Bounds>
     {
         [SerializeField]
-        [Tooltip("The value of the variable.")]
+        [Delayed]
         private Bounds m_Value;
 
         /// <inheritdoc/>

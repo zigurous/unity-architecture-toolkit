@@ -6,7 +6,7 @@ namespace Zigurous.Architecture.Editor
     [CustomPropertyDrawer(typeof(ValueReference<,>), true)]
     public class ValueReferencePropertyDrawer : PropertyDrawer
     {
-        private readonly string[] popupOptions = { "Fixed Value", "Variable" };
+        private readonly string[] popupOptions = { "Fixed Value", "Scriptable Value" };
         private static GUIStyle popupStyle;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -15,8 +15,8 @@ namespace Zigurous.Architecture.Editor
                 imagePosition = ImagePosition.ImageOnly
             };
 
-            SerializedProperty useVariable = property.FindPropertyRelative("useVariable");
-            SerializedProperty variable = property.FindPropertyRelative("variable");
+            SerializedProperty useScriptableValue = property.FindPropertyRelative("useScriptableValue");
+            SerializedProperty scriptableValue = property.FindPropertyRelative("scriptableValue");
             SerializedProperty fixedValue = property.FindPropertyRelative("fixedValue");
 
             label = EditorGUI.BeginProperty(position, label, property);
@@ -36,10 +36,14 @@ namespace Zigurous.Architecture.Editor
 
             EditorGUI.BeginChangeCheck();
 
-            int result = EditorGUI.Popup(popupRect, useVariable.boolValue ? 1 : 0, popupOptions, popupStyle);
-            useVariable.boolValue = result == 1;
+            int result = EditorGUI.Popup(popupRect, useScriptableValue.boolValue ? 1 : 0, popupOptions, popupStyle);
+            useScriptableValue.boolValue = result == 1;
 
-            EditorGUI.PropertyField(position, useVariable.boolValue ? variable : fixedValue, GUIContent.none, true);
+            if (useScriptableValue.boolValue) {
+                EditorGUI.PropertyField(position, scriptableValue, GUIContent.none, true);
+            } else {
+                EditorGUI.PropertyField(position, fixedValue, GUIContent.none, true);
+            }
 
             if (EditorGUI.EndChangeCheck()) {
                 property.serializedObject.ApplyModifiedProperties();
@@ -51,11 +55,18 @@ namespace Zigurous.Architecture.Editor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            SerializedProperty useVariable = property.FindPropertyRelative("useVariable");
-            SerializedProperty variable = property.FindPropertyRelative("variable");
-            SerializedProperty fixedValue = property.FindPropertyRelative("fixedValue");
+            SerializedProperty useScriptableValue = property.FindPropertyRelative("useScriptableValue");
 
-            return EditorGUI.GetPropertyHeight(useVariable.boolValue ? variable : fixedValue, true);
+            if (useScriptableValue.boolValue)
+            {
+                SerializedProperty scriptableValue = property.FindPropertyRelative("scriptableValue");
+                return EditorGUI.GetPropertyHeight(scriptableValue, true);
+            }
+            else
+            {
+                SerializedProperty fixedValue = property.FindPropertyRelative("fixedValue");
+                return EditorGUI.GetPropertyHeight(fixedValue, true);
+            }
         }
 
     }

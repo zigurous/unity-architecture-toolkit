@@ -3,14 +3,14 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A boolean variable saved as a ScriptableObject.
+    /// A boolean value stored as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Bool", order = 0)]
-    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/BoolVariable")]
-    public class BoolVariable : ScriptableVariable<bool>
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/ScriptableBool")]
+    public class ScriptableBool : ScriptableValue<bool>
     {
         [SerializeField]
-        [Tooltip("The value of the variable.")]
+        [Delayed]
         private bool m_Value;
 
         /// <inheritdoc/>

@@ -3,27 +3,22 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a Bounds value, either a fixed value or <see cref="BoundsVariable"/>.
+    /// A reference to a Bounds value, either a fixed value or <see cref="ScriptableBounds"/>.
     /// </summary>
     [System.Serializable]
-    public class BoundsReference : ValueReference<Bounds, BoundsVariable>
+    public class BoundsReference : ValueReference<Bounds, ScriptableBounds>
     {
         /// <summary>
-        /// Creates a new Bounds reference.
+        /// Creates a new reference to a Bounds with a fixed value.
         /// </summary>
-        public BoundsReference() {}
-
-        /// <summary>
-        /// Creates a new Bounds reference with the fixed value.
-        /// </summary>
-        /// <param name="value">The fixed value to set.</param>
+        /// <param name="value">The fixed value to use.</param>
         public BoundsReference(Bounds value) : base(value) {}
 
         /// <summary>
-        /// Creates a new Bounds reference to the variable value.
+        /// Creates a new reference to the Bounds stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public BoundsReference(BoundsVariable variable) : base(variable) {}
+        /// <param name="value">The ScriptableObject that stores the value.</param>
+        public BoundsReference(ScriptableBounds value) : base(value) {}
 
         /// <summary>
         /// Implicitly converts the reference to a Bounds.

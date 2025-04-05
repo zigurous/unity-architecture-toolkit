@@ -3,27 +3,22 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a Vector3 value, either a fixed value or <see cref="Vector3Variable"/>.
+    /// A reference to a Vector3 value, either a fixed value or <see cref="ScriptableVector3"/>.
     /// </summary>
     [System.Serializable]
-    public class Vector3Reference : ValueReference<Vector3, Vector3Variable>
+    public class Vector3Reference : ValueReference<Vector3, ScriptableVector3>
     {
         /// <summary>
-        /// Creates a new Vector3 reference.
+        /// Creates a new reference to a Vector3 with a fixed value.
         /// </summary>
-        public Vector3Reference() {}
-
-        /// <summary>
-        /// Creates a new Vector3 reference with the fixed value.
-        /// </summary>
-        /// <param name="value">The fixed value to set.</param>
+        /// <param name="value">The fixed value to use.</param>
         public Vector3Reference(Vector3 value) : base(value) {}
 
         /// <summary>
-        /// Creates a new Vector3 reference to the variable value.
+        /// Creates a new reference to the Vector3 stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public Vector3Reference(Vector3Variable variable) : base(variable) {}
+        /// <param name="value">The ScriptableObject that stores the value.</param>
+        public Vector3Reference(ScriptableVector3 value) : base(value) {}
 
         /// <summary>
         /// Implicitly converts the reference to a Vector3.

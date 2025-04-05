@@ -1,27 +1,22 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a uint value, either a fixed value or <see cref="UIntVariable"/>.
+    /// A reference to a uint value, either a fixed value or <see cref="ScriptableUInt"/>.
     /// </summary>
     [System.Serializable]
-    public class UIntReference : ValueReference<uint, UIntVariable>
+    public class UIntReference : ValueReference<uint, ScriptableUInt>
     {
         /// <summary>
-        /// Creates a new uint reference.
+        /// Creates a new reference to a uint with a fixed value.
         /// </summary>
-        public UIntReference() {}
-
-        /// <summary>
-        /// Creates a new uint reference with the fixed value.
-        /// </summary>
-        /// <param name="value">The fixed value to set.</param>
+        /// <param name="value">The fixed value to use.</param>
         public UIntReference(uint value) : base(value) {}
 
         /// <summary>
-        /// Creates a new uint reference to the variable value.
+        /// Creates a new reference to the uint stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public UIntReference(UIntVariable variable) : base(variable) {}
+        /// <param name="value">The ScriptableObject that stores the value.</param>
+        public UIntReference(ScriptableUInt value) : base(value) {}
 
         /// <summary>
         /// Implicitly converts the reference to a uint.

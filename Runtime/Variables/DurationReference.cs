@@ -1,27 +1,22 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a duration, either a fixed value or <see cref="DurationVariable"/>.
+    /// A reference to a duration value, either a fixed value or <see cref="ScriptableDuration"/>.
     /// </summary>
     [System.Serializable]
-    public class DurationReference : ValueReference<float, DurationVariable>
+    public class DurationReference : ValueReference<float, ScriptableDuration>
     {
         /// <summary>
-        /// Creates a new duration reference.
+        /// Creates a new reference with a fixed duration.
         /// </summary>
-        public DurationReference() {}
-
-        /// <summary>
-        /// Creates a new duration reference with a fixed duration.
-        /// </summary>
-        /// <param name="duration">The fixed duration to set.</param>
+        /// <param name="duration">The fixed duration to use.</param>
         public DurationReference(float duration) : base(duration) {}
 
         /// <summary>
-        /// Creates a new duration reference to the variable value.
+        /// Creates a new reference to the duration stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public DurationReference(DurationVariable variable) : base(variable) {}
+        /// <param name="duration">The ScriptableObject that stores the duration.</param>
+        public DurationReference(ScriptableDuration duration) : base(duration) {}
 
         /// <summary>
         /// Implicitly converts the reference to a duration.

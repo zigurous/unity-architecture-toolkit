@@ -3,27 +3,22 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a Quaternion value, either a fixed value or <see cref="QuaternionVariable"/>.
+    /// A reference to a Quaternion value, either a fixed value or <see cref="ScriptableQuaternion"/>.
     /// </summary>
     [System.Serializable]
-    public class QuaternionReference : ValueReference<Quaternion, QuaternionVariable>
+    public class QuaternionReference : ValueReference<Quaternion, ScriptableQuaternion>
     {
         /// <summary>
-        /// Creates a new Quaternion reference.
+        /// Creates a new reference to a Quaternion with a fixed value.
         /// </summary>
-        public QuaternionReference() {}
-
-        /// <summary>
-        /// Creates a new Quaternion reference with the fixed value.
-        /// </summary>
-        /// <param name="value">The fixed value to set.</param>
+        /// <param name="value">The fixed value to use.</param>
         public QuaternionReference(Quaternion value) : base(value) {}
 
         /// <summary>
-        /// Creates a new Quaternion reference to the variable value.
+        /// Creates a new reference to the Quaternion stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public QuaternionReference(QuaternionVariable variable) : base(variable) {}
+        /// <param name="value">The ScriptableObject that stores the value.</param>
+        public QuaternionReference(ScriptableQuaternion value) : base(value) {}
 
         /// <summary>
         /// Implicitly converts the reference to a Quaternion.

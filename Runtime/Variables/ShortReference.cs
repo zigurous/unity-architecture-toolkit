@@ -1,27 +1,22 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a short value, either a fixed value or <see cref="ShortVariable"/>.
+    /// A reference to a short value, either a fixed value or <see cref="ScriptableShort"/>.
     /// </summary>
     [System.Serializable]
-    public class ShortReference : ValueReference<short, ShortVariable>
+    public class ShortReference : ValueReference<short, ScriptableShort>
     {
         /// <summary>
-        /// Creates a new short reference.
+        /// Creates a new reference to a short with a fixed value.
         /// </summary>
-        public ShortReference() {}
-
-        /// <summary>
-        /// Creates a new short reference with the fixed value.
-        /// </summary>
-        /// <param name="value">The fixed value to set.</param>
+        /// <param name="value">The fixed value to use.</param>
         public ShortReference(short value) : base(value) {}
 
         /// <summary>
-        /// Creates a new short reference to the variable value.
+        /// Creates a new reference to the short stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public ShortReference(ShortVariable variable) : base(variable) {}
+        /// <param name="value">The ScriptableObject that stores the value.</param>
+        public ShortReference(ScriptableShort value) : base(value) {}
 
         /// <summary>
         /// Implicitly converts the reference to a short.

@@ -1,27 +1,22 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a float value, either a fixed value or <see cref="FloatVariable"/>.
+    /// A reference to a float value, either a fixed value or <see cref="ScriptableFloat"/>.
     /// </summary>
     [System.Serializable]
-    public class FloatReference : ValueReference<float, FloatVariable>
+    public class FloatReference : ValueReference<float, ScriptableFloat>
     {
         /// <summary>
-        /// Creates a new float reference.
+        /// Creates a new reference to a float with a fixed value.
         /// </summary>
-        public FloatReference() {}
-
-        /// <summary>
-        /// Creates a new float reference with the fixed value.
-        /// </summary>
-        /// <param name="value">The fixed value to set.</param>
+        /// <param name="value">The fixed value to use.</param>
         public FloatReference(float value) : base(value) {}
 
         /// <summary>
-        /// Creates a new float reference to the variable value.
+        /// Creates a new reference to the float stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public FloatReference(FloatVariable variable) : base(variable) {}
+        /// <param name="value">The ScriptableObject that stores the value.</param>
+        public FloatReference(ScriptableFloat value) : base(value) {}
 
         /// <summary>
         /// Implicitly converts the reference to a float.

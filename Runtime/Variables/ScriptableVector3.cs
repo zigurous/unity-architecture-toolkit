@@ -3,14 +3,14 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A Vector3 variable saved as a ScriptableObject.
+    /// A Vector3 value stored as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Vector3", order = 15)]
-    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/Vector3Variable")]
-    public class Vector3Variable : ScriptableVariable<Vector3>
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/ScriptableVector3")]
+    public class ScriptableVector3 : ScriptableValue<Vector3>
     {
         [SerializeField]
-        [Tooltip("The value of the variable.")]
+        [Delayed]
         private Vector3 m_Value;
 
         /// <inheritdoc/>

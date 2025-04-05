@@ -3,14 +3,14 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A short variable saved as a ScriptableObject.
+    /// A short value stored as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Short", order = 10)]
-    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/ShortVariable")]
-    public class ShortVariable : ScriptableVariable<short>
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/ScriptableShort")]
+    public class ScriptableShort : ScriptableValue<short>
     {
         [SerializeField]
-        [Tooltip("The value of the variable.")]
+        [Delayed]
         private short m_Value;
 
         /// <inheritdoc/>

@@ -3,14 +3,14 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A double variable saved as a ScriptableObject.
+    /// A double value stored as a ScriptableObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Zigurous/Variables/Double", order = 2)]
-    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/DoubleVariable")]
-    public class DoubleVariable : ScriptableVariable<double>
+    [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/ScriptableDouble")]
+    public class ScriptableDouble : ScriptableValue<double>
     {
         [SerializeField]
-        [Tooltip("The value of the variable.")]
+        [Delayed]
         private double m_Value;
 
         /// <inheritdoc/>

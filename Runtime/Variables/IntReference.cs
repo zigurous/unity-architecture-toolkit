@@ -1,27 +1,22 @@
 ﻿namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to an int value, either a fixed value or <see cref="IntVariable"/>.
+    /// A reference to an int value, either a fixed value or <see cref="ScriptableInt"/>.
     /// </summary>
     [System.Serializable]
-    public class IntReference : ValueReference<int, IntVariable>
+    public class IntReference : ValueReference<int, ScriptableInt>
     {
         /// <summary>
-        /// Creates a new int reference.
+        /// Creates a new reference to an int with a fixed value.
         /// </summary>
-        public IntReference() {}
-
-        /// <summary>
-        /// Creates a new int reference with the fixed value.
-        /// </summary>
-        /// <param name="value">The fixed value to set.</param>
+        /// <param name="value">The fixed value to use.</param>
         public IntReference(int value) : base(value) {}
 
         /// <summary>
-        /// Creates a new int reference to the variable value.
+        /// Creates a new reference to the int stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public IntReference(IntVariable variable) : base(variable) {}
+        /// <param name="value">The ScriptableObject that stores the value.</param>
+        public IntReference(ScriptableInt value) : base(value) {}
 
         /// <summary>
         /// Implicitly converts the reference to an int.

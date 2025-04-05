@@ -3,27 +3,22 @@
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a Vector2 value, either a fixed value or <see cref="Vector2Variable"/>.
+    /// A reference to a Vector2 value, either a fixed value or <see cref="ScriptableVector2"/>.
     /// </summary>
     [System.Serializable]
-    public class Vector2Reference : ValueReference<Vector2, Vector2Variable>
+    public class Vector2Reference : ValueReference<Vector2, ScriptableVector2>
     {
         /// <summary>
-        /// Creates a new Vector2 reference.
+        /// Creates a new reference to a Vector2 with a fixed value.
         /// </summary>
-        public Vector2Reference() {}
-
-        /// <summary>
-        /// Creates a new Vector2 reference with the fixed value.
-        /// </summary>
-        /// <param name="value">The fixed value to set.</param>
+        /// <param name="value">The fixed value to use.</param>
         public Vector2Reference(Vector2 value) : base(value) {}
 
         /// <summary>
-        /// Creates a new Vector2 reference to the variable value.
+        /// Creates a new reference to the Vector2 stored in a ScriptableObject.
         /// </summary>
-        /// <param name="variable">The variable to reference.</param>
-        public Vector2Reference(Vector2Variable variable) : base(variable) {}
+        /// <param name="value">The ScriptableObject that stores the value.</param>
+        public Vector2Reference(ScriptableVector2 value) : base(value) {}
 
         /// <summary>
         /// Implicitly converts the reference to a Vector2.
