@@ -50,12 +50,19 @@ namespace Zigurous.Architecture
 
         private void Update()
         {
-            if (deltaTime >= tickRate)
-            {
-                ticks++;
-                tick?.Invoke();
-                timeOfLastTick = Time.time;
+            if (deltaTime >= tickRate) {
+                Tick();
             }
+        }
+
+        /// <summary>
+        /// Invokes a tick manually.
+        /// </summary>
+        public void Tick()
+        {
+            ticks++;
+            tick?.Invoke();
+            timeOfLastTick = Time.time;
         }
 
         /// <summary>
