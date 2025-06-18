@@ -8,7 +8,7 @@ namespace Zigurous.Architecture
     public class WaitForGameTick : CustomYieldInstruction
     {
         /// <inheritdoc/>
-        public override bool keepWaiting => tickSystem.currentTick - startTick <= 0;
+        public override bool keepWaiting => tickSystem.count - startTick <= 0;
 
         private TickSystem tickSystem;
         private int startTick;
@@ -16,13 +16,13 @@ namespace Zigurous.Architecture
         public WaitForGameTick(TickSystem tickSystem)
         {
             this.tickSystem = tickSystem;
-            startTick = tickSystem.currentTick;
+            startTick = tickSystem.count;
         }
 
         /// <inheritdoc/>
         public override void Reset()
         {
-            startTick = tickSystem.currentTick;
+            startTick = tickSystem.count;
         }
 
         ~WaitForGameTick()

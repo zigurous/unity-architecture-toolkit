@@ -29,9 +29,9 @@ namespace Zigurous.Architecture
         private int ticks;
 
         /// <summary>
-        /// The current tick number.
+        /// The current tick count.
         /// </summary>
-        public int currentTick => ticks;
+        public int count => ticks;
 
         /// <summary>
         /// The amount of seconds since the last tick.
@@ -113,9 +113,9 @@ namespace Zigurous.Architecture
         /// <returns>The current enumerator.</returns>
         public IEnumerator WaitForGameTick()
         {
-            int startTick = currentTick;
+            int startTick = count;
 
-            while (currentTick - startTick <= 0) {
+            while (count - startTick <= 0) {
                 yield return null;
             }
         }
