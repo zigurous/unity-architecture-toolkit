@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// Caches yield statements to minimize garbage collection.
+    /// Caches yield statements to minimize GC allocations.
     /// </summary>
     public static class YieldCache
     {
