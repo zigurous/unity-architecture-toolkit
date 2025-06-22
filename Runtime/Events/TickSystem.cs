@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Zigurous.Architecture
@@ -41,7 +42,9 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The event invoked at the tick rate.
         /// </summary>
-        public event System.Action tick;
+        public event System.Action<int> tick;
+
+        private List<TickDelayedAction> delayedActions;
 
         private void OnEnable()
         {
@@ -61,7 +64,20 @@ namespace Zigurous.Architecture
         public void Tick()
         {
             ticks++;
-            tick?.Invoke();
+            tick?.Invoke(ticks);
+
+            if (delayedActions != null)
+            {
+                for (int i = delayedActions.Count - 1; i >= 0; i--)
+                {
+                    if (ticks >= delayedActions[i].invokeTick)
+                    {
+                        delayedActions[i].action.Invoke();
+                        delayedActions.RemoveAt(i);
+                    }
+                }
+            }
+
             timeOfLastTick = Time.time;
         }
 
@@ -78,19 +94,13 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="ticks">The amount of game ticks to wait.</param>
         /// <param name="onComplete">The action to invoke after the delay.</param>
-        /// <returns>The coroutine for the delayed action.</returns>
-        public Coroutine DelayAction(int ticks, System.Action onComplete)
+        public void DelayAction(int ticks, System.Action onComplete)
         {
-            return StartCoroutine(Delay(ticks, onComplete));
-        }
-
-        private IEnumerator Delay(int ticks, System.Action onComplete)
-        {
-            if (ticks > 0) {
-                yield return WaitForGameTicks(ticks);
-            }
-
-            onComplete.Invoke();
+            delayedActions ??= new List<TickDelayedAction>();
+            delayedActions.Add(new TickDelayedAction() {
+                action = onComplete,
+                invokeTick = count + ticks,
+            });
         }
 
         /// <summary>
