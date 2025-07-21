@@ -82,11 +82,13 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
-        /// Resets the tick count to zero.
+        /// Resets the tick count to zero and clears any delayed actions.
         /// </summary>
-        public void ResetCount()
+        public void Reset()
         {
             ticks = 0;
+            delayedActions?.Clear();
+            StopAllCoroutines();
         }
 
         /// <summary>
