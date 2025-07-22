@@ -109,27 +109,33 @@ namespace Zigurous.Architecture
         /// An enumerator to yield for the specified amount of game ticks.
         /// </summary>
         /// <param name="ticks">The amount of game ticks to yield.</param>
+        /// <param name="onComplete">An optional action to invoke after the delay.</param>
         /// <returns>The current enumerator.</returns>
-        public IEnumerator WaitForGameTicks(int ticks)
+        public IEnumerator WaitForGameTicks(int ticks, System.Action onComplete = null)
         {
             while (ticks > 0)
             {
                 yield return WaitForGameTick();
                 ticks--;
             }
+
+            onComplete?.Invoke();
         }
 
         /// <summary>
         /// An enumerator to yield for a single game tick.
         /// </summary>
+        /// <param name="onComplete">An optional action to invoke after the delay.</param>
         /// <returns>The current enumerator.</returns>
-        public IEnumerator WaitForGameTick()
+        public IEnumerator WaitForGameTick(System.Action onComplete = null)
         {
             int startTick = count;
 
             while (count - startTick <= 0) {
                 yield return null;
             }
+
+            onComplete?.Invoke();
         }
 
     }
