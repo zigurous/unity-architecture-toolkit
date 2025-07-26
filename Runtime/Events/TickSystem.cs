@@ -12,6 +12,13 @@ namespace Zigurous.Architecture
     public class TickSystem : MonoBehaviour
     {
         /// <summary>
+        /// The default global tick system. This can be assigned manually to
+        /// have a static reference to the tick system without needing to find
+        /// the reference in the scene.
+        /// </summary>
+        public static TickSystem Default { get; set; }
+
+        /// <summary>
         /// The default rate in seconds at which the tick system updates.
         /// </summary>
         public static readonly float DefaultTickRate = 0.6f; // seconds
@@ -45,6 +52,13 @@ namespace Zigurous.Architecture
         public event System.Action<int> tick;
 
         private List<TickDelayedAction> delayedActions;
+
+        private void OnDestroy()
+        {
+            if (Default == this) {
+                Default = null;
+            }
+        }
 
         private void OnEnable()
         {
