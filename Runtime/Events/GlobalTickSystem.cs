@@ -64,6 +64,13 @@ namespace Zigurous.Architecture
             }
         }
 
+        private void OnDestroy()
+        {
+            if (instance == this) {
+                instance = null;
+            }
+        }
+
         private void OnApplicationQuit()
         {
             isUnloading = true;
