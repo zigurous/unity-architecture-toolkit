@@ -77,7 +77,7 @@ namespace Zigurous.Architecture.Editor
 
                 case SerializedPropertyType.Enum:
                     if (attribute.enumFlags) {
-                        return (property.intValue & attribute.enumValue) == attribute.enumValue;
+                        return (property.intValue & attribute.enumValue) != 0;
                     } else {
                         return property.enumValueIndex == attribute.enumValue;
                     }
