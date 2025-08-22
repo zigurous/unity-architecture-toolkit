@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Zigurous.Architecture
@@ -51,13 +50,29 @@ namespace Zigurous.Architecture
         /// </summary>
         public event System.Action<int> tick;
 
-        private List<TickDelayedAction> delayedActions;
+        private DelayedTickActionQueue m_ActionQueue;
+
+        /// <summary>
+        /// Allows for actions to be queued and invoked on later ticks.
+        /// These actions are processed after the main tick event.
+        /// </summary>
+        public DelayedTickActionQueue actionQueue
+        {
+            get
+            {
+                m_ActionQueue ??= new DelayedTickActionQueue();
+                return m_ActionQueue;
+            }
+        }
 
         private void OnDestroy()
         {
             if (Default == this) {
                 Default = null;
             }
+
+            tick = null;
+            m_ActionQueue?.Clear();
         }
 
         private void OnEnable()
@@ -79,19 +94,7 @@ namespace Zigurous.Architecture
         {
             ticks++;
             tick?.Invoke(ticks);
-
-            if (delayedActions != null)
-            {
-                for (int i = delayedActions.Count - 1; i >= 0; i--)
-                {
-                    if (ticks >= delayedActions[i].invokeTick)
-                    {
-                        delayedActions[i].action.Invoke();
-                        delayedActions.RemoveAt(i);
-                    }
-                }
-            }
-
+            m_ActionQueue?.Tick(ticks);
             timeOfLastTick = Time.time;
         }
 
@@ -101,22 +104,18 @@ namespace Zigurous.Architecture
         public void ResetTimer()
         {
             ticks = 0;
-            delayedActions?.Clear();
+            m_ActionQueue?.Clear();
             StopAllCoroutines();
         }
 
         /// <summary>
         /// Delays an action for a specified amount of game ticks.
         /// </summary>
+        /// <param name="action">The action to invoke after the specified amount of game ticks.</param>
         /// <param name="ticks">The amount of game ticks to wait.</param>
-        /// <param name="onComplete">The action to invoke after the delay.</param>
-        public void DelayAction(int ticks, System.Action onComplete)
+        public void DelayAction(System.Action action, int ticks)
         {
-            delayedActions ??= new List<TickDelayedAction>();
-            delayedActions.Add(new TickDelayedAction() {
-                action = onComplete,
-                invokeTick = count + ticks,
-            });
+            actionQueue.Enqueue(action, count + ticks);
         }
 
         /// <summary>
