@@ -159,6 +159,21 @@ namespace Zigurous.Architecture
             onComplete?.Invoke();
         }
 
+        /// <summary>
+        /// An enumerator to yield until an exact game tick.
+        /// </summary>
+        /// <param name="tick">The exact game tick to wait until.</param>
+        /// <param name="onComplete">An optional action to invoke after the delay.</param>
+        /// <returns>The current enumerator.</returns>
+        public IEnumerator WaitUntilExactGameTick(int tick, System.Action onComplete = null)
+        {
+            while (count < tick) {
+                yield return null;
+            }
+
+            onComplete?.Invoke();
+        }
+
     }
 
 }
