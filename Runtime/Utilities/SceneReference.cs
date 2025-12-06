@@ -5,7 +5,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// A reference to a scene by name and/or build index.
     /// </summary>
-    [CreateAssetMenu(menuName = "Zigurous/Scene Reference")]
+    [CreateAssetMenu(menuName = "Zigurous/Utils/Scene Reference")]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/SceneReference")]
     public class SceneReference : ScriptableObject
     {
