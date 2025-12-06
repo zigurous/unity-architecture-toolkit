@@ -86,6 +86,21 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
+        /// Gets the specified component from the game object or any parent of
+        /// the game object, if it exists.
+        /// </summary>
+        /// <typeparam name="T">The type of component to get.</typeparam>
+        /// <param name="gameObject">The game object to get the component from.</param>
+        /// <param name="component">The retrieved component.</param>
+        /// <returns>True if the component exists, false otherwise.</returns>
+        public static bool TryGetComponentInParent<T>(this GameObject gameObject, out T component)
+            where T : Component
+        {
+            component = gameObject.GetComponentInParent<T>();
+            return component != null;
+        }
+
+        /// <summary>
         /// Checks if the game object has a component of the specified type.
         /// </summary>
         /// <typeparam name="T">The type of component to check for.</typeparam>
