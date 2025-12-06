@@ -59,7 +59,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Updates the target object.
         /// </summary>
-        /// <param name="deltaTime">The interval in seconds of in-game time at which physics and other fixed frame rate updates are performed.</param>
+        /// <param name="deltaTime">The amount of seconds elapsed since the last fixed update.</param>
         void FixedUpdate(float deltaTime);
     }
 

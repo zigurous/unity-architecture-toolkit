@@ -78,7 +78,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Updates the target object.
         /// </summary>
-        /// <param name="deltaTime">The interval in seconds from the last frame to the current one.</param>
+        /// <param name="deltaTime">The amount of seconds elapsed since the last update.</param>
         void Update(float deltaTime);
     }
 

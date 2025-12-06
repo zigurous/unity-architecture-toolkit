@@ -10,7 +10,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// A function delegate to execute an update action.
         /// </summary>
-        /// <param name="deltaTime">The time since the last frame.</param>
+        /// <param name="deltaTime">The amount of seconds elapsed since the last update.</param>
         public delegate void UpdateAction(float deltaTime);
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Executes the update action.
         /// </summary>
-        /// <param name="deltaTime">The time since the last frame.</param>
+        /// <param name="deltaTime">The amount of seconds elapsed since the last update.</param>
         public void Execute(float deltaTime)
         {
             update?.Invoke(deltaTime);

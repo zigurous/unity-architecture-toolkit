@@ -36,7 +36,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Handles behavior updates.
         /// </summary>
-        /// <param name="deltaTime">The time since the last frame.</param>
+        /// <param name="deltaTime">The amount of seconds elapsed since the last update.</param>
         protected abstract void OnUpdate(float deltaTime);
 
         /// <summary>
