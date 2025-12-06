@@ -55,17 +55,10 @@ namespace Zigurous.Architecture.Editor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            SerializedProperty useScriptableValue = property.FindPropertyRelative("useScriptableValue");
-
-            if (useScriptableValue.boolValue)
-            {
-                SerializedProperty scriptableValue = property.FindPropertyRelative("scriptableValue");
-                return EditorGUI.GetPropertyHeight(scriptableValue, true);
-            }
-            else
-            {
-                SerializedProperty fixedValue = property.FindPropertyRelative("fixedValue");
-                return EditorGUI.GetPropertyHeight(fixedValue, true);
+            if (property.FindPropertyRelative("useScriptableValue").boolValue) {
+                return EditorGUI.GetPropertyHeight(property.FindPropertyRelative("scriptableValue"), true);
+            } else {
+                return EditorGUI.GetPropertyHeight(property.FindPropertyRelative("fixedValue"), true);
             }
         }
 
