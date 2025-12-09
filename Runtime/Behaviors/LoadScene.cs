@@ -6,7 +6,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// Loads a scene using a specified set of options.
     /// </summary>
-    [AddComponentMenu("Zigurous/Utility/Load Scene")]
+    [AddComponentMenu("Zigurous/Utils/Load Scene")]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/LoadScene")]
     public sealed class LoadScene : MonoBehaviour
     {

@@ -5,7 +5,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// Sets the lock state of the cursor when the behavior is enabled and disabled.
     /// </summary>
-    [AddComponentMenu("Zigurous/Utility/Cursor Lock State")]
+    [AddComponentMenu("Zigurous/Utils/Cursor Lock State")]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/CursorLockState")]
     public sealed class CursorLockState : MonoBehaviour
     {

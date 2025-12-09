@@ -5,7 +5,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// Sets the target frame rate of the application.
     /// </summary>
-    [AddComponentMenu("Zigurous/Utility/Target Frame Rate")]
+    [AddComponentMenu("Zigurous/Utils/Target Frame Rate")]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/TargetFrameRate")]
     public sealed class TargetFrameRate : MonoBehaviour
     {
