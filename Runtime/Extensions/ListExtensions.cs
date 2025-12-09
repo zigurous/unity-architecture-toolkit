@@ -37,11 +37,10 @@ namespace Zigurous.Architecture
         /// <returns>A new list containing the items of both lists.</returns>
         public static List<T> CombinedWith<T>(this List<T> list, List<T> other)
         {
-            List<T> combinedList = new List<T>(list);
+            List<T> combinedList = new(list);
             combinedList.AddRange(other);
             return combinedList;
         }
-
 
         /// <summary>
         /// Checks if the list contains an item that satisfies a predicate.
@@ -79,6 +78,20 @@ namespace Zigurous.Architecture
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Destroys all Unity objects from the list and clears it.
+        /// </summary>
+        /// <typeparam name="T">The type of the list.</typeparam>
+        /// <param name="list">The list containing all of the objects to destroy.</param>
+        public static void DestroyObjects<T>(this List<T> list) where T : UnityEngine.Object
+        {
+            foreach (T obj in list) {
+                UnityEngine.Object.Destroy(obj);
+            }
+
+            list.Clear();
         }
 
         /// <summary>
@@ -427,6 +440,37 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
+        /// Removes null items from the list.
+        /// </summary>
+        /// <typeparam name="T">The type of the list.</typeparam>
+        /// <param name="list">The list to remove from.</param>
+        public static void RemoveNull<T>(this List<T> list) where T : class
+        {
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                if (list[i] == null) {
+                    list.RemoveAt(i);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Removes items from the list with a default value.
+        /// </summary>
+        /// <typeparam name="T">The type of the list.</typeparam>
+        /// <param name="list">The list to remove from.</param>
+        /// <param name="defaultValue">The default value.</param>
+        public static void RemoveDefault<T>(this List<T> list, T defaultValue = default) where T : class
+        {
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                if (list[i] == defaultValue) {
+                    list.RemoveAt(i);
+                }
+            }
+        }
+
+        /// <summary>
         /// Reverses the order of the items in the list.
         /// </summary>
         /// <typeparam name="T">The type of the list.</typeparam>
@@ -480,6 +524,28 @@ namespace Zigurous.Architecture
                 list[n] = list[k];
                 list[k] = temp;
             }
+        }
+
+        /// <summary>
+        /// Swaps the position of two items in a list.
+        /// </summary>
+        /// <typeparam name="T">The type of the list.</typeparam>
+        /// <param name="list">The list containing the items to swap.</param>
+        /// <param name="indexA">The index of the first item to swap.</param>
+        /// <param name="indexB">The index of the second item to swap.</param>
+        public static void Swap<T>(this List<T> list, int indexA, int indexB)
+        {
+            if (list == null) {
+                throw new ArgumentNullException(nameof(list));
+            }
+
+            if (list.Count < 2) {
+                throw new ArgumentException("The list must contain at least 2 items to swap positions.");
+            }
+
+            T temp = list[indexA];
+            list[indexA] = list[indexB];
+            list[indexB] = temp;
         }
 
         /// <summary>
