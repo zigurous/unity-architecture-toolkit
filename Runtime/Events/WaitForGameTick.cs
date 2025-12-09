@@ -13,6 +13,12 @@ namespace Zigurous.Architecture
         private TickSystem tickSystem;
         private int startTick;
 
+        private WaitForGameTick() {}
+
+        /// <summary>
+        /// Creates a new yield instruction to wait for the next game tick.
+        /// </summary>
+        /// <param name="tickSystem">The system handling game ticks to wait on.</param>
         public WaitForGameTick(TickSystem tickSystem)
         {
             this.tickSystem = tickSystem;
