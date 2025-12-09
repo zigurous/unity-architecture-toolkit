@@ -1,0 +1,147 @@
+﻿using UnityEngine;
+
+namespace Zigurous.Architecture
+{
+    /// <summary>
+    /// Additional debug functions for drawing shapes.
+    /// </summary>
+    public static class Draw
+    {
+        /// <summary>
+        /// The data representation of a 3D box.
+        /// </summary>
+        private struct Box3D
+        {
+            public Vector3 origin { get; private set; }
+
+            public Vector3 localFrontTopLeft { get; private set; }
+            public Vector3 localFrontTopRight { get; private set; }
+            public Vector3 localFrontBottomLeft { get; private set; }
+            public Vector3 localFrontBottomRight { get; private set; }
+
+            public readonly Vector3 localBackTopLeft => -localFrontBottomRight;
+            public readonly Vector3 localBackTopRight => -localFrontBottomLeft;
+            public readonly Vector3 localBackBottomLeft => -localFrontTopRight;
+            public readonly Vector3 localBackBottomRight => -localFrontTopLeft;
+
+            public readonly Vector3 frontTopLeft => localFrontTopLeft + origin;
+            public readonly Vector3 frontTopRight => localFrontTopRight + origin;
+            public readonly Vector3 frontBottomLeft => localFrontBottomLeft + origin;
+            public readonly Vector3 frontBottomRight => localFrontBottomRight + origin;
+
+            public readonly Vector3 backTopLeft => localBackTopLeft + origin;
+            public readonly Vector3 backTopRight => localBackTopRight + origin;
+            public readonly Vector3 backBottomLeft => localBackBottomLeft + origin;
+            public readonly Vector3 backBottomRight => localBackBottomRight + origin;
+
+            /// <summary>
+            /// Creates a new box with a specified origin and size.
+            /// </summary>
+            /// <param name="origin">The origin of the box.</param>
+            /// <param name="halfExtents">Half the size of the box in each dimension.</param>
+            public Box3D(Vector3 origin, Vector3 halfExtents)
+            {
+                this.origin = origin;
+                this.localFrontTopLeft = new Vector3(-halfExtents.x, halfExtents.y, -halfExtents.z);
+                this.localFrontTopRight = new Vector3(halfExtents.x, halfExtents.y, -halfExtents.z);
+                this.localFrontBottomLeft = new Vector3(-halfExtents.x, -halfExtents.y, -halfExtents.z);
+                this.localFrontBottomRight = new Vector3(halfExtents.x, -halfExtents.y, -halfExtents.z);
+            }
+
+            /// <summary>
+            /// Creates a new box with a specified origin, size, and rotation.
+            /// </summary>
+            /// <param name="origin">The origin of the box.</param>
+            /// <param name="halfExtents">Half the size of the box in each dimension.</param>
+            /// <param name="orientation">The orientation of the box.</param>
+            public Box3D(Vector3 origin, Vector3 halfExtents, Quaternion orientation)
+                : this(origin, halfExtents)
+            {
+                Rotate(orientation);
+            }
+
+            /// <summary>
+            /// Rotates the box to the specified orientation.
+            /// </summary>
+            /// <param name="orientation">The orientation to rotate the box to.</param>
+            public void Rotate(Quaternion orientation)
+            {
+                localFrontTopLeft = RotatePointAroundPivot(localFrontTopLeft, Vector3.zero, orientation);
+                localFrontTopRight = RotatePointAroundPivot(localFrontTopRight, Vector3.zero, orientation);
+                localFrontBottomLeft = RotatePointAroundPivot(localFrontBottomLeft, Vector3.zero, orientation);
+                localFrontBottomRight = RotatePointAroundPivot(localFrontBottomRight, Vector3.zero, orientation);
+            }
+
+            /// <summary>
+            /// Rotates a point around a pivot.
+            /// </summary>
+            /// <param name="point">The point to rotate.</param>
+            /// <param name="pivot">The pivot to rotate around.</param>
+            /// <param name="orientation">The orientation to rotate the point to.</param>
+            /// <returns>The rotated point.</returns>
+            private readonly Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Quaternion orientation)
+            {
+                Vector3 direction = point - pivot;
+                return pivot + orientation * direction;
+            }
+
+            /// <summary>
+            /// Draws the box with a given color.
+            /// </summary>
+            /// <param name="color">The color to draw the box with.</param>
+            public readonly void Draw(Color color)
+            {
+                #if UNITY_EDITOR || DEVELOPMENT_BUILD
+                Debug.DrawLine(frontTopLeft, frontTopRight, color);
+                Debug.DrawLine(frontTopRight, frontBottomRight, color);
+                Debug.DrawLine(frontBottomRight, frontBottomLeft, color);
+                Debug.DrawLine(frontBottomLeft, frontTopLeft, color);
+
+                Debug.DrawLine(backTopLeft, backTopRight, color);
+                Debug.DrawLine(backTopRight, backBottomRight, color);
+                Debug.DrawLine(backBottomRight, backBottomLeft, color);
+                Debug.DrawLine(backBottomLeft, backTopLeft, color);
+
+                Debug.DrawLine(frontTopLeft, backTopLeft, color);
+                Debug.DrawLine(frontTopRight, backTopRight, color);
+                Debug.DrawLine(frontBottomRight, backBottomRight, color);
+                Debug.DrawLine(frontBottomLeft, backBottomLeft, color);
+                #endif
+            }
+
+        }
+
+        /// <summary>
+        /// Draws a wireframe box at a given position, scale, and rotation.
+        /// </summary>
+        /// <param name="position">The position of the box.</param>
+        /// <param name="scale">The scale of the box.</param>
+        /// <param name="rotation">The rotation of the box.</param>
+        /// <param name="color">The color of the box.</param>
+        public static void Box(Vector3 position, Vector3 scale, Quaternion rotation, Color color)
+        {
+            #if UNITY_EDITOR || DEVELOPMENT_BUILD
+            new Box3D(position, scale / 2f, rotation).Draw(color);
+            #endif
+        }
+
+        /// <summary>
+        /// Draws a wireframe box using the same parameters as Physics.BoxCast.
+        /// </summary>
+        /// <param name="center">The center of the box.</param>
+        /// <param name="halfExtents">Half the size of the box in each dimension.</param>
+        /// <param name="direction">The direction in which to cast the box.</param>
+        /// <param name="orientation">The rotation of the box.</param>
+        /// <param name="distance">The length of the cast.</param>
+        /// <param name="color">The color of the box.</param>
+        public static void BoxCast(Vector3 center, Vector3 halfExtents, Vector3 direction, Quaternion orientation, float distance, Color color)
+        {
+            #if UNITY_EDITOR || DEVELOPMENT_BUILD
+            center += direction.normalized * distance;
+            new Box3D(center, halfExtents, orientation).Draw(color);
+            #endif
+        }
+
+    }
+
+}
