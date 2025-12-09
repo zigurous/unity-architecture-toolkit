@@ -60,11 +60,11 @@ namespace Zigurous.Architecture
         /// are strongly recommended to use DestroyChildren instead.
         /// </summary>
         /// <param name="parent">The parent game object to destroy the children of.</param>
-        /// <param name="allowDestroyingAssets">Allows project assets to be destroyed (default=false).</param>
-        public static void DestroyChildrenImmediate(this GameObject parent, bool allowDestroyingAssets = false)
+        /// <param name="destroyAssets">Allows project assets to be destroyed (default=false).</param>
+        public static void DestroyChildrenImmediate(this GameObject parent, bool destroyAssets = false)
         {
             foreach (Transform child in parent.transform) {
-                UnityEngine.Object.DestroyImmediate(child.gameObject, allowDestroyingAssets);
+                UnityEngine.Object.DestroyImmediate(child.gameObject, destroyAssets);
             }
         }
 
@@ -173,6 +173,30 @@ namespace Zigurous.Architecture
         public static bool HasComponentInParent(this GameObject gameObject, Type component)
         {
             return gameObject.GetComponentInParent(component) != null;
+        }
+
+        /// <summary>
+        /// Checks if a game object is a child of the parent object.
+        /// </summary>
+        /// <param name="parent">The parent object to search the hierarchy of.</param>
+        /// <param name="other">The child object to search for.</param>
+        /// <param name="recursive">Checks all children of the children (default=true).</param>
+        /// <returns>True if the other object is a child of the parent object, false otherwise.</param>
+        public static bool HasChild(this GameObject parent, GameObject other, bool recursive = true)
+        {
+            if (parent != null && other != null)
+            {
+                foreach (Transform child in parent.transform)
+                {
+                    if (child.gameObject == other) {
+                        return true;
+                    } else if (recursive && HasChild(child.gameObject, other, true)) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
     }
