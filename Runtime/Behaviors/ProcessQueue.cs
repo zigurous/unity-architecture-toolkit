@@ -41,7 +41,7 @@ namespace Zigurous.Architecture
 
             if (processor != null)
             {
-                if (ProcessQueueHandler.HasInstance) {
+                if (ProcessQueueHandler.IsLoaded) {
                     ProcessQueueHandler.Instance.StopCoroutine(processor);
                 }
 

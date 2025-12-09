@@ -51,7 +51,7 @@ namespace Zigurous.Architecture
         /// available to use.
         /// </summary>
         /// <returns>True if an instance is available, false otherwise.</returns>
-        public static bool HasInstance => instance != null;
+        public static bool IsLoaded => instance != null;
 
         /// <summary>
         /// A Unity lifecycle method called when the behavior is initialized.

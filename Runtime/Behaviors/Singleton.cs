@@ -36,7 +36,7 @@
         /// available to use.
         /// </summary>
         /// <returns>True if an instance is available, false otherwise.</returns>
-        public static bool HasInstance => instance != null;
+        public static bool IsLoaded => instance != null;
     }
 
 }
