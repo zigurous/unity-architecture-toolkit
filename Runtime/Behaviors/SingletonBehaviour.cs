@@ -21,7 +21,7 @@ namespace Zigurous.Architecture
             {
                 lock (threadLock)
                 {
-                    instance = FindObjectOfType<T>();
+                    instance = FindFirstObjectByType<T>();
 
                     if (instance == null && Application.isPlaying && !isUnloading)
                     {
@@ -53,9 +53,6 @@ namespace Zigurous.Architecture
         /// <returns>True if an instance is available, false otherwise.</returns>
         public static bool IsLoaded => instance != null;
 
-        /// <summary>
-        /// A Unity lifecycle method called when the behavior is initialized.
-        /// </summary>
         private void Awake()
         {
             if (instance == null || instance == this)
@@ -69,9 +66,6 @@ namespace Zigurous.Architecture
             }
         }
 
-        /// <summary>
-        /// A Unity lifecycle method called when the behavior is destroyed.
-        /// </summary>
         private void OnDestroy()
         {
             if (instance == this)
@@ -81,9 +75,6 @@ namespace Zigurous.Architecture
             }
         }
 
-        /// <summary>
-        /// A Unity lifecycle method called when the application is exited.
-        /// </summary>
         private void OnApplicationQuit()
         {
             isUnloading = true;

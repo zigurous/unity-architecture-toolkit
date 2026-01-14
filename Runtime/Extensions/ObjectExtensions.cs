@@ -18,7 +18,7 @@ namespace Zigurous.Architecture
         public static T FindNonNullReference<T>(this T obj) where T : Object
         {
             if (obj == null) {
-                obj = Object.FindObjectOfType<T>();
+                obj = Object.FindFirstObjectByType<T>();
             }
 
             return obj;

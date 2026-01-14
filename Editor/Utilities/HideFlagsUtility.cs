@@ -8,9 +8,9 @@ namespace Zigurous.Architecture.Editor
         [MenuItem("Help/Show Hidden Objects")]
         private static void ShowAll()
         {
-            var gameObjects = Object.FindObjectsOfType<GameObject>();
+            GameObject[] objs = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
 
-            foreach (var go in gameObjects)
+            foreach (GameObject go in objs)
             {
                 switch (go.hideFlags)
                 {
