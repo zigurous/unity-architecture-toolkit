@@ -47,6 +47,12 @@ namespace Zigurous.Architecture
         public int enumValue;
 
         /// <summary>
+        /// The enum values to use to determine if the condition is met (only
+        /// applicable if the conditional field is an enum).
+        /// </summary>
+        public int[] enumValues = null;
+
+        /// <summary>
         /// Whether the enum should be treated as a bit field (only applicable
         /// if the conditional field is an enum).
         /// </summary>

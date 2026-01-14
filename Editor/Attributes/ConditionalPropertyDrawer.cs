@@ -43,7 +43,7 @@ namespace Zigurous.Architecture.Editor
 
         private bool GetConditionalAttributeResult(ConditionalAttribute attribute, SerializedProperty property)
         {
-            SerializedProperty updatedProperty = null;
+            SerializedProperty updatedProperty;
 
             if (true /*!property.isArray*/)
             {
@@ -56,9 +56,7 @@ namespace Zigurous.Architecture.Editor
 
             // Fallback to the original implementation (does not work with
             // nested serializedObjects)
-            if (updatedProperty == null) {
-                updatedProperty = property.serializedObject.FindProperty(attribute.conditionalField);
-            }
+            updatedProperty ??= property.serializedObject.FindProperty(attribute.conditionalField);
 
             // Verify the property type is supported
             if (updatedProperty != null) {
@@ -78,6 +76,8 @@ namespace Zigurous.Architecture.Editor
                 case SerializedPropertyType.Enum:
                     if (attribute.enumFlags) {
                         return (property.intValue & attribute.enumValue) != 0;
+                    } else if (attribute.enumValues != null) {
+                        return attribute.enumValues.Contains(property.enumValueIndex);
                     } else {
                         return property.enumValueIndex == attribute.enumValue;
                     }

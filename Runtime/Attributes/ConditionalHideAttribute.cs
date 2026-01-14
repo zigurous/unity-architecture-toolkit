@@ -37,6 +37,20 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
+        /// Hides the field when the conditional field is set to the specified
+        /// enum value (this assumes the conditional field is an enum).
+        /// </summary>
+        /// <param name="conditionalField">The name of the conditional field.</param>
+        /// <param name="enumValues">The enum values to check for.</param>
+        public ConditionalHideAttribute(string conditionalField, int[] enumValues)
+        {
+            this.show = false;
+            this.conditionalField = conditionalField;
+            this.propertyDrawer = PropertyDrawer.Default;
+            this.enumValues = enumValues;
+        }
+
+        /// <summary>
         /// Hides the field when the conditional field is true.
         /// Draws the field as a slider.
         /// </summary>
