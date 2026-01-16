@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// Stores a tuple of 3 booleans.
+    /// A tuple of 3 booleans.
     /// </summary>
     [Serializable]
     public struct Bool3 : IEquatable<Bool3>

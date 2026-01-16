@@ -132,7 +132,7 @@ namespace Zigurous.Architecture
         /// indicates whether this instance precedes, follows, or appears in the
         /// same position in the sort order as the other instance.
         /// </summary>
-        /// <param name="other">The grid size to compare to.</param>
+        /// <param name="other">The other grid size to compare to.</param>
         /// <returns>
         /// Greater than zero if this instance follows the other, less than zero
         /// if this instance precedes the other, and zero if this instance has
