@@ -6,7 +6,7 @@ namespace Zigurous.Architecture
     /// Lazy loads a Unity resource from a given path.
     /// </summary>
     /// <typeparam name="T">The type of object to load.</typeparam>
-    public class LazyResource<T> where T : Object
+    public class LazyLoadResource<T> where T : Object
     {
         /// <summary>
         /// The path to the target resource.
@@ -29,13 +29,13 @@ namespace Zigurous.Architecture
             }
         }
 
-        private LazyResource() {}
+        private LazyLoadResource() {}
 
         /// <summary>
         /// Creates a new lazy resource for the given path.
         /// </summary>
         /// <param name="resourcePath">The path to the target resource.</param>
-        public LazyResource(string resourcePath)
+        public LazyLoadResource(string resourcePath)
         {
             path = resourcePath;
         }
@@ -45,7 +45,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="property">The property containing the resource.</param>
         /// <returns>The resource as its provided type.</returns>
-        public static implicit operator T(LazyResource<T> property) => property.resource;
+        public static implicit operator T(LazyLoadResource<T> property) => property?.resource;
 
     }
 
