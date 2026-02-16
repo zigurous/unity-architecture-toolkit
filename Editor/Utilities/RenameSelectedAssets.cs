@@ -10,7 +10,7 @@ namespace Zigurous.Architecture.Editor
         private string prefix;
         private string suffix;
 
-        [MenuItem("Edit/Rename Selected Assets")]
+        [MenuItem("Tools/Rename Selected Assets")]
         public static void ShowWindow()
         {
             EditorWindow window = GetWindow(typeof(RenameSelectedAssets), false, "Rename Selected Assets");
