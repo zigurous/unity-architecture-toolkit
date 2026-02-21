@@ -48,6 +48,15 @@ namespace Zigurous.Architecture
             return count == other.count;
         }
 
+        /// <summary>
+        /// Converts the tick count to its string equivalent.
+        /// </summary>
+        /// <returns>The tick count as a string.</returns>
+        public override string ToString()
+        {
+            return count.ToString();
+        }
+
         public static implicit operator TickCount(int count) => new(count);
         public static implicit operator int(TickCount t) => t.count;
     }
