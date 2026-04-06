@@ -13,7 +13,7 @@ namespace Zigurous.Architecture
         private static Dictionary<string, Dictionary<float, string>> floatCache;
         private static Dictionary<string, Dictionary<DateTime, string>> dateTimeCache;
 
-        public static string Format(int value, Func<string, string> formatter = null)
+        public static string Format(int value, Func<int, string> formatter = null)
         {
             integerCache ??= new Dictionary<int, string>();
 
@@ -21,10 +21,12 @@ namespace Zigurous.Architecture
                 return cachedString;
             }
 
-            string formattedString = value.ToString();
+            string formattedString;
 
             if (formatter != null) {
-                formattedString = formatter(formattedString);
+                formattedString = formatter(value);
+            } else {
+                formattedString = value.ToString();
             }
 
             integerCache[value] = formattedString;
@@ -32,7 +34,7 @@ namespace Zigurous.Architecture
             return formattedString;
         }
 
-        public static string Format(float value, string format, Func<string, string> formatter = null)
+        public static string Format(float value, string format, Func<float, string> formatter = null)
         {
             floatCache ??= new Dictionary<string, Dictionary<float, string>>();
 
@@ -50,10 +52,12 @@ namespace Zigurous.Architecture
                 return cachedString;
             }
 
-            string formattedString = string.Format(format, value);
+            string formattedString;
 
             if (formatter != null) {
-                formattedString = formatter(formattedString);
+                formattedString = formatter(value);
+            } else {
+                formattedString = string.Format(format, value);
             }
 
             cache[value] = formattedString;
@@ -61,7 +65,7 @@ namespace Zigurous.Architecture
             return formattedString;
         }
 
-        public static string Format(DateTime value, string format, Func<string, string> formatter = null)
+        public static string Format(DateTime value, string format, Func<DateTime, string> formatter = null)
         {
             dateTimeCache ??= new Dictionary<string, Dictionary<DateTime, string>>();
 
@@ -75,10 +79,12 @@ namespace Zigurous.Architecture
                 return cachedString;
             }
 
-            string formattedString = value.ToString(format);
+            string formattedString;
 
             if (formatter != null) {
-                formattedString = formatter(formattedString);
+                formattedString = formatter(value);
+            } else {
+                formattedString = value.ToString(format);
             }
 
             cache[value] = formattedString;
