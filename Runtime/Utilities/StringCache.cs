@@ -7,17 +7,16 @@ namespace Zigurous.Architecture
     /// Caches strings to minimize GC allocations. Useful when repeatably
     /// formatting the same strings.
     /// </summary>
-    public static class StringCache
+    public class StringCache<T>
     {
-        private static Dictionary<int, string> integerCache;
-        private static Dictionary<string, Dictionary<float, string>> floatCache;
-        private static Dictionary<string, Dictionary<DateTime, string>> dateTimeCache;
+        private Dictionary<T, string> cache1;
+        private Dictionary<string, Dictionary<T, string>> cache2;
 
-        public static string Format(int value, Func<int, string> formatter = null)
+        public string Format(T value, Func<T, string> formatter = null)
         {
-            integerCache ??= new Dictionary<int, string>();
+            cache1 ??= new Dictionary<T, string>();
 
-            if (integerCache.TryGetValue(value, out string cachedString)) {
+            if (cache1.TryGetValue(value, out string cachedString)) {
                 return cachedString;
             }
 
@@ -29,24 +28,20 @@ namespace Zigurous.Architecture
                 formattedString = value.ToString();
             }
 
-            integerCache[value] = formattedString;
+            cache1[value] = formattedString;
 
             return formattedString;
         }
 
-        public static string Format(float value, string format, Func<float, string> formatter = null)
+        public string Format(T value, string format, Func<T, string> formatter = null)
         {
-            floatCache ??= new Dictionary<string, Dictionary<float, string>>();
+            cache2 ??= new Dictionary<string, Dictionary<T, string>>();
 
-            if (float.IsNaN(value)) {
-                value = 0f;
+            if (!cache2.ContainsKey(format)) {
+                cache2.Add(format, new Dictionary<T, string>());
             }
 
-            if (!floatCache.ContainsKey(format)) {
-                floatCache.Add(format, new Dictionary<float, string>());
-            }
-
-            Dictionary<float, string> cache = floatCache[format];
+            Dictionary<T, string> cache = cache2[format];
 
             if (cache.TryGetValue(value, out string cachedString)) {
                 return cachedString;
@@ -65,43 +60,16 @@ namespace Zigurous.Architecture
             return formattedString;
         }
 
-        public static string Format(DateTime value, string format, Func<DateTime, string> formatter = null)
+        public void Remove(T value)
         {
-            dateTimeCache ??= new Dictionary<string, Dictionary<DateTime, string>>();
-
-            if (!dateTimeCache.ContainsKey(format)) {
-                dateTimeCache.Add(format, new Dictionary<DateTime, string>());
-            }
-
-            Dictionary<DateTime, string> cache = dateTimeCache[format];
-
-            if (cache.TryGetValue(value, out string cachedString)) {
-                return cachedString;
-            }
-
-            string formattedString;
-
-            if (formatter != null) {
-                formattedString = formatter(value);
-            } else {
-                formattedString = value.ToString(format);
-            }
-
-            cache[value] = formattedString;
-
-            return formattedString;
-        }
-
-        public static void Remove(int value)
-        {
-            if (integerCache != null && integerCache.ContainsKey(value)) {
-                integerCache.Remove(value);
+            if (cache1 != null && cache1.ContainsKey(value)) {
+                cache1.Remove(value);
             }
         }
 
-        public static void Remove(float value, string format)
+        public void Remove(T value, string format)
         {
-            if (floatCache != null && floatCache.TryGetValue(format, out Dictionary<float, string> cache))
+            if (cache2 != null && cache2.TryGetValue(format, out Dictionary<T, string> cache))
             {
                 if (cache.ContainsKey(value)) {
                     cache.Remove(value);
@@ -109,21 +77,10 @@ namespace Zigurous.Architecture
             }
         }
 
-        public static void Remove(DateTime value, string format)
+        public void Clear()
         {
-            if (dateTimeCache != null && dateTimeCache.TryGetValue(format, out Dictionary<DateTime, string> cache))
-            {
-                if (cache.ContainsKey(value)) {
-                    cache.Remove(value);
-                }
-            }
-        }
-
-        public static void Clear()
-        {
-            integerCache?.Clear();
-            floatCache?.Clear();
-            dateTimeCache?.Clear();
+            cache1?.Clear();
+            cache2?.Clear();
         }
 
     }
