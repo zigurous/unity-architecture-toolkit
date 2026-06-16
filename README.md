@@ -2,7 +2,7 @@
 
 [![](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/zigurous/unity-architecture-toolkit) [![](https://img.shields.io/github/package-json/v/zigurous/unity-architecture-toolkit)](https://github.com/zigurous/unity-architecture-toolkit/releases) [![](https://img.shields.io/badge/docs-link-success)](https://docs.zigurous.com/com.zigurous.architecture) [![](https://img.shields.io/github/license/zigurous/unity-architecture-toolkit)](https://github.com/zigurous/unity-architecture-toolkit/blob/main/LICENSE.md)
 
-The **Architecture Toolkit** contains data structures, design patterns, extensions, and utilities to help solve common architectural problems in Unity projects or simply make common programming tasks easier to manage.
+A general-purpose toolkit to solve common architectural problems in Unity projects and simplify various programming tasks.
 
 ## Reference
 

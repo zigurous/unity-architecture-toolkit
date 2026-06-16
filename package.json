@@ -2,7 +2,7 @@
   "name": "com.zigurous.architecture",
   "version": "2.0.0",
   "displayName": "Architecture Toolkit",
-  "description": "The Architecture Toolkit contains data structures, design patterns, extensions, and utilities to help solve common architectural problems in Unity projects or simply make common programming tasks easier to manage.",
+  "description": "A general-purpose toolkit to solve common architectural problems in Unity projects and simplify various programming tasks.",
   "unity": "2022.3",
   "repository": "https://github.com/zigurous/unity-architecture-toolkit",
   "documentationUrl": "https://docs.zigurous.com/com.zigurous.architecture",
