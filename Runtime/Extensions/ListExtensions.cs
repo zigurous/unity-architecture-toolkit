@@ -15,16 +15,34 @@ namespace Zigurous.Architecture
         private static StringBuilder stringBuilder;
 
         /// <summary>
-        /// Adds a specified amount of a given value to the list.
+        /// Adds a specified amount of the provided item to the list.
         /// </summary>
         /// <typeparam name="T">The type of the list.</typeparam>
         /// <param name="list">The list to add to.</param>
-        /// <param name="value">The value to add.</param>
-        /// <param name="amount">The number of times to add the value.</param>
-        public static void Add<T>(this List<T> list, T value, int amount)
+        /// <param name="item">The item to add.</param>
+        /// <param name="amount">The number of times to add the item.</param>
+        public static void Add<T>(this List<T> list, T item, int amount)
         {
             for (int i = 0; i < amount; i++) {
-                list.Add(value);
+                list.Add(item);
+            }
+        }
+
+        /// <summary>
+        /// Adds the provided item to the list only if it is not already
+        /// contained in the list.
+        /// </summary>
+        /// <typeparam name="T">The type of the list.</typeparam>
+        /// <param name="list">The list to add to.</param>
+        /// <param name="item">The unique item to add.</param>
+        /// <returns>True if the item was not already in the list and was added to it, false otherwise.</returns>
+        public static bool AddUnique<T>(this List<T> list, T item)
+        {
+            if (list.Contains(item)) {
+                return false;
+            } else {
+                list.Add(item);
+                return true;
             }
         }
 
