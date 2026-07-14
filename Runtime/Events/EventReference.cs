@@ -4,7 +4,7 @@ using UnityEngine.Events;
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// A reference to a UnityEvent or a GameEvent.
+    /// A reference to a UnityEvent or a ScriptableGameEvent.
     /// </summary>
     [System.Serializable]
     public sealed class EventReference
@@ -25,7 +25,7 @@ namespace Zigurous.Architecture
         /// The GameEvent to use.
         /// </summary>
         [Tooltip("The GameEvent to use.")]
-        public GameEvent gameEvent;
+        public ScriptableGameEvent gameEvent;
 
         /// <summary>
         /// Creates a new event reference.
@@ -46,7 +46,7 @@ namespace Zigurous.Architecture
         /// Creates a new event reference to the GameEvent.
         /// </summary>
         /// <param name="gameEvent">The GameEvent to use.</param>
-        public EventReference(GameEvent gameEvent)
+        public EventReference(ScriptableGameEvent gameEvent)
         {
             this.useUnityEvent = false;
             this.gameEvent = gameEvent;

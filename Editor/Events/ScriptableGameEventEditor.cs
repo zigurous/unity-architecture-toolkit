@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Zigurous.Architecture.Editor
 {
-    [CustomEditor(typeof(GameEvent), true)]
-    public class GameEventEditor : UnityEditor.Editor
+    [CustomEditor(typeof(ScriptableGameEvent), true)]
+    public class ScriptableGameEventEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
@@ -12,7 +12,7 @@ namespace Zigurous.Architecture.Editor
 
             GUI.enabled = Application.isPlaying;
 
-            GameEvent e = target as GameEvent;
+            ScriptableGameEvent e = target as ScriptableGameEvent;
 
             if (GUILayout.Button("Raise")) {
                 e.Raise();

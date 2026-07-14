@@ -9,20 +9,20 @@ namespace Zigurous.Architecture
     /// </summary>
     [AddComponentMenu("Zigurous/Events/Game Event Listener")]
     [HelpURL("https://docs.zigurous.com/com.zigurous.architecture/api/Zigurous.Architecture/GameEventListener")]
-    public class GameEventListener : MonoBehaviour
+    public class GameEventListener : MonoBehaviour, IGameEventListener<ScriptableGameEvent>
     {
         [SerializeField]
         [Tooltip("The game event to listen to.")]
-        private GameEvent m_Event;
+        private ScriptableGameEvent m_Event;
 
         [SerializeField]
         [Tooltip("The unity event invoked in response to the event being raised.")]
-        private UnityEvent m_Response;
+        private UnityEvent<ScriptableGameEvent> m_Response;
 
         /// <summary>
         /// The game event to listen to.
         /// </summary>
-        public GameEvent Event
+        public ScriptableGameEvent Event
         {
             get => m_Event;
             set => m_Event = value;
@@ -31,7 +31,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// The Unity event invoked in response to the event being raised.
         /// </summary>
-        public UnityEvent Response
+        public UnityEvent<ScriptableGameEvent> Response
         {
             get => m_Response;
             set => m_Response = value;
@@ -42,9 +42,7 @@ namespace Zigurous.Architecture
         /// </summary>
         protected virtual void OnEnable()
         {
-            if (m_Event != null) {
-                m_Event.RegisterListener(this);
-            }
+            GameEventBus<ScriptableGameEvent>.Register(this);
         }
 
         /// <summary>
@@ -52,17 +50,26 @@ namespace Zigurous.Architecture
         /// </summary>
         protected virtual void OnDisable()
         {
-            if (m_Event != null) {
-                m_Event.UnregisterListener(this);
-            }
+            GameEventBus<ScriptableGameEvent>.Unregister(this);
         }
 
         /// <summary>
         /// A callback invoked when the event is raised.
         /// </summary>
-        public virtual void OnEventRaised()
+        protected virtual void OnEventRaised(ScriptableGameEvent e)
         {
-            m_Response?.Invoke();
+            m_Response?.Invoke(e);
+        }
+
+        /// <summary>
+        /// Handles the incoming game event <paramref name="e"/>.
+        /// </summary>
+        /// <param name="e">The event payload.</param>
+        public void OnGameEvent(ScriptableGameEvent e)
+        {
+            if (e == m_Event) {
+                OnEventRaised(e);
+            }
         }
 
     }
