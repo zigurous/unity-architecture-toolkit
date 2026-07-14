@@ -18,7 +18,10 @@ namespace Zigurous.Architecture
         public static void Register<L>(L listener) where L : IGameEventListener<T>
         {
             listeners ??= new();
-            listeners.Add(listener);
+
+            if (!listeners.Contains(listener)) {
+                listeners.Add(listener);
+            }
         }
 
         /// <summary>
