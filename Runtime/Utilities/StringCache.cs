@@ -7,12 +7,12 @@ namespace Zigurous.Architecture
     /// Caches strings to minimize GC allocations. Useful when repeatably
     /// formatting the same strings.
     /// </summary>
-    public class StringCache<T>
+    public static class StringCache<T>
     {
-        private Dictionary<T, string> cache1;
-        private Dictionary<string, Dictionary<T, string>> cache2;
+        private static Dictionary<T, string> cache1;
+        private static Dictionary<string, Dictionary<T, string>> cache2;
 
-        public string Format(T value, Func<T, string> formatter = null)
+        public static string Format(T value, Func<T, string> formatter = null)
         {
             cache1 ??= new Dictionary<T, string>();
 
@@ -33,7 +33,7 @@ namespace Zigurous.Architecture
             return formattedString;
         }
 
-        public string Format(T value, string format, Func<T, string> formatter = null)
+        public static string Format(T value, string format, Func<T, string> formatter = null)
         {
             cache2 ??= new Dictionary<string, Dictionary<T, string>>();
 
@@ -60,14 +60,14 @@ namespace Zigurous.Architecture
             return formattedString;
         }
 
-        public void Remove(T value)
+        public static void Remove(T value)
         {
             if (cache1 != null && cache1.ContainsKey(value)) {
                 cache1.Remove(value);
             }
         }
 
-        public void Remove(T value, string format)
+        public static void Remove(T value, string format)
         {
             if (cache2 != null && cache2.TryGetValue(format, out Dictionary<T, string> cache))
             {
@@ -77,7 +77,7 @@ namespace Zigurous.Architecture
             }
         }
 
-        public void Clear()
+        public static void Clear()
         {
             cache1?.Clear();
             cache2?.Clear();
