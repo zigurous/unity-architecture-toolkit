@@ -89,6 +89,16 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
+        /// Sets the nth bit of the bitmask to x.
+        /// </summary>
+        /// <param name="n">The nth bit to set.</param>
+        /// <param name="x">The value to set the bit to.</param>
+        public void Set(int n, int x)
+        {
+            mask = (mask & ~(1 << n)) | (x << n);
+        }
+
+        /// <summary>
         /// Sets the nth bit of the bitmask to 0.
         /// </summary>
         /// <param name="n">The nth bit to clear.</param>
@@ -104,16 +114,6 @@ namespace Zigurous.Architecture
         public void Toggle(int n)
         {
             mask ^= 1 << n;
-        }
-
-        /// <summary>
-        /// Sets the nth bit of the bitmask to x.
-        /// </summary>
-        /// <param name="n">The nth bit to set.</param>
-        /// <param name="x">The value to set the bit to.</param>
-        public void Change(int n, int x)
-        {
-            mask = (mask & ~(1 << n)) | (x << n);
         }
 
         /// <summary>
