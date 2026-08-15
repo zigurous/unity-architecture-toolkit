@@ -99,6 +99,16 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
+        /// Sets the nth bit of the bitmask to on or off.
+        /// </summary>
+        /// <param name="n">The nth bit to set.</param>
+        /// <param name="on">The value to set the bit to, true for 1 or false for 0.</param>
+        public void Set(int n, bool on)
+        {
+            Set(n, on ? 1 : 0);
+        }
+
+        /// <summary>
         /// Sets the nth bit of the bitmask to 0.
         /// </summary>
         /// <param name="n">The nth bit to clear.</param>
