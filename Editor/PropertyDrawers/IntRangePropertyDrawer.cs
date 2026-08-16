@@ -11,14 +11,9 @@ namespace Zigurous.Architecture.Editor
             EditorGUI.BeginProperty(position, label, property);
 
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
-
-            int indentLevel = EditorGUI.indentLevel;
-            EditorGUI.indentLevel = 0;
-
             position = IntField(position, property.FindPropertyRelative("m_Min"));
             position = IntField(position, property.FindPropertyRelative("m_Max"));
 
-            EditorGUI.indentLevel = indentLevel;
             EditorGUI.EndProperty();
         }
 

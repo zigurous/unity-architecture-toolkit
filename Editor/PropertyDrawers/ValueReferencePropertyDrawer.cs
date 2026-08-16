@@ -22,9 +22,6 @@ namespace Zigurous.Architecture.Editor
             label = EditorGUI.BeginProperty(position, label, property);
             position = EditorGUI.PrefixLabel(position, label);
 
-            int indent = EditorGUI.indentLevel;
-            EditorGUI.indentLevel = 0;
-
             Rect popupRect = new(position)
             {
                 width = popupStyle.fixedWidth + popupStyle.margin.right,
@@ -49,7 +46,6 @@ namespace Zigurous.Architecture.Editor
                 property.serializedObject.ApplyModifiedProperties();
             }
 
-            EditorGUI.indentLevel = indent;
             EditorGUI.EndProperty();
         }
 

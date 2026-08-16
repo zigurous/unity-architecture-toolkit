@@ -12,9 +12,6 @@ namespace Zigurous.Architecture.Editor
 
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
-            int indentLevel = EditorGUI.indentLevel;
-            EditorGUI.indentLevel = 0;
-
             EditorGUI.BeginChangeCheck();
 
             SerializedProperty mask = property.FindPropertyRelative("mask");
@@ -24,7 +21,6 @@ namespace Zigurous.Architecture.Editor
                 mask.intValue = value;
             }
 
-            EditorGUI.indentLevel = indentLevel;
             EditorGUI.EndProperty();
         }
 

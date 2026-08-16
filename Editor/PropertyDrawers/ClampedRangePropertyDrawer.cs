@@ -22,8 +22,11 @@ namespace Zigurous.Architecture.Editor
             SerializedProperty range = property.FindPropertyRelative("range");
             SerializedProperty clamp = property.FindPropertyRelative("clamp");
 
-            position = RangeProperty(position, range);
-            position = RangeProperty(position, clamp);
+            using (new EditorGUI.IndentLevelScope(1))
+            {
+                position = RangeProperty(position, range);
+                position = RangeProperty(position, clamp);
+            }
 
             SerializedProperty rangeMin = range.FindPropertyRelative("m_Min");
             SerializedProperty rangeMax = range.FindPropertyRelative("m_Max");
@@ -43,18 +46,14 @@ namespace Zigurous.Architecture.Editor
             position.y += EditorGUIUtility.standardVerticalSpacing;
 
             EditorGUI.BeginProperty(position, new GUIContent(property.displayName), property);
-
-            int indentLevel = EditorGUI.indentLevel;
-            EditorGUI.indentLevel++;
-
             Rect field = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), new GUIContent(property.displayName));
 
-            EditorGUI.indentLevel = 0;
+            using (new EditorGUI.IndentLevelScope(-1))
+            {
+                field = FloatField(field, property.FindPropertyRelative("m_Min"));
+                field = FloatField(field, property.FindPropertyRelative("m_Max"));
+            }
 
-            field = FloatField(field, property.FindPropertyRelative("m_Min"));
-            field = FloatField(field, property.FindPropertyRelative("m_Max"));
-
-            EditorGUI.indentLevel = indentLevel;
             EditorGUI.EndProperty();
 
             return position;
