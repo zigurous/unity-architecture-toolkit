@@ -100,6 +100,26 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
+        /// Checks if the array contains the given object.
+        /// </summary>
+        /// <typeparam name="T">The type of the array.</typeparam>
+        /// <param name="array">The array to search in.</param>
+        /// <param name="object">The object to search for.</param>
+        /// <returns>True if the array contains the object, false otherwise.</returns>
+        public static bool Contains<T>(this T[] array, UnityEngine.Object obj)
+            where T : UnityEngine.Object
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == obj) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Checks if the array contains all elements that satisfy a predicate.
         /// </summary>
         /// <typeparam name="T">The type of the array.</typeparam>
