@@ -15,7 +15,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="L">The type of event listener.</typeparam>
         /// <param name="listener">The listener subscribing to the event.</param>
-        public static void Register<L>(L listener) where L : IGameEventListener<T>
+        public static void Listen<L>(L listener) where L : IGameEventListener<T>
         {
             listeners ??= new();
 
@@ -29,7 +29,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="L">The type of event listener.</typeparam>
         /// <param name="listener">The listener unsubscribing from the event.</param>
-        public static void Unregister<L>(L listener) where L : IGameEventListener<T>
+        public static void Unlisten<L>(L listener) where L : IGameEventListener<T>
         {
             listeners?.Remove(listener);
         }

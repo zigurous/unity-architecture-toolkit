@@ -22,9 +22,9 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="T">The type of event listener.</typeparam>
         /// <param name="listener">The listener subscribing to the event.</param>
-        public void Register<T>(T listener) where T : IGameEventListener<ScriptableGameEvent>
+        public void Listen<T>(T listener) where T : IGameEventListener<ScriptableGameEvent>
         {
-            GameEventBus<ScriptableGameEvent>.Register(listener);
+            GameEventBus<ScriptableGameEvent>.Listen(listener);
         }
 
         /// <summary>
@@ -32,9 +32,9 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <typeparam name="T">The type of event listener.</typeparam>
         /// <param name="listener">The listener unsubscribing from the event.</param>
-        public void Unregister<T>(T listener) where T : IGameEventListener<ScriptableGameEvent>
+        public void Unlisten<T>(T listener) where T : IGameEventListener<ScriptableGameEvent>
         {
-            GameEventBus<ScriptableGameEvent>.Unregister(listener);
+            GameEventBus<ScriptableGameEvent>.Unlisten(listener);
         }
 
     }

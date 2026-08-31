@@ -42,7 +42,7 @@ namespace Zigurous.Architecture
         /// </summary>
         protected virtual void OnEnable()
         {
-            GameEventBus<ScriptableGameEvent>.Register(this);
+            GameEventBus<ScriptableGameEvent>.Listen(this);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Zigurous.Architecture
         /// </summary>
         protected virtual void OnDisable()
         {
-            GameEventBus<ScriptableGameEvent>.Unregister(this);
+            GameEventBus<ScriptableGameEvent>.Unlisten(this);
         }
 
         /// <summary>
