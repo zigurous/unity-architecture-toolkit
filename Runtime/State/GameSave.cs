@@ -44,6 +44,10 @@ namespace Zigurous.Architecture
         [Tooltip("The format of the data written to the save file.")]
         private SaveFormat m_DataFormat = SaveFormat.Base64;
 
+        [SerializeField]
+        [Tooltip("Resets the save data when loaded as if it were a new save file.")]
+        private bool m_ResetDataOnLoad;
+
         [Tooltip("The deserialized save data.")]
         private T m_Data;
 
@@ -90,7 +94,7 @@ namespace Zigurous.Architecture
         /// <returns>True if the save file was loaded without errors, false otherwise.</returns>
         public bool Load()
         {
-            if (!Exists()) {
+            if (m_ResetDataOnLoad || !Exists()) {
                 return New();
             }
 
