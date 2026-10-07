@@ -48,6 +48,17 @@ namespace Zigurous.Architecture
         [Tooltip("Resets the save data when loaded as if it were a new save file.")]
         private bool m_ResetDataOnLoad;
 
+        #if UNITY_EDITOR || DEVELOPMENT_BUILD
+        [SerializeField]
+        [Tooltip("Loads custom data instead of reading from the save file. This useful for development purposes and scenario testing.")]
+        private bool m_LoadCustomData;
+
+        [SerializeField]
+        [ConditionalShow(nameof(m_LoadCustomData))]
+        [Tooltip("The custom data to load.")]
+        private T m_CustomData;
+        #endif
+
         [Tooltip("The deserialized save data.")]
         private T m_Data;
 
@@ -84,7 +95,11 @@ namespace Zigurous.Architecture
         public bool New()
         {
             Debug.Log($"Creating new save file: {SavePath}");
-            m_Data = new();
+            #if UNITY_EDITOR || DEVELOPMENT_BUILD
+                m_Data = m_LoadCustomData ? m_CustomData : new();
+            #else
+                m_Data = new();
+            #endif
             return Save();
         }
 
@@ -94,6 +109,14 @@ namespace Zigurous.Architecture
         /// <returns>True if the save file was loaded without errors, false otherwise.</returns>
         public bool Load()
         {
+            #if UNITY_EDITOR || DEVELOPMENT_BUILD
+            if (m_LoadCustomData)
+            {
+                m_Data = m_CustomData;
+                return true;
+            }
+            #endif
+
             if (m_ResetDataOnLoad || !Exists()) {
                 return New();
             }
