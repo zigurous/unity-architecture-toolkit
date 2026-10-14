@@ -6,7 +6,16 @@ namespace Zigurous.Architecture
     /// <summary>
     /// Manages a set amount of save profiles for the game.
     /// </summary>
-    public sealed class GameSaveManager : MonoBehaviour
+    public class GameSaveManager : GameSaveManager<GameSave>
+    {
+    }
+
+    /// <summary>
+    /// Manages a set amount of save profiles for the game.
+    /// </summary>
+    /// <typeparam name="T">The type of game save.</typeparam>
+    public abstract class GameSaveManager<T> : MonoBehaviour
+        where T : GameSave
     {
         /// <summary>
         /// Contextual info about a save file, e.g., whether it exists, its last
@@ -17,7 +26,7 @@ namespace Zigurous.Architecture
             /// <summary>
             /// The save file for the profile.
             /// </summary>
-            public GameSave saveFile;
+            public T saveFile;
 
             /// <summary>
             /// The last date/time the profile was saved.
@@ -33,7 +42,7 @@ namespace Zigurous.Architecture
             /// Initializes the context for the given save profile.
             /// </summary>
             /// <param name="profile">The save profile to initialize.</param>
-            public GameSaveContext(GameSave profile)
+            public GameSaveContext(T profile)
             {
                 saveFile = profile;
                 exists = profile.Exists();
@@ -44,7 +53,7 @@ namespace Zigurous.Architecture
 
         [SerializeField]
         [Tooltip("The save files being managed. The game will not allow more save profiles than provided here.")]
-        private GameSave[] saveFiles;
+        private T[] saveFiles;
 
         [SerializeField]
         [Tooltip("Loads the save context on start.")]
@@ -72,7 +81,7 @@ namespace Zigurous.Architecture
 
             for (int i = 0; i < saveFiles.Length; i++)
             {
-                GameSave saveFile = saveFiles[i];
+                T saveFile = saveFiles[i];
                 context[i] = new GameSaveContext(saveFile);
             }
         }
@@ -82,7 +91,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <param name="profile">The save profile to get the context of.</param>
         /// <returns>The save context for the profile.</returns>
-        public GameSaveContext GetContext(GameSave profile)
+        public GameSaveContext GetContext(T profile)
         {
             if (context == null) {
                 Initialize();
@@ -120,13 +129,13 @@ namespace Zigurous.Architecture
         /// Gets the most recently saved profile.
         /// </summary>
         /// <returns>The most recently saved profile.</returns>
-        public GameSave GetLatestSave()
+        public T GetLatestSave()
         {
             if (context == null) {
                 Initialize();
             }
 
-            GameSave latestSave = null;
+            T latestSave = null;
             DateTime latestDateTime = DateTime.MinValue;
 
             for (int i = 0; i < context.Length; i++)
@@ -147,13 +156,13 @@ namespace Zigurous.Architecture
         /// Gets the oldest saved profile.
         /// </summary>
         /// <returns>The oldest saved profile.</returns>
-        public GameSave GetOldestSave()
+        public T GetOldestSave()
         {
             if (context == null) {
                 Initialize();
             }
 
-            GameSave oldestSave = null;
+            T oldestSave = null;
             DateTime oldestDateTime = DateTime.MaxValue;
 
             for (int i = 0; i < context.Length; i++)
@@ -174,7 +183,7 @@ namespace Zigurous.Architecture
         /// Gets the save profile for the next available unused profile.
         /// </summary>
         /// <returns>An unused save profile, or null if no unused profile is available.</returns>
-        public GameSave GetNextUnusedSave()
+        public T GetNextUnusedSave()
         {
             if (context == null) {
                 Initialize();
