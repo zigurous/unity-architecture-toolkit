@@ -8,9 +8,7 @@ namespace Zigurous.Architecture
     /// <summary>
     /// A serializable representation of a game save file.
     /// </summary>
-    /// <typeparam name="T">The type of save data.</typeparam>
-    public abstract class GameSave<T> : ScriptableObject
-        where T : GameSaveData, new()
+    public abstract class GameSave : ScriptableObject
     {
         /// <summary>
         /// A data/encoding format for a game save file.
@@ -32,6 +30,9 @@ namespace Zigurous.Architecture
 
         private static readonly Encoding Encoding = Encoding.UTF8;
 
+        [Tooltip("The deserialized save data.")]
+        protected GameSaveData m_Data;
+
         [SerializeField]
         [Tooltip("The name of the save file, without any file extensions.")]
         private string m_SaveName = "save1";
@@ -47,20 +48,6 @@ namespace Zigurous.Architecture
         [SerializeField]
         [Tooltip("Resets the save data when loaded as if it were a new save file.")]
         private bool m_ResetDataOnLoad;
-
-        #if UNITY_EDITOR || DEVELOPMENT_BUILD
-        [SerializeField]
-        [Tooltip("Loads custom data instead of reading from the save file. This useful for development purposes and scenario testing.")]
-        private bool m_LoadCustomData;
-
-        [SerializeField]
-        [ConditionalShow(nameof(m_LoadCustomData))]
-        [Tooltip("The custom data to load.")]
-        private T m_CustomData;
-        #endif
-
-        [Tooltip("The deserialized save data.")]
-        private T m_Data;
 
         /// <summary>
         /// The name of the save file, without any file extensions.
@@ -83,23 +70,25 @@ namespace Zigurous.Architecture
         public SaveFormat DataFormat => m_DataFormat;
 
         /// <summary>
-        /// The deserialized save data.
+        /// The type of data to deserialize.
         /// </summary>
-        public T data => m_Data;
+        protected abstract Type DataType { get; }
+
+        /// <summary>
+        /// Creates a new save data object.
+        /// </summary>
+        /// <returns>The new data object.</returns>
+        protected abstract GameSaveData NewDataObject();
 
         /// <summary>
         /// Creates a new save file. If the save file already exists, then it
         /// will be overwritten with default data.
         /// </summary>
         /// <returns>True if the save file was created without errors, false otherwise.</returns>
-        public bool New()
+        public virtual bool New()
         {
             Debug.Log($"Creating new save file: {SavePath}");
-            #if UNITY_EDITOR || DEVELOPMENT_BUILD
-                m_Data = m_LoadCustomData ? m_CustomData : new();
-            #else
-                m_Data = new();
-            #endif
+            m_Data = NewDataObject();
             return Save();
         }
 
@@ -107,16 +96,8 @@ namespace Zigurous.Architecture
         /// Loads the data from the save file.
         /// </summary>
         /// <returns>True if the save file was loaded without errors, false otherwise.</returns>
-        public bool Load()
+        public virtual bool Load()
         {
-            #if UNITY_EDITOR || DEVELOPMENT_BUILD
-            if (m_LoadCustomData)
-            {
-                m_Data = m_CustomData;
-                return true;
-            }
-            #endif
-
             if (m_ResetDataOnLoad || !Exists()) {
                 return New();
             }
@@ -129,12 +110,12 @@ namespace Zigurous.Architecture
                 using FileStream stream = new(filePath, FileMode.OpenOrCreate);
                 using BinaryReader reader = new(stream, Encoding);
                 string data = reader.ReadString();
-                m_Data = Deserialize(data, m_DataFormat);
-                return true;
+                m_Data = Deserialize(data, DataType, m_DataFormat);
+                return m_Data != null;
             }
             catch (Exception e)
             {
-                m_Data = new();
+                m_Data = NewDataObject();
                 Debug.LogError($"An error occured trying to load data from file: {filePath}\n{e}");
                 return false;
             }
@@ -144,7 +125,7 @@ namespace Zigurous.Architecture
         /// Saves the data to the save file.
         /// </summary>
         /// <returns>True if the data was saved without errors, false otherwise.</returns>
-        public bool Save()
+        public virtual bool Save()
         {
             string filePath = SavePath;
 
@@ -167,7 +148,7 @@ namespace Zigurous.Architecture
         /// Deletes the save file.
         /// </summary>
         /// <returns>True if the save file was deleted without errors, false otherwise.</returns>
-        public bool Delete()
+        public virtual bool Delete()
         {
             string filePath = SavePath;
 
@@ -187,7 +168,7 @@ namespace Zigurous.Architecture
         /// Checks if the save file exists.
         /// </summary>
         /// <returns>True if the save file exists, false otherwise.</returns>
-        public bool Exists()
+        public virtual bool Exists()
         {
             try
             {
@@ -205,10 +186,10 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Serializes the save data to the given format.
         /// </summary>
-        /// <param name="data">The data to serialize.</param>
+        /// <param name="data">The data object to serialize.</param>
         /// <param name="format">The format to serialize the data to.</param>
         /// <returns>The serialized data as a string.</returns>
-        public static string Serialize(T data, SaveFormat format)
+        public static string Serialize(GameSaveData data, SaveFormat format)
         {
             string json = data.ToJson();
 
@@ -222,10 +203,11 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Deserializes the save data from the given format.
         /// </summary>
-        /// <param name="data">The data to deserialize.</param>
+        /// <typeparam name="T">The type of save data.</typeparam>
+        /// <param name="data">The string of data to deserialize.</param>
         /// <param name="format">The format of the data as written to the save file.</param>
         /// <returns>The deserialized save data.</returns>
-        public static T Deserialize(string data, SaveFormat format)
+        public static T Deserialize<T>(string data, SaveFormat format) where T : GameSaveData
         {
             string json = format switch {
                 SaveFormat.PlainText => data,
@@ -234,6 +216,86 @@ namespace Zigurous.Architecture
             };
 
             return JsonUtility.FromJson<T>(json);
+        }
+
+        /// <summary>
+        /// Deserializes the save data from the given format.
+        /// </summary>
+        /// <param name="data">The string of data to deserialize.</param>
+        /// <param name="dataType">The type of save data to deserialize to.</param>
+        /// <param name="format">The format of the data as written to the save file.</param>
+        /// <returns>The deserialized save data.</returns>
+        public static GameSaveData Deserialize(string data, Type dataType, SaveFormat format)
+        {
+            string json = format switch {
+                SaveFormat.PlainText => data,
+                SaveFormat.Base64 => Encoding.GetString(Convert.FromBase64String(data)),
+                _ => data,
+            };
+
+            return JsonUtility.FromJson(json, dataType) as GameSaveData;
+        }
+
+    }
+
+    /// <summary>
+    /// A serializable representation of a game save file.
+    /// </summary>
+    /// <typeparam name="T">The type of save data.</typeparam>
+    public abstract class GameSave<T> : GameSave
+        where T : GameSaveData, new()
+    {
+        #if UNITY_EDITOR || DEVELOPMENT_BUILD
+        [SerializeField]
+        [Tooltip("Loads custom data instead of reading from the save file. This useful for development purposes and scenario testing.")]
+        private bool m_LoadCustomData;
+
+        [SerializeField]
+        [ConditionalShow(nameof(m_LoadCustomData))]
+        [Tooltip("The custom data to load.")]
+        private T m_CustomData;
+        #endif
+
+        /// <summary>
+        /// The deserialized save data.
+        /// </summary>
+        public T data => m_Data as T;
+
+        /// <inheritdoc/>
+        protected override Type DataType => typeof(T);
+
+        /// <inheritdoc/>
+        protected override GameSaveData NewDataObject()
+        {
+            return new T();
+        }
+
+        /// <inheritdoc/>
+        public override bool New()
+        {
+            #if UNITY_EDITOR || DEVELOPMENT_BUILD
+            if (m_LoadCustomData)
+            {
+                m_Data = m_CustomData;
+                return Save();
+            }
+            #endif
+
+            return base.New();
+        }
+
+        /// <inheritdoc/>
+        public override bool Load()
+        {
+            #if UNITY_EDITOR || DEVELOPMENT_BUILD
+            if (m_LoadCustomData)
+            {
+                m_Data = m_CustomData;
+                return true;
+            }
+            #endif
+
+            return base.Load();
         }
 
     }
