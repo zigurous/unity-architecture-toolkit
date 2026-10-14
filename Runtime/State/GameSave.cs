@@ -184,6 +184,20 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
+        /// Gets the last date/time the save file was written.
+        /// </summary>
+        /// <returns>The last date/time the save file was written or null if the
+        /// file does not exist.</returns>
+        public virtual DateTime? GetLastWriteTime()
+        {
+            try {
+                return File.GetLastWriteTime(SavePath);
+            } catch {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Serializes the save data to the given format.
         /// </summary>
         /// <param name="data">The data object to serialize.</param>
