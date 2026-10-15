@@ -31,6 +31,11 @@ namespace Zigurous.Architecture
             public T profile;
 
             /// <summary>
+            /// The index of the save profile.
+            /// </summary>
+            public int index;
+
+            /// <summary>
             /// The last date/time the profile was saved.
             /// </summary>
             public DateTime? lastSaveDateTime;
@@ -44,9 +49,11 @@ namespace Zigurous.Architecture
             /// Initializes the context for the given save profile.
             /// </summary>
             /// <param name="profile">The save profile for the context.</param>
-            public GameSaveContext(T profile)
+            /// <param name="index">The index of the save profile.</param>
+            public GameSaveContext(T profile, int index)
             {
                 this.profile = profile;
+                this.index = index;
                 this.exists = profile.Exists();
                 this.lastSaveDateTime = exists ? profile.GetLastWriteTime() : null;
             }
@@ -130,7 +137,7 @@ namespace Zigurous.Architecture
             }
 
             for (int i = 0; i < profiles.Length; i++) {
-                context[i] = new GameSaveContext(profiles[i]);
+                context[i] = new GameSaveContext(profiles[i], i);
             }
         }
 
