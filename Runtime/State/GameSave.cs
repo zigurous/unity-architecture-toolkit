@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Zigurous.Architecture
@@ -35,19 +36,25 @@ namespace Zigurous.Architecture
 
         [SerializeField]
         [Tooltip("The name of the save file, without any file extensions.")]
-        private string m_SaveName = "save1";
+        protected string m_SaveName = "save1";
 
         [SerializeField]
         [Tooltip("The file extension of the save file.")]
-        private string m_FileExtension = ".dat";
+        protected string m_FileExtension = ".dat";
 
         [SerializeField]
         [Tooltip("The format of the data written to the save file.")]
-        private SaveFormat m_DataFormat = SaveFormat.Base64;
+        protected SaveFormat m_DataFormat = SaveFormat.Base64;
 
         [SerializeField]
         [Tooltip("Resets the save data when loaded as if it were a new save file.")]
-        private bool m_ResetDataOnLoad;
+        protected bool m_ResetDataOnLoad;
+
+        #if UNITY_EDITOR || DEVELOPMENT_BUILD
+        [SerializeField]
+        [Tooltip("Loads custom data instead of reading from the save file. This useful for development purposes and scenario testing.")]
+        protected bool m_LoadCustomData;
+        #endif
 
         /// <summary>
         /// The name of the save file, without any file extensions.
@@ -77,70 +84,85 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Creates a new save data object.
         /// </summary>
-        /// <returns>The new data object.</returns>
-        protected abstract GameSaveData NewDataObject();
+        /// <returns>The new save data.</returns>
+        protected abstract GameSaveData GetNewData();
+
+        #if UNITY_EDITOR || DEVELOPMENT_BUILD
+        /// <summary>
+        /// Gets the custom data to read instead of reading from the save file.
+        /// </summary>
+        /// <returns>The custom data.</returns>
+        protected abstract GameSaveData GetCustomData();
+        #endif
 
         /// <summary>
         /// Creates a new save file. If the save file already exists, then it
         /// will be overwritten with default data.
         /// </summary>
-        /// <returns>True if the save file was created without errors, false otherwise.</returns>
-        public virtual bool New()
+        public async Task New()
         {
+            #if UNITY_EDITOR || DEVELOPMENT_BUILD
+            if (m_LoadCustomData)
+            {
+                m_Data = GetCustomData();
+                await Save();
+                return;
+            }
+            #endif
+
             Debug.Log($"Creating new save file: {SavePath}");
-            m_Data = NewDataObject();
-            return Save();
+            m_Data = GetNewData();
+            await Save();
         }
 
         /// <summary>
         /// Loads the data from the save file.
         /// </summary>
-        /// <returns>True if the save file was loaded without errors, false otherwise.</returns>
-        public virtual bool Load()
+        public async Task Load()
         {
-            if (m_ResetDataOnLoad || !Exists()) {
-                return New();
+            #if UNITY_EDITOR || DEVELOPMENT_BUILD
+            if (m_LoadCustomData)
+            {
+                m_Data = GetCustomData();
+                return;
             }
+            #endif
 
-            string filePath = SavePath;
+            if (m_ResetDataOnLoad || !Exists())
+            {
+                await New();
+                return;
+            }
 
             try
             {
+                string filePath = SavePath;
                 Debug.Log($"Loading save file: {filePath}");
-                using FileStream stream = new(filePath, FileMode.OpenOrCreate);
-                using BinaryReader reader = new(stream, Encoding);
-                string data = reader.ReadString();
-                m_Data = Deserialize(data, DataType, m_DataFormat);
-                return m_Data != null;
+                string contents = await File.ReadAllTextAsync(filePath);
+                m_Data = Deserialize(contents, DataType, DataFormat);
             }
             catch (Exception e)
             {
-                m_Data = NewDataObject();
-                Debug.LogError($"An error occured trying to load data from file: {filePath}\n{e}");
-                return false;
+                m_Data = GetNewData();
+                Debug.LogError($"An error occured trying to load data from file: {SavePath}\n{e}");
             }
         }
 
         /// <summary>
-        /// Saves the data to the save file.
+        /// Writes the data to the save file.
         /// </summary>
-        /// <returns>True if the data was saved without errors, false otherwise.</returns>
-        public virtual bool Save()
+        public async Task Save()
         {
-            string filePath = SavePath;
-
             try
             {
+                string filePath = SavePath;
+                string contents = Serialize(m_Data, m_DataFormat);
                 Debug.Log($"Saving game state: {filePath}");
-                using FileStream stream = new(filePath, FileMode.Create);
-                using BinaryWriter writer = new(stream, Encoding);
-                writer.Write(Serialize(m_Data, m_DataFormat));
-                return true;
+                await File.WriteAllTextAsync(filePath, contents, Encoding);
             }
             catch (Exception e)
             {
-                Debug.LogError($"An error occurred trying to save data to file: {filePath}\n{e}");
-                return false;
+                Debug.LogError($"An error occurred trying to save data to file: {SavePath}\n{e}");
             }
         }
 
@@ -148,7 +170,7 @@ namespace Zigurous.Architecture
         /// Deletes the save file.
         /// </summary>
         /// <returns>True if the save file was deleted without errors, false otherwise.</returns>
-        public virtual bool Delete()
+        public bool Delete()
         {
             string filePath = SavePath;
 
@@ -168,17 +190,11 @@ namespace Zigurous.Architecture
         /// Checks if the save file exists.
         /// </summary>
         /// <returns>True if the save file exists, false otherwise.</returns>
-        public virtual bool Exists()
+        public bool Exists()
         {
-            try
-            {
-                using FileStream stream = new(SavePath, FileMode.Open);
-                using BinaryReader reader = new(stream, Encoding);
-                string data = reader.ReadString();
-                return !string.IsNullOrEmpty(data.Trim());
-            }
-            catch
-            {
+            try {
+                return File.Exists(SavePath);
+            } catch {
                 return false;
             }
         }
@@ -188,7 +204,7 @@ namespace Zigurous.Architecture
         /// </summary>
         /// <returns>The last date/time the save file was written or null if the
         /// file does not exist.</returns>
-        public virtual DateTime? GetLastWriteTime()
+        public DateTime? GetLastWriteTime()
         {
             try {
                 return File.GetLastWriteTime(SavePath);
@@ -261,10 +277,6 @@ namespace Zigurous.Architecture
     {
         #if UNITY_EDITOR || DEVELOPMENT_BUILD
         [SerializeField]
-        [Tooltip("Loads custom data instead of reading from the save file. This useful for development purposes and scenario testing.")]
-        private bool m_LoadCustomData;
-
-        [SerializeField]
         [ConditionalShow(nameof(m_LoadCustomData))]
         [Tooltip("The custom data to load.")]
         private T m_CustomData;
@@ -279,38 +291,18 @@ namespace Zigurous.Architecture
         protected override Type DataType => typeof(T);
 
         /// <inheritdoc/>
-        protected override GameSaveData NewDataObject()
+        protected override GameSaveData GetNewData()
         {
             return new T();
         }
 
+        #if UNITY_EDITOR || DEVELOPMENT_BUILD
         /// <inheritdoc/>
-        public override bool New()
+        protected override GameSaveData GetCustomData()
         {
-            #if UNITY_EDITOR || DEVELOPMENT_BUILD
-            if (m_LoadCustomData)
-            {
-                m_Data = m_CustomData;
-                return Save();
-            }
-            #endif
-
-            return base.New();
+            return m_CustomData;
         }
-
-        /// <inheritdoc/>
-        public override bool Load()
-        {
-            #if UNITY_EDITOR || DEVELOPMENT_BUILD
-            if (m_LoadCustomData)
-            {
-                m_Data = m_CustomData;
-                return true;
-            }
-            #endif
-
-            return base.Load();
-        }
+        #endif
 
     }
 

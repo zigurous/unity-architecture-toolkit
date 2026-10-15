@@ -52,12 +52,12 @@ namespace Zigurous.Architecture
         }
 
         [SerializeField]
-        [Tooltip("The save files being managed. The game will not allow more save profiles than provided here.")]
-        private T[] saveFiles;
-
-        [SerializeField]
         [Tooltip("Loads the save context on start.")]
         private bool initializeOnStart = true;
+
+        [SerializeField]
+        [Tooltip("The save files being managed. The game will not allow more save profiles than provided here.")]
+        private T[] saveFiles;
 
         private GameSaveContext[] context;
 
