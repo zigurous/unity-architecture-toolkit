@@ -63,13 +63,14 @@ namespace Zigurous.Architecture
 
         [SerializeField]
         [Tooltip("Loads the save context on start.")]
-        private bool initializeOnStart = true;
+        private bool m_InitializeOnStart = true;
 
         [SerializeField]
         [Tooltip("The save profiles to manage. The length of the array is the maximum amount of saves that can be made.")]
-        private T[] profiles;
+        private T[] m_Profiles;
 
         private GameSaveContext[] context;
+        private bool dirty;
 
         /// <summary>
         /// The amount of save profiles being used.
@@ -78,7 +79,7 @@ namespace Zigurous.Architecture
         {
             get
             {
-                if (context == null) {
+                if (context == null || dirty) {
                     Initialize();
                 }
 
@@ -102,7 +103,7 @@ namespace Zigurous.Architecture
         {
             get
             {
-                if (context == null) {
+                if (context == null || dirty) {
                     Initialize();
                 }
 
@@ -121,7 +122,7 @@ namespace Zigurous.Architecture
 
         private void Start()
         {
-            if (initializeOnStart) {
+            if (m_InitializeOnStart) {
                 Initialize();
             }
         }
@@ -132,14 +133,16 @@ namespace Zigurous.Architecture
         public void Initialize()
         {
             if (context == null) {
-                context = new GameSaveContext[profiles.Length];
-            } else if (context.Length != profiles.Length) {
-                Array.Resize(ref context, profiles.Length);
+                context = new GameSaveContext[m_Profiles.Length];
+            } else if (context.Length != m_Profiles.Length) {
+                Array.Resize(ref context, m_Profiles.Length);
             }
 
-            for (int i = 0; i < profiles.Length; i++) {
-                context[i] = new GameSaveContext(profiles[i], i);
+            for (int i = 0; i < m_Profiles.Length; i++) {
+                context[i] = new GameSaveContext(m_Profiles[i], i);
             }
+
+            dirty = false;
         }
 
         /// <summary>
@@ -149,7 +152,7 @@ namespace Zigurous.Architecture
         /// <returns>The save context for the profile.</returns>
         public GameSaveContext GetContext(T profile)
         {
-            if (context == null) {
+            if (context == null || dirty) {
                 Initialize();
             }
 
@@ -170,7 +173,7 @@ namespace Zigurous.Architecture
         /// <returns>The save context for the profile at the given index.</returns>
         public GameSaveContext GetContext(int index)
         {
-            if (context == null) {
+            if (context == null || dirty) {
                 Initialize();
             }
 
@@ -187,7 +190,7 @@ namespace Zigurous.Architecture
         /// <returns>The most recently saved profile, or null if no save exists.</returns>
         public T GetLatestSave()
         {
-            if (context == null) {
+            if (context == null || dirty) {
                 Initialize();
             }
 
@@ -214,7 +217,7 @@ namespace Zigurous.Architecture
         /// <returns>The oldest saved profile, or null if no save exists.</returns>
         public T GetOldestSave()
         {
-            if (context == null) {
+            if (context == null || dirty) {
                 Initialize();
             }
 
@@ -241,7 +244,7 @@ namespace Zigurous.Architecture
         /// <returns>An unused save profile, or null if no unused profile exists.</returns>
         public T GetUnusedSave()
         {
-            if (context == null) {
+            if (context == null || dirty) {
                 Initialize();
             }
 
@@ -294,7 +297,7 @@ namespace Zigurous.Architecture
         /// <returns>True if an unused save profile exists, false otherwise.</returns>
         public bool HasUnusedSave()
         {
-            if (context == null) {
+            if (context == null || dirty) {
                 Initialize();
             }
 
@@ -314,7 +317,7 @@ namespace Zigurous.Architecture
         /// <returns>True if a save profile has been made, false otherwise.</returns>
         public bool HasAnySave()
         {
-            if (context == null) {
+            if (context == null || dirty) {
                 Initialize();
             }
 
@@ -326,6 +329,11 @@ namespace Zigurous.Architecture
             }
 
             return false;
+        }
+
+        public void SetDirty()
+        {
+            dirty = true;
         }
 
     }
