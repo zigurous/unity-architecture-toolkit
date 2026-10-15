@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,26 +100,45 @@ namespace Zigurous.Architecture
         /// Creates a new save file. If the save file already exists, then it
         /// will be overwritten with default data.
         /// </summary>
-        public async Task New()
+        public IEnumerator New(Action<GameSaveData> onComplete = null)
+        {
+            yield return WaitForAsyncTask(NewAsync());
+            onComplete?.Invoke(m_Data);
+        }
+
+        /// <summary>
+        /// Creates a new save file asynchronously. If the save file already
+        /// exists, then it will be overwritten with default data.
+        /// </summary>
+        public async Task NewAsync()
         {
             #if UNITY_EDITOR || DEVELOPMENT_BUILD
             if (m_LoadCustomData)
             {
                 m_Data = GetCustomData();
-                await Save();
+                await SaveAsync();
                 return;
             }
             #endif
 
             Debug.Log($"Creating new save file: {SavePath}");
             m_Data = GetNewData();
-            await Save();
+            await SaveAsync();
         }
 
         /// <summary>
         /// Loads the data from the save file.
         /// </summary>
-        public async Task Load()
+        public IEnumerator Load(Action<GameSaveData> onComplete = null)
+        {
+            yield return WaitForAsyncTask(LoadAsync());
+            onComplete?.Invoke(m_Data);
+        }
+
+        /// <summary>
+        /// Loads the data from the save file asynchronously.
+        /// </summary>
+        public async Task LoadAsync()
         {
             #if UNITY_EDITOR || DEVELOPMENT_BUILD
             if (m_LoadCustomData)
@@ -130,7 +150,7 @@ namespace Zigurous.Architecture
 
             if (m_ResetDataOnLoad || !Exists())
             {
-                await New();
+                await NewAsync();
                 return;
             }
 
@@ -151,7 +171,16 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Writes the data to the save file.
         /// </summary>
-        public async Task Save()
+        public IEnumerator Save(Action onComplete = null)
+        {
+            yield return WaitForAsyncTask(SaveAsync());
+            onComplete?.Invoke();
+        }
+
+        /// <summary>
+        /// Writes the data to the save file asynchronously.
+        /// </summary>
+        public async Task SaveAsync()
         {
             try
             {
@@ -210,6 +239,21 @@ namespace Zigurous.Architecture
                 return File.GetLastWriteTime(SavePath);
             } catch {
                 return null;
+            }
+        }
+
+        private IEnumerator WaitForAsyncTask(Task task)
+        {
+            while (!task.IsCompleted) {
+                yield return null;
+            }
+
+            if (task.IsFaulted && task.Exception != null) {
+                throw task.Exception.InnerException ?? task.Exception;
+            }
+
+            if (task.IsCanceled) {
+                yield break;
             }
         }
 
