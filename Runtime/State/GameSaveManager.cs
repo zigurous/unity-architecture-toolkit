@@ -23,6 +23,7 @@ namespace Zigurous.Architecture
         /// Contextual info about a save profile, e.g., whether it exists, the
         /// last save date/time, etc.
         /// </summary>
+        [Serializable]
         public struct GameSaveContext
         {
             /// <summary>
@@ -36,14 +37,14 @@ namespace Zigurous.Architecture
             public int index;
 
             /// <summary>
-            /// The last date/time the profile was saved.
-            /// </summary>
-            public DateTime? lastSaveDateTime;
-
-            /// <summary>
             /// Whether the save profile exists or not.
             /// </summary>
             public bool exists;
+
+            /// <summary>
+            /// The last date/time the profile was saved.
+            /// </summary>
+            public DateTime? lastSaveDateTime;
 
             /// <summary>
             /// Initializes the context for the given save profile.
