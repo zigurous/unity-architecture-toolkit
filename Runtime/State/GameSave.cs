@@ -204,16 +204,15 @@ namespace Zigurous.Architecture
         /// <returns>True if the save file was deleted without errors, false otherwise.</returns>
         public bool Delete()
         {
-            string filePath = SavePath;
-
             try
             {
-                File.Delete(filePath);
+                File.Delete(SavePath);
+                m_Data = null;
                 return true;
             }
             catch (Exception e)
             {
-                Debug.LogError($"An error occurred trying to delete save file: {filePath}\n{e}");
+                Debug.LogError($"An error occurred trying to delete save file: {SavePath}\n{e}");
                 return false;
             }
         }
