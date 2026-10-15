@@ -100,10 +100,9 @@ namespace Zigurous.Architecture
         /// Creates a new save file. If the save file already exists, then it
         /// will be overwritten with default data.
         /// </summary>
-        public IEnumerator New(Action<GameSaveData> onComplete = null)
+        public IEnumerator New()
         {
             yield return WaitForAsyncTask(NewAsync());
-            onComplete?.Invoke(m_Data);
         }
 
         /// <summary>
@@ -129,10 +128,9 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Loads the data from the save file.
         /// </summary>
-        public IEnumerator Load(Action<GameSaveData> onComplete = null)
+        public IEnumerator Load()
         {
             yield return WaitForAsyncTask(LoadAsync());
-            onComplete?.Invoke(m_Data);
         }
 
         /// <summary>
@@ -171,10 +169,9 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Writes the data to the save file.
         /// </summary>
-        public IEnumerator Save(Action onComplete = null)
+        public IEnumerator Save()
         {
             yield return WaitForAsyncTask(SaveAsync());
-            onComplete?.Invoke();
         }
 
         /// <summary>
@@ -347,6 +344,37 @@ namespace Zigurous.Architecture
             return m_CustomData;
         }
         #endif
+
+        /// <summary>
+        /// Creates a new save file. If the save file already exists, then it
+        /// will be overwritten with default data.
+        /// </summary>
+        /// <param name="onComplete">An action invoked after the save file has been created.</param>
+        public IEnumerator New(Action<GameSave<T>> onComplete)
+        {
+            yield return New();
+            onComplete?.Invoke(this);
+        }
+
+        /// <summary>
+        /// Loads the data from the save file.
+        /// </summary>
+        /// <param name="onComplete">An action invoked after the save file has been loaded.</param>
+        public IEnumerator Load(Action<GameSave<T>> onComplete)
+        {
+            yield return Load();
+            onComplete?.Invoke(this);
+        }
+
+        /// <summary>
+        /// Writes the data to the save file.
+        /// </summary>
+        /// <param name="onComplete">An action invoked after the save file has been updated.</param>
+        public IEnumerator Save(Action<GameSave<T>> onComplete)
+        {
+            yield return Save();
+            onComplete?.Invoke(this);
+        }
 
     }
 
