@@ -4,29 +4,31 @@ using UnityEngine;
 namespace Zigurous.Architecture
 {
     /// <summary>
-    /// Manages a set amount of save profiles for the game.
+    /// Manages a set amount of save profiles for the game. This class is
+    /// particularly useful for handling save profiles on the main menu.
     /// </summary>
     public class GameSaveManager : GameSaveManager<GameSave>
     {
     }
 
     /// <summary>
-    /// Manages a set amount of save profiles for the game.
+    /// Manages a set amount of save profiles for the game. This class is
+    /// particularly useful for handling save profiles on the main menu.
     /// </summary>
     /// <typeparam name="T">The type of game save.</typeparam>
     public abstract class GameSaveManager<T> : MonoBehaviour
         where T : GameSave
     {
         /// <summary>
-        /// Contextual info about a save file, e.g., whether it exists, its last
-        /// save date/time, etc.
+        /// Contextual info about a save profile, e.g., whether it exists, the
+        /// last save date/time, etc.
         /// </summary>
         public struct GameSaveContext
         {
             /// <summary>
-            /// The save file for the profile.
+            /// The save profile for the context.
             /// </summary>
-            public T saveFile;
+            public T profile;
 
             /// <summary>
             /// The last date/time the profile was saved.
@@ -41,12 +43,12 @@ namespace Zigurous.Architecture
             /// <summary>
             /// Initializes the context for the given save profile.
             /// </summary>
-            /// <param name="profile">The save profile to initialize.</param>
+            /// <param name="profile">The save profile for the context.</param>
             public GameSaveContext(T profile)
             {
-                saveFile = profile;
-                exists = profile.Exists();
-                lastSaveDateTime = exists ? profile.GetLastWriteTime() : null;
+                this.profile = profile;
+                this.exists = profile.Exists();
+                this.lastSaveDateTime = exists ? profile.GetLastWriteTime() : null;
             }
 
         }
@@ -56,10 +58,58 @@ namespace Zigurous.Architecture
         private bool initializeOnStart = true;
 
         [SerializeField]
-        [Tooltip("The save files being managed. The game will not allow more save profiles than provided here.")]
-        private T[] saveFiles;
+        [Tooltip("The save profiles to manage. The length of the array is the maximum amount of saves that can be made.")]
+        private T[] profiles;
 
         private GameSaveContext[] context;
+
+        /// <summary>
+        /// The amount of save profiles being used.
+        /// </summary>
+        public int UsedSaveCount
+        {
+            get
+            {
+                if (context == null) {
+                    Initialize();
+                }
+
+                int count = 0;
+
+                for (int i = 0; i < context.Length; i++)
+                {
+                    if (context[i].exists) {
+                        count++;
+                    }
+                }
+
+                return count;
+            }
+        }
+
+        /// <summary>
+        /// The amount of save profiles not yet used.
+        /// </summary>
+        public int UnusedSaveCount
+        {
+            get
+            {
+                if (context == null) {
+                    Initialize();
+                }
+
+                int count = 0;
+
+                for (int i = 0; i < context.Length; i++)
+                {
+                    if (!context[i].exists) {
+                        count++;
+                    }
+                }
+
+                return count;
+            }
+        }
 
         private void Start()
         {
@@ -74,15 +124,13 @@ namespace Zigurous.Architecture
         public void Initialize()
         {
             if (context == null) {
-                context = new GameSaveContext[saveFiles.Length];
-            } else if (context.Length != saveFiles.Length) {
-                Array.Resize(ref context, saveFiles.Length);
+                context = new GameSaveContext[profiles.Length];
+            } else if (context.Length != profiles.Length) {
+                Array.Resize(ref context, profiles.Length);
             }
 
-            for (int i = 0; i < saveFiles.Length; i++)
-            {
-                T saveFile = saveFiles[i];
-                context[i] = new GameSaveContext(saveFile);
+            for (int i = 0; i < profiles.Length; i++) {
+                context[i] = new GameSaveContext(profiles[i]);
             }
         }
 
@@ -99,7 +147,7 @@ namespace Zigurous.Architecture
 
             for (int i = 0; i < context.Length; i++)
             {
-                if (context[i].saveFile == profile) {
+                if (context[i].profile == profile) {
                     return context[i];
                 }
             }
@@ -128,7 +176,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Gets the most recently saved profile.
         /// </summary>
-        /// <returns>The most recently saved profile.</returns>
+        /// <returns>The most recently saved profile, or null if no save exists.</returns>
         public T GetLatestSave()
         {
             if (context == null) {
@@ -144,7 +192,7 @@ namespace Zigurous.Architecture
 
                 if (saveContext.lastSaveDateTime.HasValue && saveContext.lastSaveDateTime.Value > latestDateTime)
                 {
-                    latestSave = saveContext.saveFile;
+                    latestSave = saveContext.profile;
                     latestDateTime = saveContext.lastSaveDateTime.Value;
                 }
             }
@@ -155,7 +203,7 @@ namespace Zigurous.Architecture
         /// <summary>
         /// Gets the oldest saved profile.
         /// </summary>
-        /// <returns>The oldest saved profile.</returns>
+        /// <returns>The oldest saved profile, or null if no save exists.</returns>
         public T GetOldestSave()
         {
             if (context == null) {
@@ -171,7 +219,7 @@ namespace Zigurous.Architecture
 
                 if (saveContext.lastSaveDateTime.HasValue && saveContext.lastSaveDateTime < oldestDateTime)
                 {
-                    oldestSave = saveContext.saveFile;
+                    oldestSave = saveContext.profile;
                     oldestDateTime = saveContext.lastSaveDateTime.Value;
                 }
             }
@@ -180,10 +228,10 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
-        /// Gets the save profile for the next available unused profile.
+        /// Gets the next available unused save profile.
         /// </summary>
-        /// <returns>An unused save profile, or null if no unused profile is available.</returns>
-        public T GetNextUnusedSave()
+        /// <returns>An unused save profile, or null if no unused profile exists.</returns>
+        public T GetUnusedSave()
         {
             if (context == null) {
                 Initialize();
@@ -192,7 +240,7 @@ namespace Zigurous.Architecture
             for (int i = 0; i < context.Length; i++)
             {
                 if (!context[i].exists) {
-                    return context[i].saveFile;
+                    return context[i].profile;
                 }
             }
 
@@ -200,9 +248,42 @@ namespace Zigurous.Architecture
         }
 
         /// <summary>
-        /// Checks if an unused save profile is available.
+        /// Gets the most recently saved profile.
         /// </summary>
-        /// <returns>True if an unused save profile is available, false otherwise.</returns>
+        /// <param name="profile">The most recently saved profile as an output.</param>
+        /// <returns>True if a most recent save exists, false otherwise.</returns>
+        public bool TryGetLatestSave(out T profile)
+        {
+            profile = GetLatestSave();
+            return profile != null;
+        }
+
+        /// <summary>
+        /// Gets the oldest saved profile.
+        /// </summary>
+        /// <param name="profile">The oldest saved profile as an output.</param>
+        /// <returns>True if an oldest save exists, false otherwise.</returns>
+        public bool TryGetOldestSave(out T profile)
+        {
+            profile = GetOldestSave();
+            return profile != null;
+        }
+
+        /// <summary>
+        /// Gets the next available unused save profile.
+        /// </summary>
+        /// <param name="profile">The next available unused save profile as an output.</param>
+        /// <returns>True if an unused save exists, false otherwise.</returns>
+        public bool TryGetUnusedSave(out T profile)
+        {
+            profile = GetUnusedSave();
+            return profile != null;
+        }
+
+        /// <summary>
+        /// Checks if an unused save profile exists.
+        /// </summary>
+        /// <returns>True if an unused save profile exists, false otherwise.</returns>
         public bool HasUnusedSave()
         {
             if (context == null) {
