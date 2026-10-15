@@ -32,6 +32,7 @@ namespace Zigurous.Architecture
 
         private static readonly Encoding Encoding = Encoding.UTF8;
 
+        [NonSerialized]
         [Tooltip("The deserialized save data.")]
         protected GameSaveData m_Data;
 
@@ -76,6 +77,11 @@ namespace Zigurous.Architecture
         /// The format of the data written to the save file.
         /// </summary>
         public SaveFormat DataFormat => m_DataFormat;
+
+        /// <summary>
+        /// Whether the save data has been loaded into memory.
+        /// </summary>
+        public bool IsLoaded => m_Data != null;
 
         /// <summary>
         /// The type of data to deserialize.
