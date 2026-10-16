@@ -206,7 +206,9 @@ namespace Zigurous.Architecture
         {
             try
             {
-                File.Delete(SavePath);
+                string filePath = SavePath;
+                Debug.Log($"Deleting save file: {filePath}");
+                File.Delete(filePath);
                 m_Data = null;
                 return true;
             }
