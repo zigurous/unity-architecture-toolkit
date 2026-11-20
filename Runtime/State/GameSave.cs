@@ -327,7 +327,7 @@ namespace Zigurous.Architecture
         [SerializeField]
         [ConditionalShow(nameof(m_LoadCustomData))]
         [Tooltip("The custom data to load.")]
-        private T m_CustomData;
+        protected T m_CustomData;
         #endif
 
         /// <summary>
